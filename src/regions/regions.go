@@ -84,7 +84,7 @@ func get_market_pages_count(id string, c chan map[string]interface{}){
 
 func update_markets_pages_count(){
     c := make(chan map[string]interface{})
-    for id, reg := range regions {
+    for id, _ := range regions {
         //if reg.(map[string]interface{})["marked"] {
             go get_market_pages_count(id, c)
         //}
@@ -94,10 +94,6 @@ func update_markets_pages_count(){
         id := m["id"].(string)
         pages := m["pages"].(int)
         regions[id].(map[string]interface{})["pages"] = pages
-    }
-    for k, v := range regions {
-        fmt.Println(k)
-        fmt.Println(v.(map[string]interface{})["pages"])
     }
 
 }
