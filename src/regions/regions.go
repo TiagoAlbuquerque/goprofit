@@ -8,6 +8,7 @@ import (
     "strconv"
     "os"
     "reflect"
+    "../utils"
 //    "math"
 )
 
@@ -24,6 +25,7 @@ func get_url(url string) *http.Response {
         fmt.Println("ERRO")
         fmt.Println(err)
         fmt.Println("tentando novamente")
+        err = nil
         res, err = http.Get(url)
     }
     return res
@@ -34,6 +36,7 @@ func json_from_url(url string) interface{}{
     body, err := ioutil.ReadAll(res.Body)
     if err != nil {
         fmt.Println("couldnt read response body")
+        panic(err)
     }
     var out interface{}
     json.Unmarshal(body, &out)
@@ -64,13 +67,17 @@ func get_regions_info(){
     list := get_regions_list()
 
     c := make(chan map[string]interface{})
-    for i := 0; i < len(list); i++ {
+    total := len(list)
+    for i := 0; i < total; i++ {
         go get_region_info(list[i], c)
     }
-    for i := 0; i < len(list); i++ {
+
+    utils.ProgressBar(0, total)
+    for i := 0; i < total; i++ {
         info := <-c
         var id = fmt.Sprintf("%7.0f", info["region_id"].(float64))
         regions[id] = info
+        utils.ProgressBar(i+1, total)
     }
 }
 
@@ -88,31 +95,27 @@ func get_market_pages_count(id string, c chan map[string]interface{}){
 
 func update_markets_pages_count(){
     c := make(chan map[string]interface{})
-    marked_regions_count := 0
+    total := 0
     for id, reg := range regions {
         if reg.(map[string]interface{})["marked"].(bool) {
-            marked_regions_count++
+            total++
             go get_market_pages_count(id, c)
         }
     }
-    for marked_regions_count > 0 {
-        marked_regions_count--
+    utils.ProgressBar(0, total)
+    for i:=0; i < total; i++ {
         m := <-c
         id := m["id"].(string)
         pages := m["pages"].(int)
         regions[id].(map[string]interface{})["pages"] = pages
+        utils.ProgressBar(i+1, total)
     }
 
 }
 func Start(){
-    if regions == nil {
-        regions = make(map[string]interface{})
-        fmt.Println("no regions")
-        get_regions_info()
-        update_markets_pages_count()
-        Decorate(save).(func())()
-    }
 
+    fmt.Println("")
+    utils.ProgressBar(50, 100)
 }
 func Decorate(impl interface{}) interface{} {
     fn := reflect.ValueOf(impl)
@@ -127,6 +130,10 @@ func Decorate(impl interface{}) interface{} {
     return v.Interface()
 }
 
+func load() interface{}{
+    return 1
+}
+
 func save(){
     out, _ := json.MarshalIndent(regions, "", "  ")
     f, err := os.Create(f_name)
@@ -138,10 +145,12 @@ func save(){
 }
 
 func init(){
-    //load from file
-//    if err != nil {
-
-
-//    }
+    err := load()
+    if err != nil {
+        fmt.Printf("Failed to open %s\n", f_name)
+        regions = make(map[string]interface{})
+        get_regions_info()
+    }
     update_markets_pages_count()
+    save()
 }
