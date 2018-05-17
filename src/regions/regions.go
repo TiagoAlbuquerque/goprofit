@@ -7,8 +7,8 @@ import (
     "io/ioutil"
     "strconv"
     "os"
-    "reflect"
-    "../utils"
+//    "reflect"
+    "gopkg.in/cheggaaa/pb.v1"
 //    "math"
 )
 
@@ -64,6 +64,7 @@ func get_region_info(id string, c chan map[string]interface{}) {
 }
 
 func get_regions_info(){
+    fmt.Println("Getting regions info")
     list := get_regions_list()
 
     c := make(chan map[string]interface{})
@@ -72,13 +73,15 @@ func get_regions_info(){
         go get_region_info(list[i], c)
     }
 
-    utils.ProgressBar(0, total)
+    bar := pb.StartNew(total)
+    bar.ShowElapsedTime = true
     for i := 0; i < total; i++ {
         info := <-c
         var id = fmt.Sprintf("%7.0f", info["region_id"].(float64))
         regions[id] = info
-        utils.ProgressBar(i+1, total)
+        bar.Increment()
     }
+    bar.Finish()
 }
 
 func get_market_pages_count(id string, c chan map[string]interface{}){
@@ -94,6 +97,7 @@ func get_market_pages_count(id string, c chan map[string]interface{}){
 
 
 func update_markets_pages_count(){
+    fmt.Println("Updating markets pages count")
     c := make(chan map[string]interface{})
     total := 0
     for id, reg := range regions {
@@ -102,36 +106,26 @@ func update_markets_pages_count(){
             go get_market_pages_count(id, c)
         }
     }
-    utils.ProgressBar(0, total)
+    bar := pb.StartNew(total)
+    bar.ShowElapsedTime = true
     for i:=0; i < total; i++ {
         m := <-c
         id := m["id"].(string)
         pages := m["pages"].(int)
         regions[id].(map[string]interface{})["pages"] = pages
-        utils.ProgressBar(i+1, total)
+        bar.Increment()
     }
+    bar.Finish()
 
 }
 func Start(){
 
     fmt.Println("")
-    utils.ProgressBar(50, 100)
-}
-func Decorate(impl interface{}) interface{} {
-    fn := reflect.ValueOf(impl)
-    inner := func(in []reflect.Value) []reflect.Value {
-        f := reflect.ValueOf(impl)
-        fmt.Println("Stuff before")
-        ret := f.Call(in)
-        fmt.Println("Stuff after")
-        return ret
-    }
-    v := reflect.MakeFunc(fn.Type(), inner)
-    return v.Interface()
 }
 
 func load() interface{}{
     return 1
+    return nil
 }
 
 func save(){
