@@ -6,7 +6,8 @@ import (
     "encoding/json"
     "io/ioutil"
     "strconv"
-    "os"
+//    "os"
+    "../utils"
 //    "reflect"
     "gopkg.in/cheggaaa/pb.v1"
 //    "math"
@@ -128,15 +129,6 @@ func load() interface{}{
     return nil
 }
 
-func save(){
-    out, _ := json.MarshalIndent(regions, "", "  ")
-    f, err := os.Create(f_name)
-    if err != nil {
-        panic(err)
-    }
-    defer f.Close()
-    f.Write(out)
-}
 
 func init(){
     err := load()
@@ -146,5 +138,5 @@ func init(){
         get_regions_info()
     }
     update_markets_pages_count()
-    save()
+    utils.Save(f_name, regions)
 }
