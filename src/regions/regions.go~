@@ -7,6 +7,7 @@ import (
     "io/ioutil"
     "strconv"
     "os"
+    "reflect"
 //    "math"
 )
 
@@ -109,16 +110,23 @@ func Start(){
         fmt.Println("no regions")
         get_regions_info()
         update_markets_pages_count()
-        dec(save)
+        Decorate(save).(func())()
     }
 
 }
-func dec(f func()){
-    fmt.Println("inicio")
-    f()
-    fmt.Println("fim")
-
+func Decorate(impl interface{}) interface{} {
+    fn := reflect.ValueOf(impl)
+    inner := func(in []reflect.Value) []reflect.Value { //Why does this return the same type as the parameters passed to the function ? Does this mean this decorator only works for fns with signature func (arg TypeA) TypeA and not func (arg TypeA) TypeB ?
+        f := reflect.ValueOf(impl)
+        fmt.Println("Stuff before")
+        ret := f.Call(in) //What does call do ? Why cant we just use f(in) ?
+        fmt.Println("Stuff after")
+        return ret
+    }
+    v := reflect.MakeFunc(fn.Type(), inner)
+    return v.Interface()
 }
+
 func save(){
     out, _ := json.MarshalIndent(regions, "", "  ")
     f, err := os.Create(f_name)
