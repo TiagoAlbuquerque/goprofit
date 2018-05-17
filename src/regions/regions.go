@@ -6,11 +6,13 @@ import (
     "encoding/json"
     "io/ioutil"
     "strconv"
+    "os"
 //    "math"
 )
 
 const regions_url = "https://esi.evetech.net/latest/universe/regions/%s"
 const markets_url = "https://esi.evetech.net/latest/markets/%s/orders/"
+const f_name = "data_regions.eve"
 
 var regions map[string]interface{}
 
@@ -53,6 +55,7 @@ func get_region_info(id string, c chan map[string]interface{}) {
 
     url := fmt.Sprintf(regions_url, id)
     info := json_from_url(url).(map[string]interface{})
+    info["marked"] = true
     c <- info
 }
 
@@ -84,12 +87,15 @@ func get_market_pages_count(id string, c chan map[string]interface{}){
 
 func update_markets_pages_count(){
     c := make(chan map[string]interface{})
-    for id, _ := range regions {
-        //if reg.(map[string]interface{})["marked"] {
+    marked_regions_count := 0
+    for id, reg := range regions {
+        if reg.(map[string]interface{})["marked"].(bool) {
+            marked_regions_count++
             go get_market_pages_count(id, c)
-        //}
+        }
     }
-    for range regions {
+    for marked_regions_count > 0 {
+        marked_regions_count--
         m := <-c
         id := m["id"].(string)
         pages := m["pages"].(int)
@@ -103,8 +109,24 @@ func Start(){
         fmt.Println("no regions")
         get_regions_info()
         update_markets_pages_count()
+        dec(save)
     }
 
+}
+func dec(f func()){
+    fmt.Println("inicio")
+    f()
+    fmt.Println("fim")
+
+}
+func save(){
+    out, _ := json.MarshalIndent(regions, "", "  ")
+    f, err := os.Create(f_name)
+    if err != nil {
+        panic(err)
+    }
+    defer f.Close()
+    f.Write(out)
 }
 
 func init(){
