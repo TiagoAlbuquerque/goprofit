@@ -14,7 +14,7 @@ import (
 )
 
 const regions_url = "https://esi.evetech.net/latest/universe/regions/%s"
-const markets_url = "https://esi.evetech.net/latest/markets/%s/orders/"
+const markets_url = "https://esi.evetech.net/latest/markets/%s/orders/?order_type=all&page=%d"
 const f_name = "data_regions.eve"
 
 var regions map[string]interface{}
@@ -86,7 +86,7 @@ func get_regions_info(){
 }
 
 func get_market_pages_count(id string, c chan map[string]interface{}){
-    url := fmt.Sprintf(markets_url, id)
+    url := fmt.Sprintf(markets_url, id, 1)
     out := make(map[string]interface{})
     out["id"] = id
     res := get_url(url)
@@ -96,7 +96,17 @@ func get_market_pages_count(id string, c chan map[string]interface{}){
     c <- out
 }
 
-
+func getMarketPagesList() []string {
+    var out []string
+    for id, i_info := range regions {
+        info := i_info.(map[string]interface{})
+        for i:=1; i < info["pages"].(int)+1; i++ {
+            url := fmt.Sprintf(markets_url, id, i)
+            out = append(out, url)
+        }
+    }
+    return out
+}
 func update_markets_pages_count(){
     fmt.Println("Updating markets pages count")
     c := make(chan map[string]interface{})
@@ -122,21 +132,20 @@ func update_markets_pages_count(){
 func Start(){
 
     fmt.Println("")
-}
-
-func load() interface{}{
-    return 1
-    return nil
+    getMarketPagesList()
 }
 
 
 func init(){
-    err := load()
+    i_regions, err := utils.Load(f_name)
+    regions = i_regions.(map[string]interface{})
+
     if err != nil {
         fmt.Printf("Failed to open %s\n", f_name)
         regions = make(map[string]interface{})
         get_regions_info()
     }
+
     update_markets_pages_count()
     utils.Save(f_name, regions)
 }
