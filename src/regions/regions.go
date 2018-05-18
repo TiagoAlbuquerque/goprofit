@@ -8,6 +8,7 @@ import (
     "strconv"
 //    "os"
     "../utils"
+    "github.com/ti/nasync"
 //    "reflect"
 //    "math"
 )
@@ -71,8 +72,10 @@ func get_regions_info(){
 
     c := make(chan bool)
     total := len(list)
+    async := nasync.New(100, 100)
+    defer async.Close()
     for i := 0; i < total; i++ {
-        go get_region_info(list[i], c)
+        async.Do(get_region_info, list[i], c)
     }
     utils.ProgressBar(total, c)
 }
@@ -108,10 +111,12 @@ func update_markets_pages_count(){
     fmt.Println("Updating markets pages count")
     c := make(chan bool)
     total := 0
+    async := nasync.New(100, 100)
+    defer async.Close()
     for id, reg := range regions {
         if reg.(map[string]interface{})["marked"].(bool) {
             total++
-            go get_market_pages_count(id, c)
+            async.Do(get_market_pages_count, id, c)
         }
     }
     utils.ProgressBar(total, c)
@@ -130,8 +135,10 @@ func GetMarketsPages(){
     l := getMarketsPagesList()
     c := make(chan bool)
     total := len(l)
+    async := nasync.New(1000, 1000)
+    defer async.Close()
     for i := 0; i < total; i++ {
-        go getMarketPages(l[i], c)
+        async.Do(getMarketPages, l[i], c)
     }
     utils.ProgressBar(total, c)
 }
