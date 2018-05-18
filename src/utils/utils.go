@@ -3,6 +3,7 @@ import (
     "os"
     "encoding/json"
     "io/ioutil"
+    "gopkg.in/cheggaaa/pb.v1"
        )
 
 func Load(f_name string) (interface{}, error) {
@@ -24,4 +25,14 @@ func Save(f_name string, data interface{}){
     }
     defer f.Close()
     f.Write(out)
+}
+
+func ProgressBar(total int, c chan bool){
+    bar := pb.StartNew(total)
+    bar.ShowElapsedTime = true
+    for i:=0; i < total; i++ {
+        _ = <-c
+        bar.Increment()
+    }
+    bar.Finish()
 }

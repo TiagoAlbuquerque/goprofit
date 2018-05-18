@@ -9,7 +9,6 @@ import (
 //    "os"
     "../utils"
 //    "reflect"
-    "gopkg.in/cheggaaa/pb.v1"
 //    "math"
 )
 
@@ -24,6 +23,7 @@ func get_url(url string) *http.Response {
     res, err := http.Get(url)
     for err != nil {
         fmt.Println("ERRO")
+        fmt.Println(url)
         fmt.Println(err)
         fmt.Println("tentando novamente")
         err = nil
@@ -56,60 +56,57 @@ func get_regions_list() []string {
    return out
 }
 
-func get_region_info(id string, c chan map[string]interface{}) {
+func get_region_info(id string, c chan bool) {
 
     url := fmt.Sprintf(regions_url, id)
     info := json_from_url(url).(map[string]interface{})
     info["marked"] = true
-    c <- info
+    regions[id] = info
+    c <- true
 }
 
 func get_regions_info(){
     fmt.Println("Getting regions info")
     list := get_regions_list()
 
-    c := make(chan map[string]interface{})
+    c := make(chan bool)
     total := len(list)
     for i := 0; i < total; i++ {
         go get_region_info(list[i], c)
     }
-
-    bar := pb.StartNew(total)
-    bar.ShowElapsedTime = true
-    for i := 0; i < total; i++ {
-        info := <-c
-        var id = fmt.Sprintf("%7.0f", info["region_id"].(float64))
-        regions[id] = info
-        bar.Increment()
-    }
-    bar.Finish()
+    utils.ProgressBar(total, c)
 }
 
-func get_market_pages_count(id string, c chan map[string]interface{}){
-    url := fmt.Sprintf(markets_url, id, 1)
-    out := make(map[string]interface{})
-    out["id"] = id
-    res := get_url(url)
-    defer res.Body.Close()
-    pages, _ := strconv.Atoi(res.Header["X-Pages"][0])
-    out["pages"] = pages
-    c <- out
-}
-
-func getMarketPagesList() []string {
+func getMarketsPagesList() []string {
     var out []string
     for id, i_info := range regions {
         info := i_info.(map[string]interface{})
-        for i:=1; i < info["pages"].(int)+1; i++ {
-            url := fmt.Sprintf(markets_url, id, i)
-            out = append(out, url)
+        if info["marked"].(bool){
+            for i:=1; i < info["pages"].(int)+1; i++ {
+                url := fmt.Sprintf(markets_url, id, i)
+                out = append(out, url)
+            }
         }
     }
     return out
 }
+
+func get_market_pages_count(id string, c chan bool){
+    reg := regions[id].(map[string]interface{})
+    url := fmt.Sprintf(markets_url, id, 1)
+    var pages []string
+    for ok := false; !ok; {
+        res := get_url(url)
+        defer res.Body.Close()
+        pages, ok = res.Header["X-Pages"]
+    }
+    reg["pages"], _ = strconv.Atoi(pages[0])
+    c <- true
+}
+
 func update_markets_pages_count(){
     fmt.Println("Updating markets pages count")
-    c := make(chan map[string]interface{})
+    c := make(chan bool)
     total := 0
     for id, reg := range regions {
         if reg.(map[string]interface{})["marked"].(bool) {
@@ -117,30 +114,40 @@ func update_markets_pages_count(){
             go get_market_pages_count(id, c)
         }
     }
-    bar := pb.StartNew(total)
-    bar.ShowElapsedTime = true
-    for i:=0; i < total; i++ {
-        m := <-c
-        id := m["id"].(string)
-        pages := m["pages"].(int)
-        regions[id].(map[string]interface{})["pages"] = pages
-        bar.Increment()
-    }
-    bar.Finish()
-
+    utils.ProgressBar(total, c)
 }
+
+func getMarketPages(url string, c chan bool){
+    var page []interface{}
+    for ok := false; !ok; {
+        page, ok = json_from_url(url).([]interface{})
+    }
+    page = page
+    c <- true
+}
+func GetMarketsPages(){
+    fmt.Println("Fetching markets pages")
+    l := getMarketsPagesList()
+    c := make(chan bool)
+    total := len(l)
+    for i := 0; i < total; i++ {
+        go getMarketPages(l[i], c)
+    }
+    utils.ProgressBar(total, c)
+}
+
 func Start(){
 
     fmt.Println("")
-    getMarketPagesList()
+    GetMarketsPages()
 }
 
 
 func init(){
     i_regions, err := utils.Load(f_name)
-    regions = i_regions.(map[string]interface{})
-
-    if err != nil {
+    if err == nil {
+        regions = i_regions.(map[string]interface{})
+    } else {
         fmt.Printf("Failed to open %s\n", f_name)
         regions = make(map[string]interface{})
         get_regions_info()
