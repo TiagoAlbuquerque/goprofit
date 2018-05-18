@@ -1,0 +1,9 @@
+{
+  "cargo": 130,
+  "f_items": "data_items.eve",
+  "f_locations": "data_locations.eve",
+  "f_regions": "data_regions.eve",
+  "min_pm3": 100000,
+  "tax": 0.035,
+  "threads": 1
+}

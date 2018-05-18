@@ -1,17 +1,20 @@
 package regions
 
 import (
+    "../utils"
+    "../items"
+
     "fmt"
     "net/http"
     "encoding/json"
     "io/ioutil"
     "strconv"
-//    "os"
-    "../utils"
+
     "github.com/ti/nasync"
+//    "os"
 //    "reflect"
 //    "math"
-)
+        )
 
 const regions_url = "https://esi.evetech.net/latest/universe/regions/%s"
 const markets_url = "https://esi.evetech.net/latest/markets/%s/orders/?order_type=all&page=%d"
@@ -20,18 +23,15 @@ const f_name = "data_regions.eve"
 var regions map[string]interface{}
 
 func get_url(url string) *http.Response {
-
-    res, err := http.Get(url)
-    for err != nil {
-        fmt.Println("ERRO")
-        fmt.Println(url)
-        fmt.Println(err)
-        fmt.Println("tentando novamente")
-        err = nil
+    var res *http.Response
+    var err error
+    for ok := false; !ok; {
         res, err = http.Get(url)
+        ok = (err == nil)
     }
     return res
 }
+
 func json_from_url(url string) interface{}{
     res := get_url(url)
     defer res.Body.Close()
@@ -46,7 +46,6 @@ func json_from_url(url string) interface{}{
 }
 
 func get_regions_list() []string {
-
     url := fmt.Sprintf(regions_url, "")
     list := json_from_url(url).([]interface{})
     var out []string
@@ -58,7 +57,6 @@ func get_regions_list() []string {
 }
 
 func get_region_info(id string, c chan bool) {
-
     url := fmt.Sprintf(regions_url, id)
     info := json_from_url(url).(map[string]interface{})
     info["marked"] = true
@@ -69,7 +67,6 @@ func get_region_info(id string, c chan bool) {
 func get_regions_info(){
     fmt.Println("Getting regions info")
     list := get_regions_list()
-
     c := make(chan bool)
     total := len(list)
     async := nasync.New(100, 100)
@@ -126,10 +123,12 @@ func getMarketPages(url string, c chan bool){
     var page []interface{}
     for ok := false; !ok; {
         page, ok = json_from_url(url).([]interface{})
+        ok = ok &&(page != nil)
     }
-    page = page
+    items.PlaceOrders(page)
     c <- true
 }
+
 func GetMarketsPages(){
     fmt.Println("Fetching markets pages")
     l := getMarketsPagesList()
@@ -143,13 +142,6 @@ func GetMarketsPages(){
     utils.ProgressBar(total, c)
 }
 
-func Start(){
-
-    fmt.Println("")
-    GetMarketsPages()
-}
-
-
 func init(){
     i_regions, err := utils.Load(f_name)
     if err == nil {
@@ -158,8 +150,8 @@ func init(){
         fmt.Printf("Failed to open %s\n", f_name)
         regions = make(map[string]interface{})
         get_regions_info()
+        utils.Save(f_name, regions)
     }
 
     update_markets_pages_count()
-    utils.Save(f_name, regions)
 }

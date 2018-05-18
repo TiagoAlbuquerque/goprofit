@@ -5,5 +5,5 @@ import(
 )
 
 func main(){
-    regions.Start()
+    regions.GetMarketsPages()
 }
