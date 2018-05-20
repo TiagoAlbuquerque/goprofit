@@ -3,6 +3,7 @@ package main
 import(
     "./regions"
     "./items"
+    "./locations"
     "fmt"
     "os"
     "os/signal"
@@ -25,6 +26,7 @@ func terminate(){
     fmt.Println("terminating")
     regions.Terminate()
     items.Terminate()
+    locations.Terminate()
 }
 
 func interruptionHandler(c chan os.Signal){
