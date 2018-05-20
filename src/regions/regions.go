@@ -2,12 +2,10 @@ package regions
 
 import (
     "../utils"
-    "../items"
+//    "../items"
+    "../locations"
 
     "fmt"
-    "net/http"
-    "encoding/json"
-    "io/ioutil"
     "strconv"
 
     "github.com/ti/nasync"
@@ -22,32 +20,9 @@ const f_name = "data_regions.eve"
 
 var regions map[string]interface{}
 
-func get_url(url string) *http.Response {
-    var res *http.Response
-    var err error
-    for ok := false; !ok; {
-        res, err = http.Get(url)
-        ok = (err == nil)
-    }
-    return res
-}
-
-func json_from_url(url string) interface{}{
-    res := get_url(url)
-    defer res.Body.Close()
-    body, err := ioutil.ReadAll(res.Body)
-    if err != nil {
-        fmt.Println("couldnt read response body")
-        panic(err)
-    }
-    var out interface{}
-    json.Unmarshal(body, &out)
-    return out
-}
-
 func get_regions_list() []string {
     url := fmt.Sprintf(regions_url, "")
-    list := json_from_url(url).([]interface{})
+    list := utils.JsonFromUrl(url).([]interface{})
     var out []string
     for i := 0 ; i < len(list); i++ {
         id := fmt.Sprintf("%7.0f", list[i].(float64))
@@ -58,7 +33,7 @@ func get_regions_list() []string {
 
 func get_region_info(id string, c chan bool) {
     url := fmt.Sprintf(regions_url, id)
-    info := json_from_url(url).(map[string]interface{})
+    info := utils.JsonFromUrl(url).(map[string]interface{})
     info["marked"] = true
     regions[id] = info
     c <- true
@@ -96,7 +71,7 @@ func get_market_pages_count(id string, c chan bool){
     url := fmt.Sprintf(markets_url, id, 1)
     var pages []string
     for ok := false; !ok; {
-        res := get_url(url)
+        res := utils.GetUrl(url)
         defer res.Body.Close()
         pages, ok = res.Header["X-Pages"]
     }
@@ -119,27 +94,29 @@ func update_markets_pages_count(){
     utils.ProgressBar(total, c)
 }
 
-func getMarketPages(url string, c chan bool){
+func getMarketPages(url string, cPages chan []interface{}){
     var page []interface{}
     for ok := false; !ok; {
-        page, ok = json_from_url(url).([]interface{})
+        page, ok = utils.JsonFromUrl(url).([]interface{})
         ok = ok &&(page != nil)
     }
-    items.PlaceOrders(page)
-    c <- true
+    cPages <- page
 }
 
 func GetMarketsPages(){
     fmt.Println("Fetching markets pages")
-    l := getMarketsPagesList()
-    c := make(chan bool)
-    total := len(l)
+    lURL := getMarketsPagesList()
+    cOK := make(chan bool)
+    cPages := make(chan []interface{})
+    total := len(lURL)
+//    go items.ConsumePages(cPages, cOK, total)
+    go locations.ConsumePages(cPages, cOK, total)
     async := nasync.New(1000, 1000)
     defer async.Close()
     for i := 0; i < total; i++ {
-        async.Do(getMarketPages, l[i], c)
+        async.Do(getMarketPages, lURL[i], cPages)
     }
-    utils.ProgressBar(total, c)
+    utils.ProgressBar(total, cOK)
 }
 
 func init(){
@@ -150,8 +127,11 @@ func init(){
         fmt.Printf("Failed to open %s\n", f_name)
         regions = make(map[string]interface{})
         get_regions_info()
-        utils.Save(f_name, regions)
     }
 
     update_markets_pages_count()
+}
+
+func Terminate(){
+    utils.Save(f_name, regions)
 }

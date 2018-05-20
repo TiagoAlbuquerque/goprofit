@@ -43,7 +43,7 @@
     "description": "\"The greater the State becomes, the greater humanity under it flourishes.\"",
     "marked": true,
     "name": "The Forge",
-    "pages": 284,
+    "pages": 286,
     "region_id": 10000002
   },
   "10000003": {
@@ -200,7 +200,7 @@
     "description": "Little is known by the Empires about the region known as Insmother. Long a haunt of the Angel Cartel, it forms a tangled barrier between the dense south-eastern cluster and the barbed mystery of the Cache region. Once the guardian of a little-visited backwater volume, in the wake of the Spectrum Breach incident it now serves as the primary corridor between the southern expanse and the drone-infested eastern regions.",
     "marked": true,
     "name": "Insmother",
-    "pages": 4,
+    "pages": 3,
     "region_id": 10000009
   },
   "10000010": {
@@ -584,7 +584,7 @@
     "description": "Despite being overrun by Guristas, Geminate is home to the Society of Conscious Thought. Their headquarters are located in the middle of the region, quite a distance from civilized space. Many contend that the Society's most gifted students are brought here to learn the innermost secrets of the Society, far from the prying eyes of their parents and the Empires. Though the claims appear quite outlandish, the fact that the Guristas give the station a wide berth has lead to rumors that the Society isn't nearly as passive as many think.",
     "marked": true,
     "name": "Geminate",
-    "pages": 6,
+    "pages": 5,
     "region_id": 10000029
   },
   "10000030": {
@@ -721,7 +721,7 @@
     "description": "Only through many hardships\r\nIs a man stripped to his very foundations\r\nAnd in such a state\r\nDevoid of distractions\r\nIs his soul free to soar\r\nAnd in this\r\nHe is closest to God\r\n\r\n\u003ci\u003e- The Scriptures, Book of Missions Verses 42:5\u003c/i\u003e",
     "marked": true,
     "name": "Devoid",
-    "pages": 13,
+    "pages": 14,
     "region_id": 10000036
   },
   "10000037": {
@@ -817,7 +817,7 @@
     "description": "\"A den of thieves, scoundrels, bandits, black market dealers, gamblers, pimps and prostitutes. All in all, a nice place for a holiday\"\u003cbr\u003e\u003cbr\u003e\u003ci\u003e- Unnamed Gallente Senator.\u003c/i\u003e",
     "marked": true,
     "name": "Syndicate",
-    "pages": 15,
+    "pages": 16,
     "region_id": 10000041
   },
   "10000042": {
@@ -849,7 +849,7 @@
     "description": "It has long been an established fact of civilization that wherever a seat of government lies, then so will a concentration of its subjects, the better to fuel the halls of bureaucracy.  In this, the Republic has been no exception and in locating their Parliament and Justice Department in the Gedulf constellation, they guaranteed a huge population influx.  This population needs supporting, and so some of the largest Matari corporations also have their head offices here, making the region bustle with activity, not unlike a large Metropolis.",
     "marked": true,
     "name": "Metropolis",
-    "pages": 99,
+    "pages": 98,
     "region_id": 10000042
   },
   "10000043": {
@@ -1220,7 +1220,7 @@
     "description": "Bloody Omir ran away\r\nHiding from the light of day\r\nMade a base out in the night\r\nFar far from the Empire's might\r\nHolders think they all are safe\r\nProtected by the Emp'ror's grace\r\nSilly people, they should know\r\nYou shall reap just what you sow\r\nBloody Omir's coming back\r\nMonsters from the endless black\r\nWading through a crimson flood\r\nOmir's come to drink your blood\u003cbr\u003e\u003cbr\u003e\u003ci\u003e- Nursery Ryhme\u003c/i\u003e",
     "marked": true,
     "name": "Delve",
-    "pages": 10,
+    "pages": 9,
     "region_id": 10000060
   },
   "10000061": {

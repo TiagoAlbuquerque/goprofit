@@ -2,46 +2,72 @@ package items
 
 import(
         "../utils"
+        "../deals"
 //        "os"
         "fmt"
+//        "sync"
+//        "strings"
 //        "reflect"
 )
 
-
+const itemUrl = "https://esi.evetech.net/latest/universe/types/%s"
 const f_name = "data_items.eve"
 var items map[string]interface{}
+var saveToFileFlag bool = false
 
+func getItemInfo(id string) map[string]interface{} {
+    url := fmt.Sprintf(itemUrl, id)
+    fmt.Println(url)
+    item := utils.JsonFromUrl(url).(map[string]interface{})
+    item["buy_orders"] = make([]interface{}, 0)
+    item["sell_orders"] = make([]interface{}, 0)
+    items[id] = item
+    saveToFileFlag = true
+    return item
+}
 func getItemForOrder(order map[string]interface{}) map[string]interface{}{
-    itemId := order["type_id"]
-    itemId = itemId
-    return nil
-}
-func addSorted(l []interface{}, o map[string]interface{}, reversed bool){
-    mult := 1
-    if reversed {
-        mult = mult*(-1)
+    itemId := fmt.Sprint(order["type_id"])
+    item, ok := items[itemId]
+    if !ok {
+        item = getItemInfo(itemId)
     }
+    return item.(map[string]interface{})
 }
+
 func place(order map[string]interface{}, item map[string]interface{}) {
     if order["is_buy_order"].(bool){
-        addSorted(item["buy_orders"].([]interface{}), order, true)
+        //item["buy_orders"] = utils.InsertSorted(item["buy_orders"].([]interface{}), order, true)
+        deals.ComputeDeals([]interface{}{order}, item["sell_orders"].([]interface{}))
     } else {
-        addSorted(item["buy_orders"].([]interface{}), order, false)
+        //item["sell_orders"] = utils.InsertSorted(item["sell_orders"].([]interface{}), order, false)
+        deals.ComputeDeals(item["buy_orders"].([]interface{}), []interface{}{order})
     }
 }
-func placeOrder(order map[string]interface{}) {
+func place1order(order map[string]interface{}) {
     item := getItemForOrder(order)
-    item = item
-    //place(order, item)
-
+    place(order, item)
 }
 
-func PlaceOrders(orders []interface{}) {
+func placeOrders(orders []interface{}) {
     for _, i_order := range orders {
-//        order, ok := i_order.(map[string]interface{})
-        placeOrder(i_order.(map[string]interface{}))
+        place1order(i_order.(map[string]interface{}))
     }
-    //os.Exit(1)
+}
+
+func ConsumePages(cPages chan []interface{}, cOK chan bool, total int) {
+    cleanup()
+    for i := 0; i < total; i++ {
+        placeOrders(<-cPages)
+        cOK <- true
+    }
+}
+
+func cleanup(){
+    for _, i_item := range items {
+        item := i_item.(map[string]interface{})
+        item["buy_orders"] = make([]interface{}, 0)
+        item["sell_orders"] = make([]interface{}, 0)
+    }
 }
 
 func init(){
@@ -51,6 +77,18 @@ func init(){
     } else {
         fmt.Printf("Failed to open %s\n", f_name)
         items = make(map[string]interface{})
-        utils.Save(f_name, items)
     }
+    cleanup()
+}
+
+func Terminate() {
+    if !saveToFileFlag {
+        return
+    }
+    for _, i_item := range items {
+        item := i_item.(map[string]interface{})
+        delete(item, "buy_orders")
+        delete(item, "sell_orders")
+    }
+    utils.Save(f_name, items)
 }
