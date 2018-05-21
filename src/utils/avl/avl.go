@@ -73,7 +73,7 @@ func (avl Avl) balance(d Data) *Avl {
 
 func (avl Avl) Insert(data Data) *Avl{
     if avl == nil {
-        avl = &Avl{Data, 0, nil, nil}
+        avl = Avl{Data, 0, nil, nil}
         return avl
     }
     if data.Less(avl.data) {
