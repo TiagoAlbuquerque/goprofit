@@ -1,10 +1,11 @@
 package items
 
 import(
-        "../utils"
-        "../deals"
-//        "os"
-        "fmt"
+    "../utils"
+    "../deals"
+    "fmt"
+//    "os"
+//    "container/list"
 //        "sync"
 //        "strings"
 //        "reflect"
@@ -55,6 +56,7 @@ func place1order(order map[string]interface{}) {
 
 func placeOrders(orders []interface{}) {
     for _, i_order := range orders {
+        i_order = i_order
         place1order(i_order.(map[string]interface{}))
     }
 }
