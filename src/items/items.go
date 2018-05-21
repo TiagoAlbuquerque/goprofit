@@ -16,17 +16,20 @@ var items map[string]interface{}
 var saveToFileFlag bool = false
 
 func getItemInfo(id string) map[string]interface{} {
+    println("new Item")
     url := fmt.Sprintf(itemUrl, id)
-    fmt.Println(url)
+    println(url)
     item := utils.JsonFromUrl(url).(map[string]interface{})
+    fmt.Println(item["name"])
     item["buy_orders"] = make([]interface{}, 0)
     item["sell_orders"] = make([]interface{}, 0)
     items[id] = item
     saveToFileFlag = true
     return item
 }
-func getItemForOrder(order map[string]interface{}) map[string]interface{}{
-    itemId := fmt.Sprint(order["type_id"])
+
+
+func GetItem(itemId string) map[string]interface{}{
     item, ok := items[itemId]
     if !ok {
         item = getItemInfo(itemId)
@@ -36,16 +39,18 @@ func getItemForOrder(order map[string]interface{}) map[string]interface{}{
 
 func place(order map[string]interface{}, item map[string]interface{}) {
     if order["is_buy_order"].(bool){
-        //item["buy_orders"] = utils.InsertSorted(item["buy_orders"].([]interface{}), order, true)
-        deals.ComputeDeals([]interface{}{order}, item["sell_orders"].([]interface{}))
+        item["buy_orders"] = utils.InsertSorted(item["buy_orders"].([]interface{}), order, true)
+        deals.ComputeDeals(item, []interface{}{order}, item["sell_orders"].([]interface{}))
     } else {
-        //item["sell_orders"] = utils.InsertSorted(item["sell_orders"].([]interface{}), order, false)
-        deals.ComputeDeals(item["buy_orders"].([]interface{}), []interface{}{order})
+        item["sell_orders"] = utils.InsertSorted(item["sell_orders"].([]interface{}), order, false)
+        deals.ComputeDeals(item, item["buy_orders"].([]interface{}), []interface{}{order})
     }
 }
 func place1order(order map[string]interface{}) {
-    item := getItemForOrder(order)
+    itemId := fmt.Sprint(order["type_id"])
+    item := GetItem(itemId)
     place(order, item)
+
 }
 
 func placeOrders(orders []interface{}) {

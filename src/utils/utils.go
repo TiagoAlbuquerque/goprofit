@@ -15,23 +15,9 @@ func GetUrl(url string) *http.Response {
     for ok := false; !ok; {
         res, err = http.Get(url)
         ok = (err == nil)
+        err = nil
     }
     return res
-}
-
-func InsertSorted(l []interface{}, o map[string]interface{}, reversed bool ) []interface{}{
-    mult := 1.0;
-    if reversed { mult = -1.0 }
-    comp := func (i int) bool {
-        a := mult*((l[i].(map[string]interface{}))["price"].(float64))
-        b := mult*(o["price"].(float64))
-        return (a > b)
-    }
-    i := sort.Search(len(l), comp)
-    l = append(l, make(map[string]interface{}))
-    copy(l[i+1:], l[i:])
-    l[i] = o
-    return l
 }
 
 func JsonFromUrl(url string) interface{}{
@@ -68,6 +54,22 @@ func Save(f_name string, data interface{}){
     }
     defer f.Close()
     f.Write(out)
+    fmt.Println(f_name, " saved")
+}
+
+func InsertSorted(l []interface{}, o map[string]interface{}, reversed bool ) []interface{}{
+    mult := 1.0;
+    if reversed { mult = -1.0 }
+    comp := func (i int) bool {
+        a := mult*((l[i].(map[string]interface{}))["price"].(float64))
+        b := mult*(o["price"].(float64))
+        return (a > b)
+    }
+    i := sort.Search(len(l), comp)
+    l = append(l, make(map[string]interface{}))
+    copy(l[i+1:], l[i:])
+    l[i] = o
+    return l
 }
 
 func ProgressBar(total int, c chan bool){

@@ -2,8 +2,8 @@ package regions
 
 import (
     "../utils"
-//    "../items"
-    "../locations"
+    "../items"
+//    "../locations"
 
     "fmt"
     "strconv"
@@ -17,6 +17,7 @@ import (
 const regions_url = "https://esi.evetech.net/latest/universe/regions/%s"
 const markets_url = "https://esi.evetech.net/latest/markets/%s/orders/?order_type=all&page=%d"
 const f_name = "data_regions.eve"
+var saveToFileFlag bool = false
 
 var regions map[string]interface{}
 
@@ -36,6 +37,7 @@ func get_region_info(id string, c chan bool) {
     info := utils.JsonFromUrl(url).(map[string]interface{})
     info["marked"] = true
     regions[id] = info
+    saveToFileFlag = true
     c <- true
 }
 
@@ -109,8 +111,8 @@ func GetMarketsPages(){
     cOK := make(chan bool)
     cPages := make(chan []interface{})
     total := len(lURL)
-//    go items.ConsumePages(cPages, cOK, total)
-    go locations.ConsumePages(cPages, cOK, total)
+    go items.ConsumePages(cPages, cOK, total)
+//    go locations.ConsumePages(cPages, cOK, total)
     async := nasync.New(1000, 1000)
     defer async.Close()
     for i := 0; i < total; i++ {
@@ -128,10 +130,12 @@ func init(){
         regions = make(map[string]interface{})
         get_regions_info()
     }
-
     update_markets_pages_count()
 }
 
 func Terminate(){
+    if !saveToFileFlag {
+        return
+    }
     utils.Save(f_name, regions)
 }
