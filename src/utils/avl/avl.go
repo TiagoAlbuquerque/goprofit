@@ -1,95 +1,105 @@
 package avl
 
+import (
+//    "fmt"
+)
+
 type Data interface {
-    (d Data)Less(l Data) bool
+    Less (d Data) bool
 }
-type Avl struct {
+type tAvl struct {
     data Data
     height int
-    lAvl, rAvl Avl
+    lAvl, rAvl *tAvl
 }
-var root Avl
-
-func (avl Avl) inLine(cData chan Data) {
-    if avl == nil { return }
-    avl.lData.inline(cData)
-    cData <- avl.data
-    avl.rData.inline(cData)
+type Avl struct {
+    treeRoot *tAvl
 }
 
-func (avl Avl) inLineR(cData chan Data) {
-    if avl == nil { return }
-    avl.rData.inlineR(cData)
-    cData <- avl.data
-    avl.lData.inlineR(cData)
+
+
+func (a *tAvl) inLine(cData chan Data) {
+    if a == nil { return }
+    (*a).lAvl.inLine(cData)
+    cData <- (*a).data
+    (*a).rAvl.inLine(cData)
 }
 
-func height(avl Avl) {
-    if avl == nil
-        return -1
-    return avl.height
+func (a *tAvl) inLineR(cData chan Data) {
+    if a == nil { return }
+    (*a).rAvl.inLineR(cData)
+    cData <- (*a).data
+    (*a).lAvl.inLineR(cData)
+}
+
+func (a *tAvl)getHeight() int{
+    if a == nil { return -1 }
+    return (*a).height
 }
 func max(a, b int) int{
     if a > b { return a }
     return b
 }
 
-func (avl Avl) updateHeight() {
-    avl.height = max(height(avl.lAvl), height(avl.rAvl)) +1
+func (a *tAvl) updateHeight() {
+    (*a).height = max((*a).lAvl.getHeight(), (*a).rAvl.getHeight()) +1
 }
 
-func (avl Avl) rRotate() Avl{
-    node := avl.lAvl
-    avl.lAvl = node.rAvl
-    node.rAvl = avl
-    avl.updateHeight()
+func (a *tAvl) rRotate() *tAvl{
+    node := (*a).lAvl
+    (*a).lAvl = node.rAvl
+    node.rAvl = a
+    (*a).updateHeight()
     node.updateHeight()
     return node
 }
 
-func (avl Avl) lRotate() Avl{
-    node := avl.rAvl
-    avl.rAvl = node.lAvl
-    node.lAvl = avl
-    avl.updateHeight()
+func (a *tAvl) lRotate() *tAvl{
+    node := (*a).rAvl
+    (*a).rAvl = node.lAvl
+    node.lAvl = a
+    (*a).updateHeight()
     node.updateHeight()
     return node
 }
 
-func (avl Avl) balance(d Data) *Avl {
-    if height(avl.lAvl) - height(avl.rAvl) == 2 {
-        if !d.Less(avl.lAvl.data) {
-            avl.lAvl = lRotate(avl.lAvl)
+func (a *tAvl) balance(d Data) *tAvl {
+    if (*a).lAvl.getHeight() - (*a).rAvl.getHeight() == 2 {
+        if !d.Less((*a).lAvl.data) {
+            (*a).lAvl = (*a).lAvl.lRotate()
         }
-        alv = rRotate(avl)
-    } else if height(avl.rAvl) - height(avl.lAvl) == 2 {
-        if d.Less(avl.rAvl.data) {
-            avl.rAvl = rRotate(avl.rAvl)
+        a = a.rRotate()
+    } else if (*a).rAvl.getHeight() - (*a).lAvl.getHeight() == 2 {
+        if d.Less((*a).rAvl.data) {
+            (*a).rAvl = (*a).rAvl.rRotate()
         }
-        avl = avl.lRotate()
+        a = a.lRotate()
     }
-    return avl
+    return a
 }
 
-func (avl Avl) Insert(data Data) *Avl{
-    if avl == nil {
-        avl = Avl{Data, 0, nil, nil}
-        return avl
+func (a *tAvl) put(d Data) *tAvl{
+    if a == nil {
+        return &tAvl{d, 0, nil, nil}
     }
-    if data.Less(avl.data) {
-        avl = avl.lAvl.Insert(data)
+    if d.Less((*a).data) {
+        (*a).lAvl = (*a).lAvl.put(d)
     } else {
-        avl = avl.rAvl.Insert(data)
+        (*a).rAvl = (*a).rAvl.put(d)
     }
-    avl.updateHeight()
-    avl = avl.balance(data)
-    return avl
+    a.updateHeight()
+    a = a.balance(d)
+    return a
 }
 
-func (avl Avl) Iter(reversed bool) chan Data{
+func (a *tAvl) iter(reversed bool) chan Data{
     cOut := make (chan Data)
-    defer cout.Close()
-    if reversed { defer avl.inLineR(cOut)
-    } else { defer alv.inLine(cOut) }
+    defer close(cOut)
+    if reversed { defer a.inLineR(cOut)
+    } else { defer a.inLine(cOut) }
     return cOut
+}
+
+func (a Avl) Put(d Data) {
+    a.treeRoot = a.treeRoot.put(d)
 }

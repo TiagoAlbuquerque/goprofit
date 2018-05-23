@@ -1,8 +1,10 @@
 package items
 
 import(
+//    "../deals"
+    "../order"
     "../utils"
-    "../deals"
+    "../utils/avl"
     "fmt"
 //    "os"
 //    "container/list"
@@ -16,14 +18,27 @@ const f_name = "data_items.eve"
 var items map[string]interface{}
 var saveToFileFlag bool = false
 
+type Item struct {
+    data map[string]interface{}
+}
+
+type mOrder order.Order
+
+func (a mOrder) Less (b avl.Data) bool{
+    return a.Less(b.(mOrder))
+
+}
+
 func getItemInfo(id string) map[string]interface{} {
     println("new Item")
     url := fmt.Sprintf(itemUrl, id)
     println(url)
     item := utils.JsonFromUrl(url).(map[string]interface{})
     fmt.Println(item["name"])
-    item["buy_orders"] = make([]interface{}, 0)
-    item["sell_orders"] = make([]interface{}, 0)
+//    item["buy_orders"] = []order.Order{}
+//    item["sell_orders"] = []order.Order{}
+    item["buy_orders"] = avl.Avl{}
+    item["sell_orders"] = avl.Avl{}
     items[id] = item
     saveToFileFlag = true
     return item
@@ -38,26 +53,27 @@ func GetItem(itemId string) map[string]interface{}{
     return item.(map[string]interface{})
 }
 
-func place(order map[string]interface{}, item map[string]interface{}) {
-    if order["is_buy_order"].(bool){
-        item["buy_orders"] = utils.InsertSorted(item["buy_orders"].([]interface{}), order, true)
-        deals.ComputeDeals(item, []interface{}{order}, item["sell_orders"].([]interface{}))
+func place(o order.Order, item map[string]interface{}) {
+    if o.IsBuyOrder() {
+        (item["buy_orders"].(avl.Avl)).Put(mOrder(o))
+//        item["buy_orders"] = utils.InsertSorted(item["buy_orders"].([]order.Order), o, true)
+        //deals.ComputeDeals(item, []order.Order{o}, item["sell_orders"].([]interface{}))
     } else {
-        item["sell_orders"] = utils.InsertSorted(item["sell_orders"].([]interface{}), order, false)
-        deals.ComputeDeals(item, item["buy_orders"].([]interface{}), []interface{}{order})
+        (item["sell_orders"].(avl.Avl)).Put(mOrder(o))
+//        item["sell_orders"] = utils.InsertSorted(item["sell_orders"].([]order.Order), o, false)
+        //deals.ComputeDeals(item, item["buy_orders"].([]interface{}), []order.Order{o})
     }
 }
-func place1order(order map[string]interface{}) {
-    itemId := fmt.Sprint(order["type_id"])
+func place1order(o order.Order) {
+    itemId := o.ItemId()
     item := GetItem(itemId)
-    place(order, item)
+    place(o, item)
 
 }
 
 func placeOrders(orders []interface{}) {
-    for _, i_order := range orders {
-        i_order = i_order
-        place1order(i_order.(map[string]interface{}))
+    for _, o := range orders {
+        place1order(order.New(o.(map[string]interface{})))
     }
 }
 
@@ -72,8 +88,10 @@ func ConsumePages(cPages chan []interface{}, cOK chan bool, total int) {
 func cleanup(){
     for _, i_item := range items {
         item := i_item.(map[string]interface{})
-        item["buy_orders"] = make([]interface{}, 0)
-        item["sell_orders"] = make([]interface{}, 0)
+//        item["buy_orders"] = []order.Order{}
+//        item["sell_orders"] = []order.Order{}
+        item["buy_orders"] = avl.Avl{}
+        item["sell_orders"] = avl.Avl{}
     }
 }
 

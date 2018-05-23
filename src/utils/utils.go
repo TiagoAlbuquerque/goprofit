@@ -1,5 +1,6 @@
 package utils
 import (
+    "../order"
     "os"
     "encoding/json"
     "io/ioutil"
@@ -57,16 +58,22 @@ func Save(f_name string, data interface{}){
     fmt.Println(f_name, " saved")
 }
 
-func InsertSorted(l []interface{}, o map[string]interface{}, reversed bool ) []interface{}{
+func InsertSorted(l []order.Order, o order.Order, reversed bool ) []order.Order {
+    if l == nil {
+        fmt.Println(l)
+        l = []order.Order{o}
+        fmt.Println(l)
+        return l
+    }
     mult := 1.0;
     if reversed { mult = -1.0 }
     comp := func (i int) bool {
-        a := mult*((l[i].(map[string]interface{}))["price"].(float64))
-        b := mult*(o["price"].(float64))
+        a := mult*((l[i].Price()))
+        b := mult*(o.Price())
         return (a > b)
     }
     i := sort.Search(len(l), comp)
-    l = append(l, make(map[string]interface{}))
+    l = append(l, o)
     copy(l[i+1:], l[i:])
     l[i] = o
     return l

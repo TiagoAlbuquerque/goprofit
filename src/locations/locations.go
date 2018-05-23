@@ -22,7 +22,7 @@ func getLocationInfo(id string) map[string]interface{} {
     saveToFileFlag = true
     return location
 }
-
+/*
 func getLocationForOrder(order map[string]interface{}) map[string]interface{} {
     locId := fmt.Sprintf("%.0f",order["location_id"])
     location, ok := locations[locId]
@@ -64,13 +64,13 @@ func ConsumePages(cPages chan []interface{}, cOK chan bool, total int) {
     }
 }
 
+*/
 func cleanLocation(location map[string]interface{}) {
         locItems := make(map[string]interface{})
         locItems["buy_orders"] = make([]interface{}, 0)
         locItems["sell_orders"] = make([]interface{}, 0)
         location["items"] = locItems
 }
-
 func cleanup() {
     for _, i_location := range locations {
         location := i_location.(map[string]interface{})
