@@ -5,7 +5,10 @@ import(
     "../order"
     "../utils"
     "../utils/avl"
+
     "fmt"
+    "encoding/json"
+    "io/ioutil"
 //    "os"
 //    "container/list"
 //        "sync"
@@ -13,107 +16,122 @@ import(
 //        "reflect"
 )
 
-const itemUrl = "https://esi.evetech.net/latest/universe/types/%s"
-const f_name = "data_items.eve"
-var items map[string]interface{}
-var saveToFileFlag bool = false
 
 type Item struct {
-    data map[string]interface{}
+    Capacity float32 `json:"capacity"`
+    Description string `json:"description"`
+    DogmaAttributes []struct {
+        AttributeID int `json:"attribute_id"`
+        Value float32 `json:"value"`
+    } `json:"dogma_attributes"`
+    DogmaEffects []struct {
+        EffectID int `json:"effect_id"`
+        IsDefault bool `json:"is_default"`
+    } `json:"dogma_effects"`
+    GraphicID int `json:"graphic_id"`
+    GroupID int `json:"group_id"`
+    MarketGroupID int `json:"market_group_id"`
+    Mass float32 `json:"mass"`
+    Name string `json:"name"`
+    PackagedVolume float32 `json:"packaged_volume"`
+    PortionSize int `json:"portion_size"`
+    Published bool `json:"published"`
+    Radius float32 `json:"radius"`
+    ItemID int `json:"type_id"`
+    Volume float32 `json:"volume"`
+
+    Buy_orders avl.Avl
+    Sell_orders avl.Avl
 }
 
 type mOrder order.Order
 
+const itemUrl = "https://esi.evetech.net/latest/universe/types/%d"
+const f_name = "data_items.eve"
+
+var items map[int]Item
+var saveToFileFlag bool = false
+
 func (a mOrder) Less (b avl.Data) bool{
     return a.Less(b.(mOrder))
-
 }
 
-func getItemInfo(id string) map[string]interface{} {
+func getItemInfo(id int) Item {
     println("new Item")
     url := fmt.Sprintf(itemUrl, id)
     println(url)
-    item := utils.JsonFromUrl(url).(map[string]interface{})
-    fmt.Println(item["name"])
+    var item Item
+    utils.JsonFromUrl(url, &item)
+    fmt.Println(item.Name)
 //    item["buy_orders"] = []order.Order{}
 //    item["sell_orders"] = []order.Order{}
-    item["buy_orders"] = avl.Avl{}
-    item["sell_orders"] = avl.Avl{}
+    item.Buy_orders = avl.Avl{}
+    item.Sell_orders = avl.Avl{}
     items[id] = item
     saveToFileFlag = true
     return item
 }
 
 
-func GetItem(itemId string) map[string]interface{}{
+func GetItem(itemId int) Item{
     item, ok := items[itemId]
     if !ok {
         item = getItemInfo(itemId)
     }
-    return item.(map[string]interface{})
+    return item
 }
 
-func place(o order.Order, item map[string]interface{}) {
-    if o.IsBuyOrder() {
-        (item["buy_orders"].(avl.Avl)).Put(mOrder(o))
-//        item["buy_orders"] = utils.InsertSorted(item["buy_orders"].([]order.Order), o, true)
-        //deals.ComputeDeals(item, []order.Order{o}, item["sell_orders"].([]interface{}))
+func place(o mOrder, item Item) {
+    if o.IsBuyOrder {
+  //      (&(item.Buy_orders)).Put(o)
     } else {
-        (item["sell_orders"].(avl.Avl)).Put(mOrder(o))
-//        item["sell_orders"] = utils.InsertSorted(item["sell_orders"].([]order.Order), o, false)
-        //deals.ComputeDeals(item, item["buy_orders"].([]interface{}), []order.Order{o})
+  //      (&(item.Sell_orders)).Put(o)
     }
+    items[item.ItemID] = item
 }
-func place1order(o order.Order) {
-    itemId := o.ItemId()
-    item := GetItem(itemId)
-    place(o, item)
-
+func PlaceOrder(o order.Order) {
+    item := GetItem(o.ItemID)
+    place(mOrder(o), item)
 }
-
-func placeOrders(orders []interface{}) {
+/*
+func placeOrders(orders []order.Order) {
     for _, o := range orders {
-        place1order(order.New(o.(map[string]interface{})))
+        place1order(mOrder(o))
     }
 }
 
-func ConsumePages(cPages chan []interface{}, cOK chan bool, total int) {
-    cleanup()
+func ConsumePages(cPages chan []order.Order, cOK chan bool, total int) {
+    Cleanup()
     for i := 0; i < total; i++ {
         placeOrders(<-cPages)
         cOK <- true
     }
-}
+}//*/
 
-func cleanup(){
-    for _, i_item := range items {
-        item := i_item.(map[string]interface{})
+func Cleanup(){
+    for _, item := range items {
 //        item["buy_orders"] = []order.Order{}
 //        item["sell_orders"] = []order.Order{}
-        item["buy_orders"] = avl.Avl{}
-        item["sell_orders"] = avl.Avl{}
+        item.Buy_orders = avl.Avl{}
+        item.Sell_orders = avl.Avl{}
     }
 }
 
 func init(){
-    i_items, err := utils.Load(f_name)
+    raw, err := ioutil.ReadFile(f_name)
     if err == nil {
-        items = i_items.(map[string]interface{})
+        json.Unmarshal(raw, &items)
     } else {
         fmt.Printf("Failed to open %s\n", f_name)
-        items = make(map[string]interface{})
+        items = make(map[int]Item)
     }
-    cleanup()
+
+    Cleanup()
 }
 
 func Terminate() {
     if !saveToFileFlag {
         return
-    }
-    for _, i_item := range items {
-        item := i_item.(map[string]interface{})
-        delete(item, "buy_orders")
-        delete(item, "sell_orders")
     }
     utils.Save(f_name, items)
 }

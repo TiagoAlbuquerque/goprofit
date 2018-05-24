@@ -16,8 +16,6 @@ type Avl struct {
     treeRoot *tAvl
 }
 
-
-
 func (a *tAvl) inLine(cData chan Data) {
     if a == nil { return }
     (*a).lAvl.inLine(cData)
@@ -82,6 +80,7 @@ func (a *tAvl) put(d Data) *tAvl{
     if a == nil {
         return &tAvl{d, 0, nil, nil}
     }
+    println("not nil")
     if d.Less((*a).data) {
         (*a).lAvl = (*a).lAvl.put(d)
     } else {
@@ -100,6 +99,6 @@ func (a *tAvl) iter(reversed bool) chan Data{
     return cOut
 }
 
-func (a Avl) Put(d Data) {
-    a.treeRoot = a.treeRoot.put(d)
+func (a *Avl) Put(d Data) {
+    (*a).treeRoot = (*a).treeRoot.put(d)
 }

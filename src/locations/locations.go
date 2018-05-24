@@ -16,7 +16,8 @@ func getLocationInfo(id string) map[string]interface{} {
     if len(id) == 8 { url = fmt.Sprintf(locationsUrl, id)
     } else { url = fmt.Sprintf(structuresUrl, id) }
     fmt.Println(url)
-    location := utils.JsonFromUrl(url).(map[string]interface{})
+    var location map[string]interface{}
+    utils.JsonFromUrl(url, &location)
     cleanLocation(location)
     locations[id] = location
     saveToFileFlag = true

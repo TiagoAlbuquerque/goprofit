@@ -2,11 +2,15 @@ package regions
 
 import (
     "../utils"
-    "../items"
+//    "../items"
+//    "../order"
 //    "../locations"
 
     "fmt"
     "strconv"
+    "encoding/json"
+    "io/ioutil"
+
 
     "github.com/ti/nasync"
 //    "os"
@@ -14,29 +18,36 @@ import (
 //    "math"
         )
 
-const regions_url = "https://esi.evetech.net/latest/universe/regions/%s"
-const markets_url = "https://esi.evetech.net/latest/markets/%s/orders/?order_type=all&page=%d"
+const regions_url = "https://esi.evetech.net/latest/universe/regions/"
+const markets_url = "https://esi.evetech.net/latest/markets/%d/orders/?order_type=all&page=%d"
 const f_name = "data_regions.eve"
+
+type Region struct {
+    Constellations []int `json:"constellations"`
+    Description string `json:"description"`
+    Name string `json:"name"`
+    RegionID int `json:"region_id"`
+    Marked bool `json:"marked"`
+    pages int
+}
+//type mOrder order.Order
+
+var regions map[int]Region
+
 var saveToFileFlag bool = false
 
-var regions map[string]interface{}
-
-func get_regions_list() []string {
-    url := fmt.Sprintf(regions_url, "")
-    list := utils.JsonFromUrl(url).([]interface{})
-    var out []string
-    for i := 0 ; i < len(list); i++ {
-        id := fmt.Sprintf("%7.0f", list[i].(float64))
-        out = append(out, id)
-    }
-   return out
+func get_regions_list() []int {
+    var out []int
+    utils.JsonFromUrl(regions_url, &out)
+    return out
 }
 
-func get_region_info(id string, c chan bool) {
-    url := fmt.Sprintf(regions_url, id)
-    info := utils.JsonFromUrl(url).(map[string]interface{})
-    info["marked"] = true
-    regions[id] = info
+func get_region_info(id int, c chan bool) {
+    url := fmt.Sprint(regions_url, id)
+    var region Region
+    utils.JsonFromUrl(url, &region)
+    region.Marked = true
+    regions[id] = region
     saveToFileFlag = true
     c <- true
 }
@@ -54,12 +65,11 @@ func get_regions_info(){
     utils.ProgressBar(total, c)
 }
 
-func getMarketsPagesList() []string {
+func GetMarketsPagesList() []string {
     var out []string
-    for id, i_info := range regions {
-        info := i_info.(map[string]interface{})
-        if info["marked"].(bool){
-            for i:=1; i < info["pages"].(int)+1; i++ {
+    for id, reg := range regions {
+        if reg.Marked {
+            for i:=1; i < reg.pages+1; i++ {
                 url := fmt.Sprintf(markets_url, id, i)
                 out = append(out, url)
             }
@@ -68,8 +78,7 @@ func getMarketsPagesList() []string {
     return out
 }
 
-func get_market_pages_count(id string, c chan bool){
-    reg := regions[id].(map[string]interface{})
+func get_market_pages_count(id int, c chan bool){
     url := fmt.Sprintf(markets_url, id, 1)
     var pages []string
     for ok := false; !ok; {
@@ -77,7 +86,9 @@ func get_market_pages_count(id string, c chan bool){
         defer res.Body.Close()
         pages, ok = res.Header["X-Pages"]
     }
-    reg["pages"], _ = strconv.Atoi(pages[0])
+    reg := regions[id]
+    reg.pages, _ = strconv.Atoi(pages[0])
+    regions[id] = reg
     c <- true
 }
 
@@ -88,7 +99,7 @@ func update_markets_pages_count(){
     async := nasync.New(100, 100)
     defer async.Close()
     for id, reg := range regions {
-        if reg.(map[string]interface{})["marked"].(bool) {
+        if reg.Marked {
             total++
             async.Do(get_market_pages_count, id, c)
         }
@@ -96,23 +107,26 @@ func update_markets_pages_count(){
     utils.ProgressBar(total, c)
 }
 
-func getMarketPages(url string, cPages chan []interface{}){
-    var page []interface{}
+/*
+func getMarketPages(url string, cPages chan []order.Order){
+    var mPage []order.Order
     for ok := false; !ok; {
-        page, ok = utils.JsonFromUrl(url).([]interface{})
-        ok = ok &&(page != nil)
+        res := utils.GetUrl(url)
+        defer res.Body.Close()
+        body, _ := ioutil.ReadAll(res.Body)
+        json.Unmarshal(body, &mPage)
+        ok = (mPage != nil)
     }
-    cPages <- page
+    cPages <- mPage
 }
 
 func GetMarketsPages(){
     fmt.Println("Fetching markets pages")
-    lURL := getMarketsPagesList()
+    lURL := GetMarketsPagesList()
     cOK := make(chan bool)
-    cPages := make(chan []interface{})
+    cPages := make(chan []order.Order)
     total := len(lURL)
     go items.ConsumePages(cPages, cOK, total)
-//    go locations.ConsumePages(cPages, cOK, total)
     async := nasync.New(1000, 1000)
     defer async.Close()
     for i := 0; i < total; i++ {
@@ -120,16 +134,18 @@ func GetMarketsPages(){
     }
     utils.ProgressBar(total, cOK)
 }
+*/
 
 func init(){
-    i_regions, err := utils.Load(f_name)
+    raw, err := ioutil.ReadFile(f_name)
     if err == nil {
-        regions = i_regions.(map[string]interface{})
+        json.Unmarshal(raw, &regions)
     } else {
         fmt.Printf("Failed to open %s\n", f_name)
-        regions = make(map[string]interface{})
+        regions = make(map[int]Region)
         get_regions_info()
     }
+
     update_markets_pages_count()
 }
 

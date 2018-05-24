@@ -1,28 +1,26 @@
 package order
 
 import (
-    "fmt"
+    "time"
 )
 
 type Order struct{
-    data map[string]interface{}
+    Duration int `json:"duration"`
+    IsBuyOrder bool `json:"is_buy_order"`
+    Issued time.Time `json:"issued"`
+    LocationID int64 `json:"location_id"`
+    MinVolume int `json:"min_volume"`
+    OrderID int64 `json:"order_id"`
+    Price float64 `json:"price"`
+    Range string `json:"range"`
+    SystemID int `json:"system_id"`
+    ItemID int `json:"type_id"`
+    VolumeRemain int `json:"volume_remain"`
+    VolumeTotal int `json:"volume_total"`
+    Executed int
 }
 
-func New(data map[string]interface{}) Order {
-    return Order{data}
-}
-func (o *Order) Price() float64 {
-    return o.data["price"].(float64)
-}
-
-func (o *Order) IsBuyOrder() bool {
-    return o.data["is_buy_order"].(bool)
-}
-
-func (o *Order) ItemId() string {
-    return fmt.Sprintf("%.0f", o.data["type_id"].(float64))
-}
-
-func (a *Order) Less(b Order) bool {
-    return a.Price() < b.Price()
+func (a Order) Less (b Order) bool{
+    println("used")
+    return a.Price < b.Price
 }
