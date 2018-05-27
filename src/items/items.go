@@ -44,17 +44,12 @@ type Item struct {
     Sell_orders avl.Avl
 }
 
-type mOrder order.Order
 
 const itemUrl = "https://esi.evetech.net/latest/universe/types/%d"
 const f_name = "data_items.eve"
 
 var items map[int]Item
 var saveToFileFlag bool = false
-
-func (a mOrder) Less (b avl.Data) bool{
-    return a.Less(b.(mOrder))
-}
 
 func getItemInfo(id int) Item {
     println("new Item")
@@ -63,8 +58,8 @@ func getItemInfo(id int) Item {
     var item Item
     utils.JsonFromUrl(url, &item)
     fmt.Println(item.Name)
-//    item["buy_orders"] = []order.Order{}
-//    item["sell_orders"] = []order.Order{}
+//    item["buy_orders"] = []*order.Order{}
+//    item["sell_orders"] = []*order.Order{}
     item.Buy_orders = avl.Avl{}
     item.Sell_orders = avl.Avl{}
     items[id] = item
@@ -73,45 +68,33 @@ func getItemInfo(id int) Item {
 }
 
 
-func GetItem(itemId int) Item{
+func GetItem(itemId int) *Item{
     item, ok := items[itemId]
     if !ok {
         item = getItemInfo(itemId)
     }
-    return item
+    return &item
 }
 
-func place(o mOrder, item Item) {
+func (item *Item) place(o *order.Order) {
+    a := (*o)
+    b := avl.Data(a)
     if o.IsBuyOrder {
-  //      (&(item.Buy_orders)).Put(o)
+        item.Buy_orders.Put(&b)
     } else {
-  //      (&(item.Sell_orders)).Put(o)
+        item.Sell_orders.Put(&b)
     }
-    items[item.ItemID] = item
 }
-func PlaceOrder(o order.Order) {
+func PlaceOrder(o *order.Order) {
     item := GetItem(o.ItemID)
-    place(mOrder(o), item)
+    item.place(o)
+    items[(*item).ItemID] = (*item)
 }
-/*
-func placeOrders(orders []order.Order) {
-    for _, o := range orders {
-        place1order(mOrder(o))
-    }
-}
-
-func ConsumePages(cPages chan []order.Order, cOK chan bool, total int) {
-    Cleanup()
-    for i := 0; i < total; i++ {
-        placeOrders(<-cPages)
-        cOK <- true
-    }
-}//*/
 
 func Cleanup(){
     for _, item := range items {
-//        item["buy_orders"] = []order.Order{}
-//        item["sell_orders"] = []order.Order{}
+//        item["buy_orders"] = []*order.Order{}
+//        item["sell_orders"] = []*order.Order{}
         item.Buy_orders = avl.Avl{}
         item.Sell_orders = avl.Avl{}
     }
@@ -130,8 +113,6 @@ func init(){
 }
 
 func Terminate() {
-    if !saveToFileFlag {
-        return
-    }
+    if !saveToFileFlag { return }
     utils.Save(f_name, items)
 }

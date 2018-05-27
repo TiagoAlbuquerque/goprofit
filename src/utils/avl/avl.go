@@ -5,25 +5,41 @@ import (
 )
 
 type Data interface {
-    Less (d Data) bool
+    Less (d *Data) bool
 }
+
+type Iterator struct {
+    stack *Iterator
+    tree *tAvl
+}
+
 type tAvl struct {
-    data Data
+    data *Data
     height int
     lAvl, rAvl *tAvl
 }
+
 type Avl struct {
-    treeRoot *tAvl
+    root *tAvl
 }
 
-func (a *tAvl) inLine(cData chan Data) {
+func (it *Iterator) Next() (bool, Data) {
+    if stack == nil { return (false, nil)}
+    for it.tree.lAvl != nil {
+
+    }
+    out :=
+
+}
+
+func (a *tAvl) inLine(cData chan *Data) {
     if a == nil { return }
     (*a).lAvl.inLine(cData)
     cData <- (*a).data
     (*a).rAvl.inLine(cData)
 }
 
-func (a *tAvl) inLineR(cData chan Data) {
+func (a *tAvl) inLineR(cData chan *Data) {
     if a == nil { return }
     (*a).rAvl.inLineR(cData)
     cData <- (*a).data
@@ -61,14 +77,14 @@ func (a *tAvl) lRotate() *tAvl{
     return node
 }
 
-func (a *tAvl) balance(d Data) *tAvl {
+func (a *tAvl) balance(d *Data) *tAvl {
     if (*a).lAvl.getHeight() - (*a).rAvl.getHeight() == 2 {
-        if !d.Less((*a).lAvl.data) {
+        if !(*d).Less((*a).lAvl.data) {
             (*a).lAvl = (*a).lAvl.lRotate()
         }
         a = a.rRotate()
     } else if (*a).rAvl.getHeight() - (*a).lAvl.getHeight() == 2 {
-        if d.Less((*a).rAvl.data) {
+        if (*d).Less((*a).rAvl.data) {
             (*a).rAvl = (*a).rAvl.rRotate()
         }
         a = a.lRotate()
@@ -76,12 +92,11 @@ func (a *tAvl) balance(d Data) *tAvl {
     return a
 }
 
-func (a *tAvl) put(d Data) *tAvl{
+func (a *tAvl) put(d *Data) *tAvl{
     if a == nil {
         return &tAvl{d, 0, nil, nil}
     }
-    println("not nil")
-    if d.Less((*a).data) {
+    if (*d).Less((*a).data) {
         (*a).lAvl = (*a).lAvl.put(d)
     } else {
         (*a).rAvl = (*a).rAvl.put(d)
@@ -91,14 +106,12 @@ func (a *tAvl) put(d Data) *tAvl{
     return a
 }
 
-func (a *tAvl) iter(reversed bool) chan Data{
-    cOut := make (chan Data)
-    defer close(cOut)
-    if reversed { defer a.inLineR(cOut)
-    } else { defer a.inLine(cOut) }
-    return cOut
+func (a *Avl) Put(d *Data) {
+    (*a).root = (*a).root.put(d)
 }
 
-func (a *Avl) Put(d Data) {
-    (*a).treeRoot = (*a).treeRoot.put(d)
+func (a *tAvl) GetIterator(reversed bool) Iterator{
+
+
+    return nil
 }

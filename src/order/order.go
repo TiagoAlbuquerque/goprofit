@@ -2,9 +2,10 @@ package order
 
 import (
     "time"
+    "../utils/avl"
 )
 
-type Order struct{
+type Order struct {
     Duration int `json:"duration"`
     IsBuyOrder bool `json:"is_buy_order"`
     Issued time.Time `json:"issued"`
@@ -20,7 +21,8 @@ type Order struct{
     Executed int
 }
 
-func (a Order) Less (b Order) bool{
-    println("used")
-    return a.Price < b.Price
+func (a Order) Less (b *avl.Data) bool{
+    c := (*b)
+    d := c.(Order)
+    return a.Price < d.Price
 }

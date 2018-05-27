@@ -21,10 +21,9 @@ func main() {
 }
 
 func cicle() {
-	//    for {
-	controller.FetchMarket()
-
-	//    }
+	for {
+	    controller.FetchMarket()
+	}
 }
 
 func terminate() {
