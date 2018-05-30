@@ -11,6 +11,7 @@ type Data interface {
 type Iterator struct {
     stack *Iterator
     tree *tAvl
+    Next func() (bool, *Data)
 }
 
 type tAvl struct {
@@ -23,12 +24,20 @@ type Avl struct {
     root *tAvl
 }
 
-func (it *Iterator) Next() (bool, Data) {
-    if stack == nil { return (false, nil)}
+func (itp *Iterator) iNext() (bool, *Data) {
+    it := (*itp)
+    if it.stack == nil { return (false, nil)}
     for it.tree.lAvl != nil {
-
+        top := Iterator{it.stack, it.tree, nil}
+        it.stack = top
+        it.tree = it.tree.lAvl
     }
-    out :=
+    out := it.tree.data
+    if it.tree.rAvl != nil {
+        it.tree =
+    } else {
+    }
+    return (true, out)
 
 }
 
