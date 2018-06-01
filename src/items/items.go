@@ -58,8 +58,6 @@ func getItemInfo(id int) Item {
     var item Item
     utils.JsonFromUrl(url, &item)
     fmt.Println(item.Name)
-//    item["buy_orders"] = []*order.Order{}
-//    item["sell_orders"] = []*order.Order{}
     item.Buy_orders = avl.Avl{}
     item.Sell_orders = avl.Avl{}
     items[id] = item
@@ -93,8 +91,6 @@ func PlaceOrder(o *order.Order) {
 
 func Cleanup(){
     for _, item := range items {
-//        item["buy_orders"] = []*order.Order{}
-//        item["sell_orders"] = []*order.Order{}
         item.Buy_orders = avl.Avl{}
         item.Sell_orders = avl.Avl{}
     }

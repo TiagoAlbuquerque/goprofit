@@ -26,18 +26,19 @@ type Avl struct {
 
 func (itp *Iterator) iNext() (bool, *Data) {
     it := (*itp)
-    if it.stack == nil { return (false, nil)}
+    if it.stack == nil { return false, nil}
     for it.tree.lAvl != nil {
         top := Iterator{it.stack, it.tree, nil}
-        it.stack = top
+        it.stack = &top
         it.tree = it.tree.lAvl
     }
     out := it.tree.data
     if it.tree.rAvl != nil {
-        it.tree =
+        it.tree = it.tree.rAvl
     } else {
+        out = out
     }
-    return (true, out)
+    return true, out
 
 }
 
@@ -119,7 +120,7 @@ func (a *Avl) Put(d *Data) {
     (*a).root = (*a).root.put(d)
 }
 
-func (a *tAvl) GetIterator(reversed bool) Iterator{
+func (a *tAvl) GetIterator(reversed bool) *Iterator{
 
 
     return nil
