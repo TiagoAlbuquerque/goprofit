@@ -11,7 +11,7 @@ type Data interface {
 type Iterator struct {
     stack *Iterator
     tree *tAvl
-    Next func() (bool, *Data)
+    Next func() bool
 }
 
 type tAvl struct {
@@ -24,22 +24,28 @@ type Avl struct {
     root *tAvl
 }
 
-func (itp *Iterator) iNext() (bool, *Data) {
-    it := (*itp)
-    if it.stack == nil { return false, nil}
-    for it.tree.lAvl != nil {
-        top := Iterator{it.stack, it.tree, nil}
-        it.stack = &top
-        it.tree = it.tree.lAvl
+func (itp *Iterator) rNext() bool {
+    if itp.stack == nil {
+        return false
     }
-    out := it.tree.data
-    if it.tree.rAvl != nil {
-        it.tree = it.tree.rAvl
-    } else {
-        out = out
-    }
-    return true, out
 
+    return true
+}
+
+func (itp *Iterator) iNext() bool {
+    if itp.stack == nil {
+        return false
+    }
+    for itp.tree.lAvl != nil {
+
+    }
+    for itp.tree.rAvl == nil {
+    }
+    return true
+}
+
+func (itp *Iterator) Value() *Data {
+    return (*itp).tree.data
 }
 
 func (a *tAvl) inLine(cData chan *Data) {
@@ -60,6 +66,7 @@ func (a *tAvl)getHeight() int{
     if a == nil { return -1 }
     return (*a).height
 }
+
 func max(a, b int) int{
     if a > b { return a }
     return b
@@ -120,8 +127,7 @@ func (a *Avl) Put(d *Data) {
     (*a).root = (*a).root.put(d)
 }
 
-func (a *tAvl) GetIterator(reversed bool) *Iterator{
-
+func (a *Avl) GetIterator(reversed bool) *Iterator{
 
     return nil
 }

@@ -2,7 +2,7 @@ package controller
 
 import (
     "../items"
-    "../deals"
+    _ "../deals"
     "../order"
     "../regions"
     "../utils"
@@ -18,7 +18,7 @@ import (
 func placeOrders(orders []order.Order) {
     for _, o := range orders {
         items.PlaceOrder(&o)
-        deals.ComputeDeals(&o)
+//        deals.ComputeDeals(&o)
     }
 }
 

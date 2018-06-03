@@ -1,7 +1,6 @@
 package items
 
 import(
-//    "../deals"
     "../order"
     "../utils"
     "../utils/avl"
@@ -83,6 +82,7 @@ func (item *Item) place(o *order.Order) {
         item.Sell_orders.Put(&b)
     }
 }
+
 func PlaceOrder(o *order.Order) {
     item := GetItem(o.ItemID)
     item.place(o)
