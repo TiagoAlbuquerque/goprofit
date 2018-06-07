@@ -11,7 +11,6 @@ type Data interface {
 type Iterator struct {
     stack *Iterator
     tree *tAvl
-    Next func() bool
 }
 
 type tAvl struct {
@@ -21,45 +20,33 @@ type tAvl struct {
 }
 
 type Avl struct {
+    Reversed bool
     root *tAvl
 }
 
-func (itp *Iterator) rNext() bool {
+func (itp *Iterator) Next() bool {
     if itp.stack == nil {
         return false
     }
 
-    return true
-}
+    itp.tree = itp.stack.tree
+    itp.stack = itp.stack.stack
 
-func (itp *Iterator) iNext() bool {
-    if itp.stack == nil {
-        return false
-    }
-    for itp.tree.lAvl != nil {
-
-    }
-    for itp.tree.rAvl == nil {
+    if itp.tree.rAvl != nil {
+        next := Iterator{itp.stack, itp.tree.rAvl}
+        itp.stack = &next
+        tree := itp.tree.rAvl
+        for tree.lAvl != nil {
+            next = Iterator{itp.stack, tree.lAvl}
+            itp.stack = &next
+            tree = tree.lAvl
+        }
     }
     return true
 }
 
 func (itp *Iterator) Value() *Data {
-    return (*itp).tree.data
-}
-
-func (a *tAvl) inLine(cData chan *Data) {
-    if a == nil { return }
-    (*a).lAvl.inLine(cData)
-    cData <- (*a).data
-    (*a).rAvl.inLine(cData)
-}
-
-func (a *tAvl) inLineR(cData chan *Data) {
-    if a == nil { return }
-    (*a).rAvl.inLineR(cData)
-    cData <- (*a).data
-    (*a).lAvl.inLineR(cData)
+    return itp.tree.data
 }
 
 func (a *tAvl)getHeight() int{
@@ -94,14 +81,14 @@ func (a *tAvl) lRotate() *tAvl{
     return node
 }
 
-func (a *tAvl) balance(d *Data) *tAvl {
+func (a *tAvl) balance(d *Data, rev bool) *tAvl {
     if (*a).lAvl.getHeight() - (*a).rAvl.getHeight() == 2 {
-        if !(*d).Less((*a).lAvl.data) {
+        if rev != (!(*d).Less((*a).lAvl.data)) {
             (*a).lAvl = (*a).lAvl.lRotate()
         }
         a = a.rRotate()
     } else if (*a).rAvl.getHeight() - (*a).lAvl.getHeight() == 2 {
-        if (*d).Less((*a).rAvl.data) {
+        if rev != ((*d).Less((*a).rAvl.data)) {
             (*a).rAvl = (*a).rAvl.rRotate()
         }
         a = a.lRotate()
@@ -109,25 +96,31 @@ func (a *tAvl) balance(d *Data) *tAvl {
     return a
 }
 
-func (a *tAvl) put(d *Data) *tAvl{
+func (a *tAvl) put(d *Data, rev bool) *tAvl{
     if a == nil {
         return &tAvl{d, 0, nil, nil}
     }
-    if (*d).Less((*a).data) {
-        (*a).lAvl = (*a).lAvl.put(d)
+    if rev != (*d).Less((*a).data) {
+        (*a).lAvl = (*a).lAvl.put(d, rev)
     } else {
-        (*a).rAvl = (*a).rAvl.put(d)
+        (*a).rAvl = (*a).rAvl.put(d, rev)
     }
     a.updateHeight()
-    a = a.balance(d)
+    a = a.balance(d, rev)
     return a
 }
 
-func (a *Avl) Put(d *Data) {
-    (*a).root = (*a).root.put(d)
+func NewAvl(reversed bool) Avl {
+    return Avl{reversed, nil}
 }
 
-func (a *Avl) GetIterator(reversed bool) *Iterator{
+func (a *Avl) Put(d *Data) {
+    (*a).root = (*a).root.put(d, a.Reversed)
+}
 
-    return nil
+func (a *Avl) GetIterator() *Iterator{
+    out := Iterator{nil, nil}
+
+
+    return &out
 }

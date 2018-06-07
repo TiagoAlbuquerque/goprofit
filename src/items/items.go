@@ -57,8 +57,8 @@ func getItemInfo(id int) Item {
     var item Item
     utils.JsonFromUrl(url, &item)
     fmt.Println(item.Name)
-    item.Buy_orders = avl.Avl{}
-    item.Sell_orders = avl.Avl{}
+    item.Buy_orders = avl.NewAvl(true)
+    item.Sell_orders = avl.NewAvl(false)
     items[id] = item
     saveToFileFlag = true
     return item
@@ -91,8 +91,8 @@ func PlaceOrder(o *order.Order) {
 
 func Cleanup(){
     for _, item := range items {
-        item.Buy_orders = avl.Avl{}
-        item.Sell_orders = avl.Avl{}
+        item.Buy_orders = avl.NewAvl(true)
+        item.Sell_orders = avl.NewAvl(true)
     }
 }
 

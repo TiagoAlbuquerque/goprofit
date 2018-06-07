@@ -36,14 +36,13 @@ func makeDeal(item *items.Item, bOrder *order.Order, sOrder *order.Order) bool {
     d := Deal{item, bOrder, sOrder}
     if d.profit() > 0 {
         deals = append(deals, Deal{item, bOrder, sOrder})
-
         return true
     }
     return false
 }
 
 func computeBuyOrder(item *items.Item, bOrder *order.Order, sAvl avl.Avl) {
-    iter := sAvl.GetIterator(false)
+    iter := sAvl.GetIterator()
 
     for iter.Next() {
         sOrder := (*iter.Value()).(order.Order)
@@ -54,7 +53,7 @@ func computeBuyOrder(item *items.Item, bOrder *order.Order, sAvl avl.Avl) {
 }
 
 func computeSellOrder(item *items.Item, sOrder *order.Order, bAvl avl.Avl) {
-    iter := bAvl.GetIterator(true)
+    iter := bAvl.GetIterator()
 
     for iter.Next() {
         bOrder := (*iter.Value()).(order.Order)
