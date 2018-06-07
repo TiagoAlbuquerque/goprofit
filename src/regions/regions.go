@@ -150,8 +150,7 @@ func init(){
 }
 
 func Terminate(){
-    if !saveToFileFlag {
-        return
-    }
+    if !saveToFileFlag { return }
     utils.Save(f_name, regions)
+    saveToFileFlag = false
 }

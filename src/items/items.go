@@ -110,5 +110,7 @@ func init(){
 
 func Terminate() {
     if !saveToFileFlag { return }
+
     utils.Save(f_name, items)
+    saToFileFlag = false
 }
