@@ -23,6 +23,7 @@ func main() {
 func cicle() {
 	for {
 	    controller.FetchMarket()
+        terminate()
 	}
 }
 
