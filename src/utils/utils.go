@@ -1,6 +1,5 @@
 package utils
 import (
-    "../order"
     "os"
     "encoding/json"
     "io/ioutil"
@@ -33,7 +32,6 @@ func JsonFromUrl(url string, out interface{}){
         err = nil
     }
     json.Unmarshal(body, out)
-//    return out
 }
 
 func Load(f_name string) (interface{}, error) {
@@ -58,26 +56,9 @@ func Save(f_name string, data interface{}){
     fmt.Println(f_name, " saved")
 }
 
-func InsertSorted(l []order.Order, o order.Order, reversed bool ) []order.Order {
-    println("OOoops")
-    /*if l == nil {
-        fmt.Println(l)
-        l = []order.Order{o}
-        fmt.Println(l)
-        return l
-    }
-    mult := 1.0;
-    if reversed { mult = -1.0 }
-    comp := func (i int) bool {
-        a := mult*((l[i].Price()))
-        b := mult*(o.Price())
-        return (a > b)
-    }
-    i := sort.Search(len(l), comp)
-    l = append(l, o)
-    copy(l[i+1:], l[i:])
-    l[i] = o*/
-    return l
+func StatusIndicator(text string) {
+    print("\033[F\033[K")
+    println(text)
 }
 
 func ProgressBar(total int, c chan bool){

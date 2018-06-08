@@ -1,41 +1,30 @@
 package main
 
 import (
-	//    "./utils"
 	"./controller"
-	//    "./regions"
-	//    "./items"
 
-	"fmt"
+    "fmt"
 	"os"
 	"os/signal"
 )
 
 func main() {
-	defer func() {
-		recover()
-		terminate()
-	}()
-
 	cicle()
 }
 
 func cicle() {
 	for {
 	    controller.FetchMarket()
-        terminate()
-	}
-}
+        controller.PrintShoppingLists(2)
 
-func terminate() {
-	fmt.Println("terminating")
-	controller.Terminate()
+        controller.Terminate()
+	}
 }
 
 func interruptionHandler(c chan os.Signal) {
 	for sig := range c {
 		fmt.Println(sig)
-		terminate()
+	    controller.Terminate()
 		os.Exit(0)
 	}
 }

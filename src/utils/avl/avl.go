@@ -1,16 +1,21 @@
 package avl
 
 import (
-//    "fmt"
+    _ "fmt"
 )
 
 type Data interface {
     Less (d *Data) bool
 }
 
+type stack struct {
+    next *stack
+    val *tAvl
+}
+
 type Iterator struct {
-    stack *Iterator
-    tree *tAvl
+    top *stack
+    val *tAvl
 }
 
 type tAvl struct {
@@ -20,25 +25,26 @@ type tAvl struct {
 }
 
 type Avl struct {
-    Reversed bool
+    rev bool //reversed
     root *tAvl
 }
+const REVERSED = true
+const DIRECT = false
 
 func (itp *Iterator) Next() bool {
-    if itp.stack == nil {
+    if itp.top == nil {
         return false
     }
 
-    itp.tree = itp.stack.tree
-    itp.stack = itp.stack.stack
+    itp.val = itp.top.val
+    itp.top = itp.top.next
 
-    if itp.tree.rAvl != nil {
-        next := Iterator{itp.stack, itp.tree.rAvl}
-        itp.stack = &next
-        tree := itp.tree.rAvl
+    if itp.val.rAvl != nil {
+        next := stack{itp.top, itp.val.rAvl}
+        itp.top = &next
+        tree := itp.val.rAvl
         for tree.lAvl != nil {
-            next = Iterator{itp.stack, tree.lAvl}
-            itp.stack = &next
+            itp.top = &stack{itp.top, tree.lAvl}
             tree = tree.lAvl
         }
     }
@@ -46,7 +52,7 @@ func (itp *Iterator) Next() bool {
 }
 
 func (itp *Iterator) Value() *Data {
-    return itp.tree.data
+    return itp.val.data
 }
 
 func (a *tAvl)getHeight() int{
@@ -115,12 +121,19 @@ func NewAvl(reversed bool) Avl {
 }
 
 func (a *Avl) Put(d *Data) {
-    (*a).root = (*a).root.put(d, a.Reversed)
+    (*a).root = (*a).root.put(d, a.rev)
 }
 
 func (a *Avl) GetIterator() *Iterator{
     out := Iterator{nil, nil}
 
-
+    if a.root != nil {
+        out.top = &stack{out.top, a.root}
+        tree := a.root
+        for tree.lAvl != nil {
+            out.top = &stack{out.top, tree.lAvl}
+            tree = tree.lAvl
+        }
+    }
     return &out
 }

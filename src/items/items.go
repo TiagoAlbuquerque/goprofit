@@ -92,7 +92,8 @@ func PlaceOrder(o *order.Order) {
 func Cleanup(){
     for _, item := range items {
         item.Buy_orders = avl.NewAvl(true)
-        item.Sell_orders = avl.NewAvl(true)
+        item.Sell_orders = avl.NewAvl(false)
+        items[item.ItemID] = item
     }
 }
 

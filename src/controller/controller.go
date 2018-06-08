@@ -1,10 +1,11 @@
 package controller
 
 import (
-    "../items"
     "../deals"
+    "../items"
     "../order"
     "../regions"
+    "../shoppingLists"
     "../utils"
 //    "../utils/avl"
 
@@ -16,15 +17,23 @@ import (
 
 
 func placeOrders(orders []order.Order) {
+
+    utils.StatusIndicator("Processing market page")
+
+    cDeals := make(chan deals.Deal)
+    defer close(cDeals)
+    go shoppingLists.ConsumeDeals(cDeals)
+
     for _, o := range orders {
         items.PlaceOrder(&o)
-        deals.ComputeDeals(&o)
+        deals.ComputeDeals(&o, cDeals)
     }
 }
 
 func consumePages(cPages chan []order.Order, cOK chan bool, total int) {
     items.Cleanup()
     for i := 0; i < total; i++ {
+        utils.StatusIndicator("Waiting page download")
         placeOrders(<-cPages)
         cOK <- true
     }
@@ -56,7 +65,17 @@ func FetchMarket(){
     }
     utils.ProgressBar(total, cOK)
 }
+
+func PrintShoppingLists(n int) {
+    shoppingLists.PrintTop(n)
+}
+
 func Terminate() {
+    items.Cleanup()
+    deals.Cleanup()
+    shoppingLists.Cleanup()
+
     items.Terminate()
     regions.Terminate()
+
 }
