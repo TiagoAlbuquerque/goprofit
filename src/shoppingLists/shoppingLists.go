@@ -13,12 +13,21 @@ type shopList struct {
     selected_l avl.Avl
 }
 
+type dealAvlData struct {
+    deal deals.Deal
+}
+
+func (a dealAvlData) Less (b *avl.Data) bool{
+    return false
+}
+
+
 var shopLists_m map[string]*shopList
 var shopLists_t avl.Avl
 var cConsumeDeals chan deals.Deal
 
 func (s *shopList) add(d deals.Deal) {
-    s.deals_l.Put(d)
+    s.deals_l.Put(&dealAvlData{d})
 }
 
 func (s *shopList) Key() string {
@@ -45,8 +54,8 @@ func PrintTop(n int) {
 }
 func Cleanup() {
     for _, lp := range shopLists_m {
-        lp.deals_l = []deals.Deal{}
-        lp.selected_l = []deals.Deal{}
+        lp.deals_l = avl.NewAvl(avl.REVERSED)
+        lp.selected_l = avl.NewAvl(avl.REVERSED)
     }
 }
 func init() {

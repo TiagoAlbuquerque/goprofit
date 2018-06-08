@@ -73,7 +73,7 @@ func computeBuyOrder(item *items.Item, bOrder *order.Order, sAvl avl.Avl, cDeals
 
     for iter.Next() {
         sOrder := (*iter.Value()).(items.OrderAvlData).Order
-        if !makeDeal(item, bOrder, &sOrder, cDeals) {
+        if !makeDeal(item, bOrder, sOrder, cDeals) {
             break
         }
     }
@@ -83,8 +83,8 @@ func computeSellOrder(item *items.Item, sOrder *order.Order, bAvl avl.Avl, cDeal
     iter := bAvl.GetIterator()
 
     for iter.Next() {
-        bOrder := (*iter.Value()).(items.OrderAvl.Data).Order
-        if !makeDeal(item, &bOrder, sOrder, cDeals) {
+        bOrder := (*iter.Value()).(items.OrderAvlData).Order
+        if !makeDeal(item, bOrder, sOrder, cDeals) {
             break
         }
     }
