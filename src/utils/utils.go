@@ -57,7 +57,7 @@ func Save(f_name string, data interface{}){
 }
 
 func StatusIndicator(text string) {
-    fmt.Printf("\033[F\033[K%s\n", text)
+    fmt.Printf("\033[A\r\033[K%s\n", text)
 }
 
 func ProgressBar(total int, c chan bool){

@@ -26,7 +26,7 @@ func (d *Deal) BuyLocID() int64{
     return d.buyOrder.LocationID
 }
 
-func (d *Deal) pm3() float64 {
+func (d *Deal) Pm3() float64 {
     prf := d.Profit()
     amt := d.amount()
     vol := float64(amt)*float64(d.item.Volume)

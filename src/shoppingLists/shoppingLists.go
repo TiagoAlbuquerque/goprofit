@@ -18,9 +18,10 @@ type dealAvlData struct {
 }
 
 func (a dealAvlData) Less (b *avl.Data) bool{
-    return false
+    c := (*b)
+    d := c.(dealAvlData)
+    return a.deal.Pm3() < d.deal.Pm3()
 }
-
 
 var shopLists_m map[string]*shopList
 var shopLists_t avl.Avl
@@ -31,8 +32,13 @@ func (s *shopList) add(d deals.Deal) {
     s.deals_l.Put(&ad)
 }
 
-func (s *shopList) Key() string {
+func (s *shopList) key() string {
     return fmt.Sprintf("%d >> %d", s.sellID, s.buyID)
+}
+
+func (s *shopList) Profit() float64 {
+    out := 0.0
+    return out
 }
 
 func ConsumeDeals(cDeals chan deals.Deal) {
@@ -40,25 +46,29 @@ func ConsumeDeals(cDeals chan deals.Deal) {
         cConsumeDeals <- d
     }
 }
+
 func consumeDeals(cDeals chan deals.Deal) {
     for d := range cDeals {
         sl, ok := shopLists_m[d.Key()]
         if !ok {
             sl = &shopList{d.SellLocID(), d.BuyLocID(), avl.NewAvl(avl.REVERSED), avl.NewAvl(avl.REVERSED)}
-            shopLists_m[sl.Key()] = sl
+            shopLists_m[sl.key()] = sl
         }
         sl.add(d)
     }
 }
+
 func PrintTop(n int) {
     fmt.Println("LISTAS")
 }
+
 func Cleanup() {
     for _, lp := range shopLists_m {
         lp.deals_l = avl.NewAvl(avl.REVERSED)
         lp.selected_l = avl.NewAvl(avl.REVERSED)
     }
 }
+
 func init() {
     shopLists_m = map[string]*shopList{}
     shopLists_t = avl.NewAvl(avl.REVERSED)
