@@ -43,6 +43,15 @@ type Item struct {
     Sell_orders avl.Avl
 }
 
+type OrderAvlData struct {
+    Order *order.Order
+}
+
+func (a OrderAvlData) Less (b *avl.Data) bool{
+    c := (*b)
+    d := c.(OrderAvlData)
+    return a.Order.Price < d.Order.Price
+}
 
 const itemUrl = "https://esi.evetech.net/latest/universe/types/%d"
 const f_name = "data_items.eve"
@@ -74,8 +83,7 @@ func GetItem(itemId int) *Item{
 }
 
 func (item *Item) place(o *order.Order) {
-    a := (*o)
-    b := avl.Data(a)
+    b := avl.Data(OrderAvlData{o})
     if o.IsBuyOrder {
         item.Buy_orders.Put(&b)
     } else {

@@ -2,7 +2,6 @@ package order
 
 import (
     "time"
-    "../utils/avl"
 )
 
 type Order struct {
@@ -21,8 +20,3 @@ type Order struct {
     Executed int
 }
 
-func (a Order) Less (b *avl.Data) bool{
-    c := (*b)
-    d := c.(Order)
-    return a.Price < d.Price
-}
