@@ -27,7 +27,8 @@ var shopLists_t avl.Avl
 var cConsumeDeals chan deals.Deal
 
 func (s *shopList) add(d deals.Deal) {
-    s.deals_l.Put(&dealAvlData{d})
+    ad := avl.Data(dealAvlData{d})
+    s.deals_l.Put(&ad)
 }
 
 func (s *shopList) Key() string {
