@@ -3,28 +3,28 @@ package main
 import (
 	"./controller"
 
-    "fmt"
+	"fmt"
 	"os"
 	"os/signal"
 )
 
 func main() {
-	cicle()
+	for {
+		cicle()
+	}
 }
 
 func cicle() {
-	for {
-	    controller.FetchMarket()
-        controller.PrintShoppingLists(2)
+	controller.FetchMarket()
+	controller.PrintShoppingLists(2)
 
-        controller.Terminate()
-	}
+	controller.Terminate()
 }
 
 func interruptionHandler(c chan os.Signal) {
 	for sig := range c {
 		fmt.Println(sig)
-	    controller.Terminate()
+		controller.Terminate()
 		os.Exit(0)
 	}
 }
