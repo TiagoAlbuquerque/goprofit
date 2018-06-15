@@ -41,6 +41,15 @@ func (s *shopList) Profit() float64 {
     return out
 }
 
+func getShopList(d deals.Deal) *shopList {
+    sl, ok := shopLists_m[d.Key()]
+    if !ok {
+        sl = &shopList{d.SellLocID(), d.BuyLocID(), avl.NewAvl(avl.REVERSED), avl.NewAvl(avl.REVERSED)}
+        shopLists_m[sl.key()] = sl
+    }
+    return sl
+}
+
 func ConsumeDeals(cDeals chan deals.Deal) {
     for d := range cDeals {
         cConsumeDeals <- d

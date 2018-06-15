@@ -2,6 +2,7 @@ package avl
 
 import (
     _ "fmt"
+    "sync"
 )
 
 type Data interface {
@@ -27,6 +28,7 @@ type tAvl struct {
 type Avl struct {
     rev bool //reversed
     root *tAvl
+    mutex *sync.Mutex
 }
 
 const REVERSED = true
@@ -118,10 +120,12 @@ func (a *tAvl) put(d *Data, rev bool) *tAvl{
 }
 
 func NewAvl(reversed bool) Avl {
-    return Avl{reversed, nil}
+    return Avl{reversed, nil, &sync.Mutex{}}
 }
 
 func (a *Avl) Put(d *Data) {
+    a.mutex.Lock()
+    defer a.mutex.Unlock()
     a.root = a.root.put(d, a.rev)
 }
 
