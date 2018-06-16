@@ -1,7 +1,7 @@
 package deals
 
 import (
-    "fmt"
+    _ "fmt"
     "../items"
     "../order"
     "../utils/avl"
@@ -14,8 +14,8 @@ type Deal struct{
 
 var deals []Deal
 
-func (d *Deal) Key() string {
-    return fmt.Sprintf("%d >> %d", d.sellOrder.LocationID, d.buyOrder.LocationID)
+func (d *Deal) Key() (int64, int64) {
+    return d.sellOrder.LocationID, d.buyOrder.LocationID
 }
 
 func (d *Deal) SellLocID() int64{
