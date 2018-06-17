@@ -11,8 +11,8 @@ import (
 type shopList struct {
     sellID int64
     buyID int64
-    deals_l avl.Avl
-    selected_l avl.Avl
+    deals avl.Avl
+    selected avl.Avl
 }
 
 type dealAvlData struct {
@@ -40,7 +40,7 @@ var cConsumeDeals chan deals.Deal
 
 func (s *shopList) add(d deals.Deal) {
     ad := avl.Data(dealAvlData{d})
-    s.deals_l.Put(&ad)
+    s.deals.Put(&ad)
 }
 
 func (s *shopList) key() (int64, int64) {
@@ -48,13 +48,17 @@ func (s *shopList) key() (int64, int64) {
 }
 
 func (s *shopList) Profit() float64 {
+    it := s.deals.GetIterator()
+    for it.Next() {
+
+    }
     out := 0.0
     return out
 }
 
 func (s *shopList) reset() {
-    s.deals_l = avl.NewAvl(avl.REVERSED)
-    s.selected_l = avl.NewAvl(avl.REVERSED)
+    s.deals = avl.NewAvl(avl.REVERSED)
+    s.selected = avl.NewAvl(avl.REVERSED)
 }
 
 var mutex = sync.Mutex{}
@@ -64,7 +68,7 @@ func getShopList(d deals.Deal) *shopList {
     orig, dest := d.Key()
     sl, ok := shopLists_m[orig][dest]
     if !ok {
-        _, ok := shopLists_m[orig]
+        _, ok = shopLists_m[orig]
         if !ok {
             shopLists_m[orig] = map[int64]*shopList{}
         }
