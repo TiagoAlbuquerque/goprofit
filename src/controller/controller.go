@@ -17,13 +17,13 @@ import (
     "github.com/ti/nasync"
 )
 
-func placeOrders(orders []order.Order) {
+func placeOrders(orders []order.Order, cOK chan bool) {
 
     utils.StatusIndicator("Processing market page")
 
     cDeals := make(chan deals.Deal)
     defer close(cDeals)
-    go shoppingLists.ConsumeDeals(cDeals)
+    go shoppingLists.ConsumeDeals(cDeals, cOK)
 
     for _, o := range orders {
         items.PlaceOrder(&o)
@@ -31,12 +31,10 @@ func placeOrders(orders []order.Order) {
     }
 }
 
-func consumePages(cPages chan []order.Order, cOK chan bool, total int) {
-    items.Cleanup()
-    for i := 0; i < total; i++ {
+func consumePages(cPages chan []order.Order, cOK chan bool) {
+    for  page := range cPages {
         utils.StatusIndicator("Waiting page download")
-        placeOrders(<-cPages)
-        cOK <- true
+        placeOrders(page, cOK)
     }
 }
 
@@ -53,17 +51,26 @@ func getMarketPages(url string, cPages chan []order.Order) {
 }
 
 func FetchMarket() {
+    items.Cleanup()
     fmt.Println("Fetching markets pages")
-    lURL := regions.GetMarketsPagesList()
     cOK := make(chan bool)
+    defer close(cOK)
     cPages := make(chan []order.Order)
-    total := len(lURL)
-    go consumePages(cPages, cOK, total)
+    defer close(cPages)
     async := nasync.New(1000, 1000)
     defer async.Close()
+
+    lURL := regions.GetMarketsPagesList()
+    total := len(lURL)
+    go consumePages(cPages, cOK)
+    go consumePages(cPages, cOK)
+    go consumePages(cPages, cOK)
+    go consumePages(cPages, cOK)
+
     for i := 0; i < total; i++ {
         async.Do(getMarketPages, lURL[i], cPages)
     }
+
     utils.ProgressBar(total, cOK)
 }
 

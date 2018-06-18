@@ -86,17 +86,20 @@ func getShopList(d deals.Deal) *shopList {
     return sl
 }
 
-func ConsumeDeals(cDeals chan deals.Deal) {
+func ConsumeDeals(cDeals chan deals.Deal, cOK chan bool) {
     for d := range cDeals {
         sl := getShopList(d)
         sl.add(d)
     }
+    cOK <- true
 }
 
 func PrintTop(n int) {
     fmt.Println("LISTAS")
     shopLists_t := avl.NewAvl(avl.REVERSED)
     cOK := make(chan bool)
+    defer close(cOK)
+
     go utils.ProgressBar(len(shopLists_m), cOK)
     for _, im := range shopLists_m {
         for _, lp := range im {

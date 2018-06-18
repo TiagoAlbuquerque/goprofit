@@ -10,7 +10,7 @@ import(
     "io/ioutil"
 //    "os"
 //    "container/list"
-//        "sync"
+    "sync"
 //        "strings"
 //        "reflect"
 )
@@ -39,8 +39,8 @@ type Item struct {
     ItemID int `json:"type_id"`
     Volume float32 `json:"volume"`
 
-    Buy_orders avl.Avl
-    Sell_orders avl.Avl
+    Buy_orders *avl.Avl
+    Sell_orders *avl.Avl
 }
 
 type OrderAvlData struct {
@@ -66,15 +66,19 @@ func getItemInfo(id int) Item {
     var item Item
     utils.JsonFromUrl(url, &item)
     fmt.Println(item.Name)
-    item.Buy_orders = avl.NewAvl(true)
-    item.Sell_orders = avl.NewAvl(false)
+    boavl := avl.NewAvl(avl.REVERSED)
+    soavl := avl.NewAvl(avl.DIRECT)
+    item.Buy_orders = &boavl
+    item.Sell_orders = &soavl
     items[id] = item
     saveToFileFlag = true
     return item
 }
 
-
+var mutex = sync.Mutex{}
 func GetItem(itemId int) *Item{
+    mutex.Lock()
+    defer mutex.Unlock()
     item, ok := items[itemId]
     if !ok {
         item = getItemInfo(itemId)
@@ -94,13 +98,15 @@ func (item *Item) place(o *order.Order) {
 func PlaceOrder(o *order.Order) {
     item := GetItem(o.ItemID)
     item.place(o)
-    items[(*item).ItemID] = (*item)
+//    items[(*item).ItemID] = (*item)
 }
 
 func Cleanup(){
     for _, item := range items {
-        item.Buy_orders = avl.NewAvl(true)
-        item.Sell_orders = avl.NewAvl(false)
+        boavl := avl.NewAvl(avl.REVERSED)
+        soavl := avl.NewAvl(avl.DIRECT)
+        item.Buy_orders = &boavl
+        item.Sell_orders = &soavl
         items[item.ItemID] = item
     }
 }
