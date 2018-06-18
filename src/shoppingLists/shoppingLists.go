@@ -11,6 +11,7 @@ import (
 type shopList struct {
     sellID int64
     buyID int64
+    profit float64
     deals avl.Avl
     selected avl.Avl
 }
@@ -48,17 +49,23 @@ func (s *shopList) key() (int64, int64) {
 }
 
 func (s *shopList) Profit() float64 {
+    if s.profit > 0.0 { return s.profit }
     it := s.deals.GetIterator()
+    cargo := 120.0
+    profit := 0.0
     for it.Next() {
-
+        adp := it.Value()
+        deal := (*adp).(dealAvlData).deal
+        cargo, profit = deal.Execute(cargo)
+        s.profit += profit
     }
-    out := 0.0
-    return out
+    return s.profit
 }
 
 func (s *shopList) reset() {
     s.deals = avl.NewAvl(avl.REVERSED)
     s.selected = avl.NewAvl(avl.REVERSED)
+    s.profit = 0.0
 }
 
 var mutex = sync.Mutex{}
@@ -72,7 +79,7 @@ func getShopList(d deals.Deal) *shopList {
         if !ok {
             shopLists_m[orig] = map[int64]*shopList{}
         }
-        sl = &shopList{d.SellLocID(), d.BuyLocID(), avl.NewAvl(avl.REVERSED), avl.NewAvl(avl.REVERSED)}
+        sl = &shopList{d.SellLocID(), d.BuyLocID(), 0.0, avl.NewAvl(avl.REVERSED), avl.NewAvl(avl.REVERSED)}
 
         shopLists_m[orig][dest] = sl
     }

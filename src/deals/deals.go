@@ -49,6 +49,12 @@ func (d *Deal) amount() int {
     return out
 }
 
+func (d *Deal) Execute(cargo float64) (float64, float64) {
+    profit := 1.0
+
+    return cargo, profit
+}
+
 func (d *Deal) Profit() float64 {
     tax := 1-0.01
     amt := d.amount()
