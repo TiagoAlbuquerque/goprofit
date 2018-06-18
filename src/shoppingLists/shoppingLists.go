@@ -86,20 +86,9 @@ func getShopList(d deals.Deal) *shopList {
     return sl
 }
 
-func consumeDeals(cDeals chan deals.Deal) {
-    for d := range cDeals {
-        cConsumeDeals <- d
-    }
-}
-
 func ConsumeDeals(cDeals chan deals.Deal) {
     for d := range cDeals {
-        //sl, ok := shopLists_m[d.Key()]
-        //if !ok {
         sl := getShopList(d)
-            //sl = &shopList{d.SellLocID(), d.BuyLocID(), avl.NewAvl(avl.REVERSED), avl.NewAvl(avl.REVERSED)}
-            //shopLists_m[sl.key()] = sl
-        //}
         sl.add(d)
     }
 }
@@ -107,8 +96,8 @@ func ConsumeDeals(cDeals chan deals.Deal) {
 func PrintTop(n int) {
     fmt.Println("LISTAS")
     shopLists_t := avl.NewAvl(avl.REVERSED)
-	cOK := make(chan bool)
-	go utils.ProgressBar(len(shopLists_m), cOK)
+    cOK := make(chan bool)
+    go utils.ProgressBar(len(shopLists_m), cOK)
     for _, im := range shopLists_m {
         for _, lp := range im {
             ad := avl.Data(shopListAvlData{lp})
@@ -136,6 +125,4 @@ func Cleanup() {
 
 func init() {
     shopLists_m = map[int64]map[int64]*shopList{}
-    cConsumeDeals = make(chan deals.Deal)
-    go consumeDeals(cConsumeDeals)
 }
