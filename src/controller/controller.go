@@ -33,8 +33,8 @@ func placeOrders(orders []order.Order, cOK chan bool) {
 
 func consumePages(cPages chan []order.Order, cOK chan bool) {
     for  page := range cPages {
-        utils.StatusIndicator("Waiting page download")
         placeOrders(page, cOK)
+        utils.StatusIndicator("Waiting page download")
     }
 }
 
@@ -62,9 +62,6 @@ func FetchMarket() {
 
     lURL := regions.GetMarketsPagesList()
     total := len(lURL)
-    go consumePages(cPages, cOK)
-    go consumePages(cPages, cOK)
-    go consumePages(cPages, cOK)
     go consumePages(cPages, cOK)
 
     for i := 0; i < total; i++ {
