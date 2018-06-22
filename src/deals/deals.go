@@ -1,10 +1,11 @@
 package deals
 
 import (
-    _ "fmt"
     "../items"
     "../order"
     "../utils/avl"
+    _ "fmt"
+    "math"
 )
 
 type Deal struct{
@@ -27,9 +28,8 @@ func (d *Deal) BuyLocID() int64{
 }
 
 func (d *Deal) Pm3() float64 {
-    prf := d.Profit()
-    amt := d.amount()
-    vol := float64(amt)*float64(d.item.Volume)
+    prf := d.profitPerUnit()
+    vol := float64(d.item.Volume)
     out := prf/vol
 
     return out
@@ -41,7 +41,7 @@ func min(a, b int) int {
 }
 
 func (d *Deal) amount() int {
-    out := min(d.buyOrder.VolumeRemain, d.sellOrder.VolumeRemain)
+    out := min(d.buyOrder.OrderRemain(), d.sellOrder.OrderRemain())
 
     if out < d.buyOrder.MinVolume { out = 0 }
     if out < d.sellOrder.MinVolume { out = 0 }
@@ -49,28 +49,46 @@ func (d *Deal) amount() int {
     return out
 }
 
-func (d *Deal) Execute(cargo float64) (float64, float64) {
-    itmVol := d.item;Volume
-    profit := 1.0
-    qnt := d.amount()
-
-    vol := qnt*itmVol
-    cargo -= vol
-    return cargo, profit
+func (d *Deal) amountCargo(cargo float64) int {
+    out := d.amount()
+    out = min(out, int(math.Floor(cargo/d.item.Volume)))
+    return out
 }
 
-func (d *Deal) Profit() float64 {
-    tax := 1-0.01
-    amt := d.amount()
-    ppu := (d.buyOrder.Price*tax) - d.sellOrder.Price
-    out := float64(amt)*ppu
+func tax() float64 {
+    return 1-0.01
+}
+
+func (d *Deal) profitPerUnit() float64 {
+    ppu := (d.buyOrder.Price*tax()) - d.sellOrder.Price
+    return ppu
+}
+
+func (d *Deal) profitQnt(qnt int) float64 {
+    ppu := d.profitPerUnit()
+    out := float64(qnt)*ppu
 
     return out
 }
 
+func (d *Deal) Execute(cargo float64) (float64, float64) {
+    itmVol := d.item.Volume
+    qnt := d.amountCargo(cargo)
+
+    d.buyOrder.Execute(qnt)
+    d.sellOrder.Execute(qnt)
+
+    vol := float64(qnt)*itmVol
+    cargo -= vol
+
+    profit := d.profitQnt(qnt)
+
+    return cargo, profit
+}
+
 func makeDeal(item *items.Item, bOrder *order.Order, sOrder *order.Order, cDeals chan Deal) bool {
     d := Deal{item, bOrder, sOrder}
-    if d.Profit() > 0 {
+    if d.profitPerUnit() > 0 {
         deals = append(deals, d)
         cDeals <- d
         return true

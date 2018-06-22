@@ -20,3 +20,10 @@ type Order struct {
     Executed int
 }
 
+func (o *Order)OrderRemain() int {
+    return o.VolumeRemain - o.Executed
+}
+
+func (o *Order)Execute(qnt int) {
+    o.Executed += qnt
+}

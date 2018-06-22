@@ -37,7 +37,7 @@ type Item struct {
     Published bool `json:"published"`
     Radius float32 `json:"radius"`
     ItemID int `json:"type_id"`
-    Volume float32 `json:"volume"`
+    Volume float64 `json:"volume"`
 
     Buy_orders *avl.Avl
     Sell_orders *avl.Avl
