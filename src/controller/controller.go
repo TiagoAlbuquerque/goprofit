@@ -63,6 +63,7 @@ func FetchMarket() {
     lURL := regions.GetMarketsPagesList()
     total := len(lURL)
     go consumePages(cPages, cOK)
+    go consumePages(cPages, cOK)
 
     for i := 0; i < total; i++ {
         async.Do(getMarketPages, lURL[i], cPages)
