@@ -52,6 +52,7 @@ func (d *Deal) amount() int {
 func (d *Deal) Execute(cargo float64) (float64, float64) {
     profit := 1.0
 
+
     return cargo, profit
 }
 
