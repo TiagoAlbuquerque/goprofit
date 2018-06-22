@@ -50,9 +50,12 @@ func (d *Deal) amount() int {
 }
 
 func (d *Deal) Execute(cargo float64) (float64, float64) {
+    itmVol := d.item;Volume
     profit := 1.0
+    qnt := d.amount()
 
-
+    vol := qnt*itmVol
+    cargo -= vol
     return cargo, profit
 }
 
