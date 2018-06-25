@@ -2,6 +2,7 @@ package shoppingLists
 
 import (
     "../deals"
+    "../locations"
     "../utils"
     "../utils/avl"
     "fmt"
@@ -12,12 +13,12 @@ type shopList struct {
     sellID int64
     buyID int64
     profit float64
-    deals avl.Avl
-    selected avl.Avl
+    deals *avl.Avl
+    st string
 }
 
 type dealAvlData struct {
-    deal deals.Deal
+    deal *deals.Deal
 }
 
 func (a dealAvlData) Less (b *avl.Data) bool {
@@ -39,7 +40,7 @@ func (a shopListAvlData) Less (b *avl.Data) bool {
 var shopLists_m map[int64]map[int64]*shopList
 var cConsumeDeals chan deals.Deal
 
-func (s *shopList) add(d deals.Deal) {
+func (s *shopList) add(d *deals.Deal) {
     ad := avl.Data(dealAvlData{d})
     s.deals.Put(&ad)
 }
@@ -48,28 +49,44 @@ func (s *shopList) key() (int64, int64) {
     return s.sellID, s.buyID
 }
 
+func (s *shopList) reset() {
+    s.deals = avl.NewAvl(avl.REVERSED)
+    s.profit = 0.0
+}
+
 func (s *shopList) Profit() float64 {
     if s.profit > 0.0 { return s.profit }
     it := s.deals.GetIterator()
     cargo := 120.0
     profit := 0.0
+    strg := ""
     for it.Next() {
         adp := it.Value()
         deal := (*adp).(dealAvlData).deal
-        cargo, profit = deal.Execute(cargo)
+        cargo, profit, strg = deal.Execute(cargo)
+        if profit > 0.0 {
+            s.st += strg
+        }
         s.profit += profit
+    }
+    it = s.deals.GetIterator()
+    for it.Next() {
+        adp := it.Value()
+        deal := (*adp).(dealAvlData).deal
+        deal.Reset()
     }
     return s.profit
 }
 
-func (s *shopList) reset() {
-    s.deals = avl.NewAvl(avl.REVERSED)
-    s.selected = avl.NewAvl(avl.REVERSED)
-    s.profit = 0.0
+func (s *shopList) String() string {
+    s.st = fmt.Sprintf("\nto:   %s", locations.Name(s.buyID))+s.st
+    s.st = fmt.Sprintf("\nfrom: %s", locations.Name(s.sellID))+s.st
+    s.st = s.st + fmt.Sprintf("\n%.2f", s.profit)
+    return s.st
 }
 
 var mutex = sync.Mutex{}
-func getShopList(d deals.Deal) *shopList {
+func getShopList(d *deals.Deal) *shopList {
     mutex.Lock()
     defer mutex.Unlock()
     orig, dest := d.Key()
@@ -79,14 +96,14 @@ func getShopList(d deals.Deal) *shopList {
         if !ok {
             shopLists_m[orig] = map[int64]*shopList{}
         }
-        sl = &shopList{d.SellLocID(), d.BuyLocID(), 0.0, avl.NewAvl(avl.REVERSED), avl.NewAvl(avl.REVERSED)}
+        sl = &shopList{d.SellLocID(), d.BuyLocID(), 0.0, avl.NewAvl(avl.REVERSED), ""}
 
         shopLists_m[orig][dest] = sl
     }
     return sl
 }
 
-func ConsumeDeals(cDeals chan deals.Deal, cOK chan bool) {
+func ConsumeDeals(cDeals chan *deals.Deal, cOK chan bool) {
     for d := range cDeals {
         sl := getShopList(d)
         sl.add(d)
@@ -96,26 +113,35 @@ func ConsumeDeals(cDeals chan deals.Deal, cOK chan bool) {
 
 func PrintTop(n int) {
     fmt.Println("LISTAS")
-    shopLists_t := avl.NewAvl(avl.REVERSED)
+    //shopLists_t := avl.NewAvl(avl.REVERSED)
     cOK := make(chan bool)
     defer close(cOK)
 
     go utils.ProgressBar(len(shopLists_m), cOK)
+    var top *shopList
+    topProfit := 0.0
     for _, im := range shopLists_m {
         for _, lp := range im {
-            ad := avl.Data(shopListAvlData{lp})
-            shopLists_t.Put(&ad)
+            if lp.Profit() > topProfit {
+                top = lp
+                topProfit = lp.Profit()
+            }
+//            ad := avl.Data(shopListAvlData{lp})
+  //          shopLists_t.Put(&ad)
         }
         cOK <- true
     }
-    it := shopLists_t.GetIterator()
+    fmt.Println(top)
+/*    it := shopLists_t.GetIterator()
     for it.Next() {
+        slp := it.Value()
+        sl := (*slp).(shopListAvlData).sl
 
-        fmt.Println(it.Value())
+        fmt.Println(sl)
 
         n -=1
         if n == 0 { break }
-    }
+    }*/
 }
 
 func Cleanup() {

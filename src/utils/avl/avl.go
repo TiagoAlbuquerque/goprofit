@@ -119,8 +119,11 @@ func (a *tAvl) put(d *Data, rev bool) *tAvl{
     return a
 }
 
-func NewAvl(reversed bool) Avl {
-    return Avl{reversed, nil, &sync.Mutex{}}
+func NewAvl(reversed bool) *Avl {
+    out := new(Avl)
+    out.rev = reversed
+    out.mutex = new(sync.Mutex)
+    return out
 }
 
 func (a *Avl) Put(d *Data) {
@@ -130,7 +133,7 @@ func (a *Avl) Put(d *Data) {
 }
 
 func (a *Avl) GetIterator() *Iterator{
-    out := Iterator{nil, nil}
+    out := new(Iterator)
 
     if a.root != nil {
         out.top = &stack{out.top, a.root}
@@ -140,5 +143,5 @@ func (a *Avl) GetIterator() *Iterator{
             tree = tree.lAvl
         }
     }
-    return &out
+    return out
 }

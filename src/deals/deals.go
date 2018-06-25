@@ -2,15 +2,15 @@ package deals
 
 import (
     "../items"
-    "../order"
-    "../utils/avl"
-    _ "fmt"
+    "../orders"
+//    "../utils/avl"
+    "fmt"
     "math"
 )
 
 type Deal struct{
     item *items.Item
-    buyOrder, sellOrder *order.Order
+    buyOrder, sellOrder *orders.Order
 }
 
 var deals []Deal
@@ -71,8 +71,10 @@ func (d *Deal) profitQnt(qnt int) float64 {
     return out
 }
 
-func (d *Deal) Execute(cargo float64) (float64, float64) {
+func (d *Deal) Execute(cargo float64) (float64, float64, string) {
     itmVol := d.item.Volume
+    itmName := d.item.Name
+
     qnt := d.amountCargo(cargo)
 
     d.buyOrder.Execute(qnt)
@@ -81,40 +83,62 @@ func (d *Deal) Execute(cargo float64) (float64, float64) {
     vol := float64(qnt)*itmVol
     cargo -= vol
 
+    bFor := d.sellOrder.Price
+    sFor := d.buyOrder.Price
     profit := d.profitQnt(qnt)
 
-    return cargo, profit
+    strg := fmt.Sprintf("\n%d\tx %s \tbuy for: %.2f \tsell for: %.2f \tprofit: %.2f",
+                        qnt,
+                        itmName,
+                        bFor,
+                        sFor,
+                        profit)
+
+    return cargo, profit, strg
 }
 
-func makeDeal(item *items.Item, bOrder *order.Order, sOrder *order.Order, cDeals chan Deal) bool {
+func (d *Deal) Reset() {
+    d.buyOrder.Reset()
+    d.sellOrder.Reset()
+}
+
+func makeDeal(item *items.Item, bOrder *orders.Order, sOrder *orders.Order, cDeals chan *Deal) bool {
     d := Deal{item, bOrder, sOrder}
-    if d.profitPerUnit() > 0 {
+    if d.profitPerUnit() > 0.0 {
         deals = append(deals, d)
-        cDeals <- d
+        cDeals <- &d
         return true
     }
     return false
 }
 
-func computeBuyOrder(item *items.Item, bOrder *order.Order, sAvl *avl.Avl, cDeals chan Deal) {
-    iter := sAvl.GetIterator()
+func computeBuyOrder(bOrder *orders.Order, cDeals chan *Deal) {
+    item := items.GetItem(bOrder.ItemID)
+    //iter := item.Buy_orders.GetIterator()
 
-    for iter.Next() {
-        sOrder := (*iter.Value()).(items.OrderAvlData).Order
-        if !makeDeal(item, bOrder, sOrder, cDeals) {
+    for _, sOrder := range item.Sell_orders {
+        //sOrder := (*iter.Value()).(items.OrderAvlData).Order
+//        println()
+  //      println(sOrder.ItemID)
+    //    println(bOrder.ItemID)
+        makeDeal(item, bOrder, sOrder, cDeals)
+        /*if !makeDeal(item, bOrder, sOrder, cDeals) {
             break
-        }
+        }*/
     }
 }
 
-func computeSellOrder(item *items.Item, sOrder *order.Order, bAvl *avl.Avl, cDeals chan Deal) {
-    iter := bAvl.GetIterator()
+func computeSellOrder(sOrder *orders.Order, cDeals chan *Deal) {
+    item := items.GetItem(sOrder.ItemID)
+    //iter := item.Sell_orders.GetIterator()
 
-    for iter.Next() {
-        bOrder := (*iter.Value()).(items.OrderAvlData).Order
-        if !makeDeal(item, bOrder, sOrder, cDeals) {
+    //for iter.Next() {
+    for _, bOrder := range item.Buy_orders {
+        //bOrder := (*iter.Value()).(items.OrderAvlData).Order
+        makeDeal(item, bOrder, sOrder, cDeals)
+        /*if !makeDeal(item, bOrder, sOrder, cDeals) {
             break
-        }
+        }*/
     }
 }
 
@@ -122,13 +146,11 @@ func Cleanup() {
     deals = []Deal{}
 }
 
-func ComputeDeals(o *order.Order, cDeals chan Deal) {
-    itID := o.ItemID
-    item := items.GetItem(itID)
+func ComputeDeals(o *orders.Order, cDeals chan *Deal) {
     if o.IsBuyOrder {
-        computeBuyOrder(item, o, item.Sell_orders, cDeals)
+        computeBuyOrder(o, cDeals)
     } else {
-        computeSellOrder(item, o, item.Buy_orders, cDeals)
+        computeSellOrder(o, cDeals)
     }
 
 }

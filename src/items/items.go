@@ -1,7 +1,7 @@
 package items
 
 import(
-    "../order"
+    "../orders"
     "../utils"
     "../utils/avl"
 
@@ -39,12 +39,15 @@ type Item struct {
     ItemID int `json:"type_id"`
     Volume float64 `json:"volume"`
 
-    Buy_orders *avl.Avl
-    Sell_orders *avl.Avl
+    //Buy_orders *avl.Avl
+    //Sell_orders *avl.Avl
+
+    Buy_orders map[int64]int64
+    Sell_orders map[int64]int64
 }
 
 type OrderAvlData struct {
-    Order *order.Order
+    Order *orders.Order
 }
 
 func (a OrderAvlData) Less (b *avl.Data) bool{
@@ -66,10 +69,10 @@ func getItemInfo(id int) Item {
     var item Item
     utils.JsonFromUrl(url, &item)
     fmt.Println(item.Name)
-    boavl := avl.NewAvl(avl.REVERSED)
-    soavl := avl.NewAvl(avl.DIRECT)
-    item.Buy_orders = &boavl
-    item.Sell_orders = &soavl
+//    item.Buy_orders = avl.NewAvl(avl.REVERSED)
+//    item.Sell_orders = avl.NewAvl(avl.DIRECT)
+    item.Buy_orders = make(map[int64]int64)
+    item.Sell_orders = make(map[int64]int64)
     items[id] = item
     saveToFileFlag = true
     return item
@@ -86,27 +89,36 @@ func GetItem(itemId int) *Item{
     return &item
 }
 
-func (item *Item) place(o *order.Order) {
-    b := avl.Data(OrderAvlData{o})
+func (item *Item) place(o orders.Order) {
+    //b := avl.Data(OrderAvlData{o})
     if o.IsBuyOrder {
-        item.Buy_orders.Put(&b)
+        item.Buy_orders = append(item.Buy_orders, o)
     } else {
-        item.Sell_orders.Put(&b)
+        //item.Sell_orders.Put(&b)
+        item.Sell_orders = append(item.Sell_orders, o)
     }
 }
 
-func PlaceOrder(o *order.Order) {
+func validate(item *Item, text string) {
+    id := item.ItemID
+    for _, o := range item.Buy_orders {
+        if o.ItemID != id {
+        }
+    }
+}
+
+func PlaceOrder(o orders.Order) {
     item := GetItem(o.ItemID)
     item.place(o)
-//    items[(*item).ItemID] = (*item)
+    items[o.ItemID] = *item
 }
 
 func Cleanup(){
     for _, item := range items {
-        boavl := avl.NewAvl(avl.REVERSED)
-        soavl := avl.NewAvl(avl.DIRECT)
-        item.Buy_orders = &boavl
-        item.Sell_orders = &soavl
+        //item.Buy_orders = avl.NewAvl(avl.REVERSED)
+        //item.Sell_orders = avl.NewAvl(avl.DIRECT)
+        item.Buy_orders = []*orders.Order{}
+        item.Sell_orders = []*orders.Order{}
         items[item.ItemID] = item
     }
 }
