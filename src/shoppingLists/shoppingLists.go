@@ -39,6 +39,7 @@ func (a shopListAvlData) Less (b *avl.Data) bool {
 
 var shopLists_m map[int64]map[int64]*shopList
 var cConsumeDeals chan deals.Deal
+var mutex sync.Mutex
 
 func (s *shopList) add(d *deals.Deal) {
     ad := avl.Data(dealAvlData{d})
@@ -85,7 +86,6 @@ func (s *shopList) String() string {
     return s.st
 }
 
-var mutex = sync.Mutex{}
 func getShopList(d *deals.Deal) *shopList {
     mutex.Lock()
     defer mutex.Unlock()
@@ -148,10 +148,12 @@ func Cleanup() {
     for _, im := range shopLists_m {
         for _, lp := range im {
             lp.reset()
+            lp.st = ""
         }
     }
 }
 
 func init() {
+    mutex = sync.Mutex{}
     shopLists_m = map[int64]map[int64]*shopList{}
 }

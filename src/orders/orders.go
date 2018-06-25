@@ -2,6 +2,7 @@ package orders
 
 import (
     "time"
+    "sync"
 )
 
 type Order struct {
@@ -21,6 +22,7 @@ type Order struct {
 }
 
 var orders map[int64]Order
+var mutex sync.Mutex
 
 func (o *Order) OrderRemain() int {
     return o.VolumeRemain - o.Executed
@@ -28,24 +30,32 @@ func (o *Order) OrderRemain() int {
 
 func (o *Order) Execute(qnt int) {
     o.Executed += qnt
+    Set(*o)
 }
 
 func (o *Order) Reset() {
     o.Executed = 0
+    Set(*o)
 }
 
 func Get(oID int64) Order {
-    return orders[oID]
+    mutex.Lock()
+    defer mutex.Unlock()
+    out := orders[oID]
+    return out
 }
 
 func Set(o Order) {
+    mutex.Lock()
+    defer mutex.Unlock()
     orders[o.OrderID] = o
 }
 
-func Reset() {
+func Cleanup() {
     orders = make(map[int64]Order)
 }
 
 func init() {
-    Reset()
+    mutex = sync.Mutex{}
+    Cleanup()
 }

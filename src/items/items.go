@@ -61,6 +61,7 @@ const f_name = "data_items.eve"
 
 var items map[int]Item
 var saveToFileFlag bool = false
+var mutex sync.Mutex
 
 func getItemInfo(id int) Item {
     println("new Item")
@@ -78,52 +79,48 @@ func getItemInfo(id int) Item {
     return item
 }
 
-var mutex = sync.Mutex{}
-func GetItem(itemId int) *Item{
+func Get(itemId int) Item{
     mutex.Lock()
     defer mutex.Unlock()
     item, ok := items[itemId]
     if !ok {
         item = getItemInfo(itemId)
     }
-    return &item
+    return item
+}
+
+func Set(item Item) {
+    mutex.Lock()
+    defer mutex.Unlock()
+    items[item.ItemID] = item
 }
 
 func (item *Item) place(o orders.Order) {
-    //b := avl.Data(OrderAvlData{o})
     if o.IsBuyOrder {
-        item.Buy_orders = append(item.Buy_orders, o)
+        item.Buy_orders[o.OrderID] = o.OrderID
     } else {
-        //item.Sell_orders.Put(&b)
-        item.Sell_orders = append(item.Sell_orders, o)
-    }
-}
-
-func validate(item *Item, text string) {
-    id := item.ItemID
-    for _, o := range item.Buy_orders {
-        if o.ItemID != id {
-        }
+        item.Sell_orders[o.OrderID] = o.OrderID
     }
 }
 
 func PlaceOrder(o orders.Order) {
-    item := GetItem(o.ItemID)
+    item := Get(o.ItemID)
     item.place(o)
-    items[o.ItemID] = *item
+    Set(item)
 }
 
 func Cleanup(){
     for _, item := range items {
         //item.Buy_orders = avl.NewAvl(avl.REVERSED)
         //item.Sell_orders = avl.NewAvl(avl.DIRECT)
-        item.Buy_orders = []*orders.Order{}
-        item.Sell_orders = []*orders.Order{}
-        items[item.ItemID] = item
+        item.Buy_orders = make(map[int64]int64)
+        item.Sell_orders = make(map[int64]int64)
+        Set(item)
     }
 }
 
 func init(){
+    mutex = sync.Mutex{}
     raw, err := ioutil.ReadFile(f_name)
     if err == nil {
         json.Unmarshal(raw, &items)

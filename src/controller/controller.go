@@ -40,7 +40,7 @@ func consumePages(cPages chan []orders.Order, cOK chan bool) {
 }
 
 func getMarketPages(url string, cPages chan []orders.Order) {
-    var mPage []order.Order
+    var mPage []orders.Order
     for ok := false; !ok; {
         res := utils.GetUrl(url)
         defer res.Body.Close()
@@ -79,6 +79,7 @@ func PrintShoppingLists(n int) {
 func Terminate() {
     items.Cleanup()
     deals.Cleanup()
+    orders.Cleanup()
     shoppingLists.Cleanup()
 
     items.Terminate()
