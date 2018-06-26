@@ -16,7 +16,7 @@ func main() {
 
 func cicle() {
 	controller.FetchMarket()
-	controller.PrintShoppingLists(2)
+	controller.PrintShoppingLists(3)
 
 	controller.Terminate()
 }

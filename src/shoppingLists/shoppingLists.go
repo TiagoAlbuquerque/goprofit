@@ -113,26 +113,26 @@ func ConsumeDeals(cDeals chan *deals.Deal, cOK chan bool) {
 
 func PrintTop(n int) {
     fmt.Println("LISTAS")
-    //shopLists_t := avl.NewAvl(avl.REVERSED)
+    shopLists_t := avl.NewAvl(avl.REVERSED)
     cOK := make(chan bool)
     defer close(cOK)
 
     go utils.ProgressBar(len(shopLists_m), cOK)
-    var top *shopList
-    topProfit := 0.0
+//    var top *shopList
+  //  topProfit := 0.0
     for _, im := range shopLists_m {
         for _, lp := range im {
-            if lp.Profit() > topProfit {
-                top = lp
-                topProfit = lp.Profit()
-            }
-//            ad := avl.Data(shopListAvlData{lp})
-  //          shopLists_t.Put(&ad)
+    //        if lp.Profit() > topProfit {
+      //          top = lp
+        //        topProfit = lp.Profit()
+          //  }
+            ad := avl.Data(shopListAvlData{lp})
+            shopLists_t.Put(&ad)
         }
         cOK <- true
     }
-    fmt.Println(top)
-/*    it := shopLists_t.GetIterator()
+  //  fmt.Println(top)
+    it := shopLists_t.GetIterator()
     for it.Next() {
         slp := it.Value()
         sl := (*slp).(shopListAvlData).sl
@@ -141,7 +141,7 @@ func PrintTop(n int) {
 
         n -=1
         if n == 0 { break }
-    }*/
+    }//*/
 }
 
 func Cleanup() {
