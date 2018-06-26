@@ -1,11 +1,12 @@
 package utils
 import (
     "os"
-    "encoding/json"
-    "io/ioutil"
-    "gopkg.in/cheggaaa/pb.v1"
-    "net/http"
     "fmt"
+    "strings"
+    "net/http"
+    "io/ioutil"
+    "encoding/json"
+    "gopkg.in/cheggaaa/pb.v1"
  //   "sort"
 )
 
@@ -69,3 +70,18 @@ func ProgressBar(total int, c chan bool){
     bar.Finish()
 }
 
+func commas(s string) string {
+    if len(s) <= 3 {
+        return s
+    } else {
+        return commas(s[0:len(s)-3]) + " " + s[len(s)-3:]
+    }
+}
+
+func FormatCommas(num float64) string {
+    parts := strings.Split(fmt.Sprintf("%.2f", num), ".")
+    if parts[0][0] == '-' {
+        return "-" + commas(parts[0][1:]) + "." + parts[1]
+    }
+    return commas(parts[0]) + "." + parts[1]
+}

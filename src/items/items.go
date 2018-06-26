@@ -103,8 +103,16 @@ func (item *Item) place(o orders.Order) {
     }
 }
 
+func (item *Item) isHighMeta() bool{
+    for _, v := range item.DogmaAttributes {
+        if v.AttributeID == 633 && v.Value > 10 { return true }
+    }
+    return false
+}
+
 func PlaceOrder(o orders.Order) {
     item := Get(o.ItemID)
+    if item.isHighMeta() { return }
     item.place(o)
     Set(item)
 }

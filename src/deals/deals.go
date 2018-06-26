@@ -120,7 +120,7 @@ func (d *Deal) Reset() {
 
 func makeDeal(itmID int, boID int64, soID int64, cDeals chan *Deal) bool {
     d := Deal{itmID, boID, soID}
-    if d.profitPerUnit() > 0.0 {
+    if d.profitPerUnit() > 0.0 && d.Pm3() > 100000{
         deals = append(deals, d)
         cDeals <- &d
         return true

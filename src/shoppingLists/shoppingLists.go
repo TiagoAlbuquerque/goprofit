@@ -2,8 +2,8 @@ package shoppingLists
 
 import (
     "../deals"
-    "../locations"
     "../utils"
+    "../locations"
     "../utils/avl"
     "fmt"
     "sync"
@@ -15,6 +15,7 @@ type shopList struct {
     profit float64
     deals *avl.Avl
     st string
+    cargoUsed float64
 }
 
 type dealAvlData struct {
@@ -53,12 +54,13 @@ func (s *shopList) key() (int64, int64) {
 func (s *shopList) reset() {
     s.deals = avl.NewAvl(avl.REVERSED)
     s.profit = 0.0
+    s.cargoUsed = 0.0
 }
 
 func (s *shopList) Profit() float64 {
     if s.profit > 0.0 { return s.profit }
     it := s.deals.GetIterator()
-    cargo := 120.0
+    cargo := 122.4
     profit := 0.0
     strg := ""
     for it.Next() {
@@ -70,6 +72,7 @@ func (s *shopList) Profit() float64 {
         }
         s.profit += profit
     }
+    s.cargoUsed = 122.4-cargo
     it = s.deals.GetIterator()
     for it.Next() {
         adp := it.Value()
@@ -82,7 +85,8 @@ func (s *shopList) Profit() float64 {
 func (s *shopList) String() string {
     s.st = fmt.Sprintf("\nto:   %s", locations.Name(s.buyID))+s.st
     s.st = fmt.Sprintf("\nfrom: %s", locations.Name(s.sellID))+s.st
-    s.st = s.st + fmt.Sprintf("\n%.2f", s.profit)
+    s.st += fmt.Sprintf("\ntotal volume: %.2f", s.cargoUsed)
+    s.st = s.st + fmt.Sprintf("\ntotal profit: %s\n", utils.FormatCommas(s.profit))
     return s.st
 }
 
@@ -96,7 +100,7 @@ func getShopList(d *deals.Deal) *shopList {
         if !ok {
             shopLists_m[orig] = map[int64]*shopList{}
         }
-        sl = &shopList{d.SellLocID(), d.BuyLocID(), 0.0, avl.NewAvl(avl.REVERSED), ""}
+        sl = &shopList{d.SellLocID(), d.BuyLocID(), 0.0, avl.NewAvl(avl.REVERSED), "", 0.0}
 
         shopLists_m[orig][dest] = sl
     }

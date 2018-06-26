@@ -1,9 +1,15 @@
 {
+  "1021371781287": {
+    "name": "RF-GGF - The SandCAStle"
+  },
   "1023075604524": {
     "name": "Perimeter - ♔ Planet V ☣Panfam Secured Hub☣"
   },
   "1023164547009": {
     "name": "Perimeter - - IChooseYou Trade Hub"
+  },
+  "1023968078820": {
+    "name": "Ashab - Port Royal - EVE-Mogul"
   },
   "1025106775286": {
     "name": "F-NXLQ - Babylon 5-Bil"
@@ -16,6 +22,9 @@
   },
   "1026199596235": {
     "name": "Obe - Elliot's Tax Evasion HQ"
+  },
+  "1027522624787": {
+    "name": "Mahtista - lowest tax"
   },
   "60002743": {
     "name": "Jakanerva II - Moon 1 - Sukuuvestaa Corporation Production Plant"
@@ -68,6 +77,9 @@
   "60008494": {
     "name": "Amarr VIII (Oris) - Emperor Family Academy"
   },
+  "60008764": {
+    "name": "Tash-Murkon Prime V - Moon 1 - Tash-Murkon Family Bureau"
+  },
   "60009427": {
     "name": "Maut VIII - Inner Zone Shipping Storage"
   },
@@ -83,14 +95,29 @@
   "60011998": {
     "name": "Halle VII - Moon 6 - Federal Intelligence Office Assembly Plant"
   },
+  "60012592": {
+    "name": "NM-OEA VI - Moon 23 - Outer Ring Excavations Mining Outpost"
+  },
   "60012694": {
     "name": "Efu VII - Sisters of EVE Bureau"
   },
   "60012754": {
     "name": "XX9-WV VII - Moon 3 - Salvation Angels Trading Post"
   },
+  "60013510": {
+    "name": "Y-W6GF IX - Moon 3 - Intaki Syndicate Bureau"
+  },
+  "60013546": {
+    "name": "M2-CF1 X - Moon 3 - Intaki Syndicate Bureau"
+  },
   "60013852": {
     "name": "Ibani VI - Moon 15 - Khanid Transport Storage"
+  },
+  "60013936": {
+    "name": "Kihtaled VIII - Royal Khanid Navy Assembly Plant"
+  },
+  "60014272": {
+    "name": "ZG8Q-N VII - Moon 6 - True Creations Testing Facilities"
   },
   "60015016": {
     "name": "Trossere VII - Moon 3 - University of Caille"
@@ -103,5 +130,8 @@
   },
   "60015041": {
     "name": "Malukker I - Republic University"
+  },
+  "60015148": {
+    "name": "Thera XII - The Sanctuary Institute of Paleocybernetics"
   }
 }
