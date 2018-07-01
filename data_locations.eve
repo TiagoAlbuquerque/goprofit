@@ -32,6 +32,9 @@
   "60002743": {
     "name": "Jakanerva II - Moon 1 - Sukuuvestaa Corporation Production Plant"
   },
+  "60003628": {
+    "name": "Seil IV - Moon 9 - Caldari Business Tribunal Bureau Offices"
+  },
   "60003760": {
     "name": "Jita IV - Moon 4 - Caldari Navy Assembly Plant"
   },
@@ -49,6 +52,9 @@
   },
   "60004465": {
     "name": "Uchoshi X - Moon 11 - Science and Trade Institute School"
+  },
+  "60004588": {
+    "name": "Rens VI - Moon 8 - Brutor Tribe Treasury"
   },
   "60005686": {
     "name": "Hek VIII - Moon 12 - Boundless Creation Factory"
@@ -98,11 +104,20 @@
   "60011998": {
     "name": "Halle VII - Moon 6 - Federal Intelligence Office Assembly Plant"
   },
+  "60012079": {
+    "name": "Octanneve III - Moon 1 - Federation Customs Logistic Support"
+  },
   "60012592": {
     "name": "NM-OEA VI - Moon 23 - Outer Ring Excavations Mining Outpost"
   },
+  "60012610": {
+    "name": "Aeschee X - Moon 20 - Sisters of EVE Academy"
+  },
   "60012694": {
     "name": "Efu VII - Sisters of EVE Bureau"
+  },
+  "60012739": {
+    "name": "Tar III - Secure Commerce Commission Depository"
   },
   "60012754": {
     "name": "XX9-WV VII - Moon 3 - Salvation Angels Trading Post"
@@ -121,6 +136,12 @@
   },
   "60014272": {
     "name": "ZG8Q-N VII - Moon 6 - True Creations Testing Facilities"
+  },
+  "60014335": {
+    "name": "RPS-0K VIII - Moon 1 - True Power Assembly Plant"
+  },
+  "60014341": {
+    "name": "F9SX-1 V - Moon 1 - True Power Assembly Plant"
   },
   "60015016": {
     "name": "Trossere VII - Moon 3 - University of Caille"
