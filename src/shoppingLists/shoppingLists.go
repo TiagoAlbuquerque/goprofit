@@ -60,8 +60,7 @@ func (s *shopList) reset() {
 func (s *shopList) Profit() float64 {
     if s.profit > 0.0 { return s.profit }
     it := s.deals.GetIterator()
-//    cargo := 122.4
-    cargo := 4500.00
+    cargo := 122.4
     profit := 0.0
     strg := ""
     for it.Next() {
@@ -73,8 +72,7 @@ func (s *shopList) Profit() float64 {
         }
         s.profit += profit
     }
-//    s.cargoUsed = 122.4-cargo
-    s.cargoUsed = 4500-cargo
+    s.cargoUsed = 122.4-cargo
     it = s.deals.GetIterator()
     for it.Next() {
         adp := it.Value()

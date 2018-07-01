@@ -98,7 +98,7 @@ func (d *Deal) Execute(cargo float64) (float64, float64, string) {
     sFor := bo.Price
     profit := d.profitQnt(qnt)
 
-    strg := fmt.Sprintf("\n%d\tx %s \tbuy for: %.2f \tsell for: %.2f \tprofit: %.2f",
+    strg := fmt.Sprintf("\n%d\t%s \tbuy for: %.2f \tsell for: %.2f \tprofit: %.2f",
                         qnt,
                         itmName,
                         bFor,

@@ -104,9 +104,8 @@ func (item *Item) place(o orders.Order) {
 }
 
 func (item *Item) isOfficer() bool{
-    return false
     for _, v := range item.DogmaAttributes {
-        if v.AttributeID == 1692 && v.Value == 5 { return true }
+        if v.AttributeID == 1692 && v.Value == 5.0 { return true }
     }
     return false
 }
