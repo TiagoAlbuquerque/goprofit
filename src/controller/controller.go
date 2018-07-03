@@ -65,8 +65,9 @@ func FetchMarket() {
     total := len(lURL)
     go consumePages(cPages, cOK)
 
-    for i := 0; i < total; i++ {
-        async.Do(getMarketPages, lURL[i], cPages)
+    for _, url := range lURL {
+        //async.Do(getMarketPages, url, cPages)
+        go getMarketPages(url, cPages)
     }
 
     utils.ProgressBar(total, cOK)

@@ -1,6 +1,15 @@
 {
+  "1021247952552": {
+    "name": "Ahtulaima - qoou's Fortizar"
+  },
   "1021371781287": {
     "name": "RF-GGF - The SandCAStle"
+  },
+  "1022409209010": {
+    "name": "Hek - IChooseYou Trade Hub"
+  },
+  "1022719559274": {
+    "name": "New Caldari - Yeti Creations - EVE-Mogul"
   },
   "1023075604524": {
     "name": "Perimeter - ♔ Planet V ☣Panfam Secured Hub☣"
@@ -23,6 +32,9 @@
   "1026199596235": {
     "name": "Obe - Elliot's Tax Evasion HQ"
   },
+  "1026411673589": {
+    "name": "Archee - Waypoint Station 0,1% Tax"
+  },
   "1027522624787": {
     "name": "Mahtista - lowest tax"
   },
@@ -41,6 +53,9 @@
   "60003763": {
     "name": "Maurasi IX - Moon 12 - Caldari Navy Assembly Plant"
   },
+  "60003922": {
+    "name": "Hageken V - Moon 2 - Caldari Navy Assembly Plant"
+  },
   "60004048": {
     "name": "Saisio VII - Moon 1 - Peace and Order Unit Testing Facilities"
   },
@@ -55,6 +70,12 @@
   },
   "60004588": {
     "name": "Rens VI - Moon 8 - Brutor Tribe Treasury"
+  },
+  "60004615": {
+    "name": "Frarn VI - Moon 18 - Brutor Tribe Bureau"
+  },
+  "60004753": {
+    "name": "Emolgranlan VI - Republic Fleet Assembly Plant"
   },
   "60005686": {
     "name": "Hek VIII - Moon 12 - Boundless Creation Factory"
@@ -94,6 +115,9 @@
   },
   "60009751": {
     "name": "Frarie VI - Moon 1 - Combined Harvest Warehouse"
+  },
+  "60010936": {
+    "name": "Actee I - Duvolle Laboratories Factory"
   },
   "60011416": {
     "name": "Oppold VIII - Moon 7 - Pend Insurance Depository"
@@ -148,6 +172,9 @@
   },
   "60014341": {
     "name": "F9SX-1 V - Moon 1 - True Power Assembly Plant"
+  },
+  "60015013": {
+    "name": "Odotte III - University of Caille"
   },
   "60015016": {
     "name": "Trossere VII - Moon 3 - University of Caille"
