@@ -39,7 +39,7 @@ func consumePages(cPages chan []orders.Order, cOK chan bool) {
     }
 }
 
-func getMarketPages(url string, cPages chan []orders.Order) {
+func getMarketPage(url string, cPages chan []orders.Order) {
     var mPage []orders.Order
     for ok := false; !ok; {
         res := utils.GetUrl(url)
@@ -49,6 +49,24 @@ func getMarketPages(url string, cPages chan []orders.Order) {
         ok = (mPage != nil)
     }
     cPages <- mPage
+}
+
+
+func consumeMarketPages(cURL chan string, cPages chan []orders.Order) {
+    for url := range cURL {
+        getMarketPage(url, cPages)
+    }
+
+}
+
+func getMarketPages(lURL []string, cPages chan []orders.Order) {
+    cURL := make(chan string)
+    for i := 0; i < 100; i+=1 {
+        go consumeMarketPages(cURL, cPages)
+    }
+    for _, url := range lURL {
+        cURL <- url
+    }
 }
 
 func FetchMarket() {
@@ -65,9 +83,11 @@ func FetchMarket() {
     total := len(lURL)
     go consumePages(cPages, cOK)
 
+//    go getMarketPages(lURL, cPages)
+
     for _, url := range lURL {
-        //async.Do(getMarketPages, url, cPages)
-        go getMarketPages(url, cPages)
+        async.Do(getMarketPage, url, cPages)
+      //  go getMarketPage(url, cPages)
     }
 
     utils.ProgressBar(total, cOK)
