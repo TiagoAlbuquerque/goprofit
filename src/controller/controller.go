@@ -61,7 +61,8 @@ func consumeMarketPages(cURL chan string, cPages chan []orders.Order) {
 
 func getMarketPages(lURL []string, cPages chan []orders.Order) {
     cURL := make(chan string)
-    for i := 0; i < 100; i+=1 {
+    defer close(cURL)
+    for i := 0; i < 210; i+=1 {
         go consumeMarketPages(cURL, cPages)
     }
     for _, url := range lURL {
@@ -81,9 +82,10 @@ func FetchMarket() {
 
     lURL := regions.GetMarketsPagesList()
     total := len(lURL)
+
     go consumePages(cPages, cOK)
 
-//    go getMarketPages(lURL, cPages)
+    //go getMarketPages(lURL, cPages)
 
     for _, url := range lURL {
         async.Do(getMarketPage, url, cPages)
