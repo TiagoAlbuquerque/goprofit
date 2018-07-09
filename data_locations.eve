@@ -23,8 +23,14 @@
   "1025106775286": {
     "name": "F-NXLQ - Babylon 5-Bil"
   },
+  "1025285564227": {
+    "name": "Perimeter - Safe Trade Hub - Panfam Secured"
+  },
   "1025480678428": {
     "name": "Perimeter - - IChooseYou Sotiyo Market"
+  },
+  "1025824394754": {
+    "name": "Botane - Barataria Bay - EVE-Mogul"
   },
   "1025949280066": {
     "name": "Perimeter - IChooseYou Tatara Max Reprocess"
@@ -38,11 +44,26 @@
   "1027522624787": {
     "name": "Mahtista - lowest tax"
   },
+  "60000085": {
+    "name": "Egbinger XI - Moon 3 - CBD Corporation Storage"
+  },
   "60000964": {
     "name": "Obe VI - Caldari Provisions Plantation"
   },
+  "60001039": {
+    "name": "Konora VI - Kaalakiota Corporation Factory"
+  },
+  "60001615": {
+    "name": "Kulelen VI - Perkone Factory"
+  },
+  "60002215": {
+    "name": "Mora VI - Moon 4 - Ishukone Corporation Factory"
+  },
   "60002743": {
     "name": "Jakanerva II - Moon 1 - Sukuuvestaa Corporation Production Plant"
+  },
+  "60003451": {
+    "name": "Uotila V - Moon 5 - Mercantile Club Bureau"
   },
   "60003628": {
     "name": "Seil IV - Moon 9 - Caldari Business Tribunal Bureau Offices"
@@ -77,6 +98,9 @@
   "60004753": {
     "name": "Emolgranlan VI - Republic Fleet Assembly Plant"
   },
+  "60004813": {
+    "name": "Teonusude III - Moon 1 - Republic Fleet Assembly Plant"
+  },
   "60005686": {
     "name": "Hek VIII - Moon 12 - Boundless Creation Factory"
   },
@@ -85,6 +109,9 @@
   },
   "60005962": {
     "name": "Octanneve IV - Moon 1 - Freedom Extension Retail Center"
+  },
+  "60006649": {
+    "name": "Danyana III - Moon 4 - Zoar and Sons Factory"
   },
   "60006664": {
     "name": "Omigiav IV - Moon 12 - Zoar and Sons Warehouse"
@@ -98,6 +125,9 @@
   "60007642": {
     "name": "Siyi I - Nurtura Plantation"
   },
+  "60007702": {
+    "name": "Emrayur III - Moon 1 - Royal Amarr Institute School"
+  },
   "60008062": {
     "name": "Fabum III - Ministry of Assessment Archives"
   },
@@ -106,6 +136,9 @@
   },
   "60008494": {
     "name": "Amarr VIII (Oris) - Emperor Family Academy"
+  },
+  "60008527": {
+    "name": "Mimen X - Emperor Family Bureau"
   },
   "60008764": {
     "name": "Tash-Murkon Prime V - Moon 1 - Tash-Murkon Family Bureau"
@@ -136,6 +169,9 @@
   },
   "60012610": {
     "name": "Aeschee X - Moon 20 - Sisters of EVE Academy"
+  },
+  "60012646": {
+    "name": "Simela IV - Moon 7 - Sisters of EVE Academy"
   },
   "60012694": {
     "name": "Efu VII - Sisters of EVE Bureau"
@@ -184,6 +220,9 @@
   },
   "60015027": {
     "name": "Uitra VI - Moon 4 - State War Academy"
+  },
+  "60015035": {
+    "name": "Clacille IV - Center for Advanced Studies School"
   },
   "60015041": {
     "name": "Malukker I - Republic University"
