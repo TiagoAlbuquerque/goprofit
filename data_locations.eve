@@ -5,6 +5,9 @@
   "1021371781287": {
     "name": "RF-GGF - The SandCAStle"
   },
+  "1022348007732": {
+    "name": "Frarn -  ☆ IChooseYou Market"
+  },
   "1022409209010": {
     "name": "Hek - IChooseYou Trade Hub"
   },
@@ -50,11 +53,17 @@
   "60000964": {
     "name": "Obe VI - Caldari Provisions Plantation"
   },
+  "60001030": {
+    "name": "Odebeinn V - Moon 5 - Kaalakiota Corporation Factory"
+  },
   "60001039": {
     "name": "Konora VI - Kaalakiota Corporation Factory"
   },
   "60001615": {
     "name": "Kulelen VI - Perkone Factory"
+  },
+  "60002077": {
+    "name": "Iro IX - Moon 6 - Ishukone Corporation Warehouse"
   },
   "60002215": {
     "name": "Mora VI - Moon 4 - Ishukone Corporation Factory"
@@ -116,11 +125,20 @@
   "60006664": {
     "name": "Omigiav IV - Moon 12 - Zoar and Sons Warehouse"
   },
+  "60006724": {
+    "name": "Thashkarai VI - Zoar and Sons Factory"
+  },
   "60006901": {
     "name": "Gererique II - Moon 1 - Ducia Foundry Mining Outpost"
   },
+  "60007015": {
+    "name": "Amdonen VII - Moon 7 - Imperial Shipment Storage"
+  },
   "60007066": {
     "name": "Shera IX - Moon 4 - Imperial Shipment Storage"
+  },
+  "60007186": {
+    "name": "Amdonen VIII - Moon 8 - Amarr Certified News Development Studio"
   },
   "60007642": {
     "name": "Siyi I - Nurtura Plantation"
@@ -164,6 +182,15 @@
   "60012079": {
     "name": "Octanneve III - Moon 1 - Federation Customs Logistic Support"
   },
+  "60012583": {
+    "name": "4C-B7X VIII - Moon 1 - Outer Ring Excavations Mining Outpost"
+  },
+  "60012586": {
+    "name": "4C-B7X VI - Moon 1 - Outer Ring Excavations Refinery"
+  },
+  "60012589": {
+    "name": "NM-OEA V - Moon 4 - Outer Ring Excavations Mining Outpost"
+  },
   "60012592": {
     "name": "NM-OEA VI - Moon 23 - Outer Ring Excavations Mining Outpost"
   },
@@ -181,6 +208,9 @@
   },
   "60012754": {
     "name": "XX9-WV VII - Moon 3 - Salvation Angels Trading Post"
+  },
+  "60012799": {
+    "name": "OSY-UD IX - Moon 16 - Serpentis Corporation Chemical Storage"
   },
   "60012904": {
     "name": "Litom XI - Moon 2 - Guardian Angels Assembly Plant"
