@@ -89,6 +89,9 @@
   "60004048": {
     "name": "Saisio VII - Moon 1 - Peace and Order Unit Testing Facilities"
   },
+  "60004204": {
+    "name": "Ibura IX - Moon 11 - Spacelane Patrol Testing Facilities"
+  },
   "60004459": {
     "name": "Osmon IV - Moon 5 - Science and Trade Institute School"
   },
@@ -100,6 +103,9 @@
   },
   "60004588": {
     "name": "Rens VI - Moon 8 - Brutor Tribe Treasury"
+  },
+  "60004591": {
+    "name": "Abudban IX - Moon 7 - Brutor Tribe Bureau"
   },
   "60004615": {
     "name": "Frarn VI - Moon 18 - Brutor Tribe Bureau"
