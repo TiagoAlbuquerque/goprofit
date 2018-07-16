@@ -41,6 +41,9 @@
   "1026199596235": {
     "name": "Obe - Elliot's Tax Evasion HQ"
   },
+  "1026232843662": {
+    "name": "Maurasi - Nameless Structure"
+  },
   "1026411673589": {
     "name": "Archee - Waypoint Station 0,1% Tax"
   },
@@ -92,6 +95,12 @@
   "60004204": {
     "name": "Ibura IX - Moon 11 - Spacelane Patrol Testing Facilities"
   },
+  "60004216": {
+    "name": "Liekuri VI - Spacelane Patrol Assembly Plant"
+  },
+  "60004441": {
+    "name": "Kulelen V - Moon 4 - School of Applied Knowledge"
+  },
   "60004459": {
     "name": "Osmon IV - Moon 5 - Science and Trade Institute School"
   },
@@ -125,6 +134,9 @@
   "60005962": {
     "name": "Octanneve IV - Moon 1 - Freedom Extension Retail Center"
   },
+  "60006358": {
+    "name": "Madirmilire VI - Moon 11 - Carthum Conglomerate Warehouse"
+  },
   "60006649": {
     "name": "Danyana III - Moon 4 - Zoar and Sons Factory"
   },
@@ -151,6 +163,12 @@
   },
   "60007702": {
     "name": "Emrayur III - Moon 1 - Royal Amarr Institute School"
+  },
+  "60007921": {
+    "name": "Madomi V - Moon 6 - Ministry of War Information Center"
+  },
+  "60007930": {
+    "name": "Vehan V - Moon 1 - Ministry of War Archives"
   },
   "60008062": {
     "name": "Fabum III - Ministry of Assessment Archives"
@@ -181,6 +199,9 @@
   },
   "60011866": {
     "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant"
+  },
+  "60011893": {
+    "name": "Stacmon V - Moon 9 - Federation Navy Assembly Plant"
   },
   "60011998": {
     "name": "Halle VII - Moon 6 - Federal Intelligence Office Assembly Plant"
@@ -233,6 +254,9 @@
   "60013936": {
     "name": "Kihtaled VIII - Royal Khanid Navy Assembly Plant"
   },
+  "60013978": {
+    "name": "Palas VII - Moon 11 - Royal Khanid Navy Assembly Plant"
+  },
   "60014272": {
     "name": "ZG8Q-N VII - Moon 6 - True Creations Testing Facilities"
   },
@@ -244,6 +268,12 @@
   },
   "60014341": {
     "name": "F9SX-1 V - Moon 1 - True Power Assembly Plant"
+  },
+  "60014578": {
+    "name": "Osmeden VII - Moon 2 - X-Sense Chemical Refinery"
+  },
+  "60014689": {
+    "name": "Duripant VII - Moon 6 - Federal Navy Academy"
   },
   "60015013": {
     "name": "Odotte III - University of Caille"
