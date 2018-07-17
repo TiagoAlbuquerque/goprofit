@@ -62,6 +62,9 @@
   "60001039": {
     "name": "Konora VI - Kaalakiota Corporation Factory"
   },
+  "60001204": {
+    "name": "Sirppala II - Moon 3 - Kaalakiota Corporation Factory"
+  },
   "60001615": {
     "name": "Kulelen VI - Perkone Factory"
   },
@@ -215,6 +218,9 @@
   "60012079": {
     "name": "Octanneve III - Moon 1 - Federation Customs Logistic Support"
   },
+  "60012163": {
+    "name": "Faspera I - Ammatar Fleet Testing Facilities"
+  },
   "60012583": {
     "name": "4C-B7X VIII - Moon 1 - Outer Ring Excavations Mining Outpost"
   },
@@ -284,6 +290,9 @@
   "60014689": {
     "name": "Duripant VII - Moon 6 - Federal Navy Academy"
   },
+  "60015010": {
+    "name": "Pasha VII - Moon 3 - Royal Amarr Institute School"
+  },
   "60015013": {
     "name": "Odotte III - University of Caille"
   },
@@ -298,6 +307,9 @@
   },
   "60015035": {
     "name": "Clacille IV - Center for Advanced Studies School"
+  },
+  "60015036": {
+    "name": "Clellinon VI - Moon 11 - Center for Advanced Studies School"
   },
   "60015041": {
     "name": "Malukker I - Republic University"
