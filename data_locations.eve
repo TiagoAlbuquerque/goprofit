@@ -98,6 +98,9 @@
   "60003763": {
     "name": "Maurasi IX - Moon 12 - Caldari Navy Assembly Plant"
   },
+  "60003817": {
+    "name": "Oimmo VII - Caldari Navy Assembly Plant"
+  },
   "60003922": {
     "name": "Hageken V - Moon 2 - Caldari Navy Assembly Plant"
   },
@@ -136,6 +139,9 @@
   },
   "60004813": {
     "name": "Teonusude III - Moon 1 - Republic Fleet Assembly Plant"
+  },
+  "60005023": {
+    "name": "Ogoten XII - Moon 2 - Republic Justice Department Accounting"
   },
   "60005686": {
     "name": "Hek VIII - Moon 12 - Boundless Creation Factory"
@@ -179,6 +185,9 @@
   "60007702": {
     "name": "Emrayur III - Moon 1 - Royal Amarr Institute School"
   },
+  "60007789": {
+    "name": "Polfaly VIII - Moon 3 - Amarr Civil Service Bureau Offices"
+  },
   "60007921": {
     "name": "Madomi V - Moon 6 - Ministry of War Information Center"
   },
@@ -209,6 +218,9 @@
   "60008764": {
     "name": "Tash-Murkon Prime V - Moon 1 - Tash-Murkon Family Bureau"
   },
+  "60008830": {
+    "name": "Soliara IX - Moon 18 - Civic Court Tribunal"
+  },
   "60009427": {
     "name": "Maut VIII - Inner Zone Shipping Storage"
   },
@@ -226,6 +238,9 @@
   },
   "60011866": {
     "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant"
+  },
+  "60011923": {
+    "name": "Grinacanne I - Federal Intelligence Office Assembly Plant"
   },
   "60011959": {
     "name": "Ommare VI - Federal Intelligence Office Assembly Plant"
@@ -325,6 +340,9 @@
   },
   "60015027": {
     "name": "Uitra VI - Moon 4 - State War Academy"
+  },
+  "60015029": {
+    "name": "Couster II - Moon 1 - Federal Navy Academy"
   },
   "60015035": {
     "name": "Clacille IV - Center for Advanced Studies School"
