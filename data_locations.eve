@@ -53,6 +53,9 @@
   "1026411673589": {
     "name": "Archee - Waypoint Station 0,1% Tax"
   },
+  "1026776107283": {
+    "name": "Tanoo - Primum Forum Publicae 0.1 Tax"
+  },
   "1027522624787": {
     "name": "Mahtista - lowest tax"
   },
@@ -215,6 +218,9 @@
   "60009427": {
     "name": "Maut VIII - Inner Zone Shipping Storage"
   },
+  "60009610": {
+    "name": "Arraron VII - Astral Mining Inc. Refinery"
+  },
   "60009751": {
     "name": "Frarie VI - Moon 1 - Combined Harvest Warehouse"
   },
@@ -241,6 +247,12 @@
   },
   "60012163": {
     "name": "Faspera I - Ammatar Fleet Testing Facilities"
+  },
+  "60012478": {
+    "name": "Zatamaka VII - Moon 2 - CONCORD Bureau"
+  },
+  "60012571": {
+    "name": "H-PA29 IV - Moon 2 - Guristas Assembly Plant"
   },
   "60012577": {
     "name": "PF-QHK VII - Moon 6 - Guristas Logistic Support"
