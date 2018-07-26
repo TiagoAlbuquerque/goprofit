@@ -179,6 +179,9 @@
   "60007066": {
     "name": "Shera IX - Moon 4 - Imperial Shipment Storage"
   },
+  "60007138": {
+    "name": "Azerakish XII - Moon 3 - Imperial Shipment Storage"
+  },
   "60007186": {
     "name": "Amdonen VIII - Moon 8 - Amarr Certified News Development Studio"
   },
@@ -236,8 +239,14 @@
   "60010936": {
     "name": "Actee I - Duvolle Laboratories Factory"
   },
+  "60010948": {
+    "name": "Jel V - Duvolle Laboratories Factory"
+  },
   "60011416": {
     "name": "Oppold VIII - Moon 7 - Pend Insurance Depository"
+  },
+  "60011578": {
+    "name": "Egghelende V - Moon 13 - University of Caille"
   },
   "60011866": {
     "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant"
@@ -343,6 +352,9 @@
   },
   "60014743": {
     "name": "Ardene VIII - Moon 11 - Center for Advanced Studies School"
+  },
+  "60015001": {
+    "name": "Akiainavas III - School of Applied Knowledge"
   },
   "60015010": {
     "name": "Pasha VII - Moon 3 - Royal Amarr Institute School"
