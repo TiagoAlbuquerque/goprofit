@@ -83,6 +83,9 @@
   "60001876": {
     "name": "Ihakana VIII - Moon 6 - Nugoeihuvi Corporation Development Studio"
   },
+  "60002008": {
+    "name": "Aunenen II - Echelon Entertainment Development Studio"
+  },
   "60002077": {
     "name": "Iro IX - Moon 6 - Ishukone Corporation Warehouse"
   },
@@ -94,6 +97,9 @@
   },
   "60003451": {
     "name": "Uotila V - Moon 5 - Mercantile Club Bureau"
+  },
+  "60003616": {
+    "name": "Dabrid V - Moon 1 - Caldari Business Tribunal Accounting"
   },
   "60003628": {
     "name": "Seil IV - Moon 9 - Caldari Business Tribunal Bureau Offices"
@@ -320,11 +326,17 @@
   "60013051": {
     "name": "G-G78S XI - Moon 3 - Dominations Assembly Plant"
   },
+  "60013411": {
+    "name": "IIRH-G VIII - Intaki Space Police Logistic Support"
+  },
   "60013423": {
     "name": "RLL-9R IX - Intaki Space Police Assembly Plant"
   },
   "60013510": {
     "name": "Y-W6GF IX - Moon 3 - Intaki Syndicate Bureau"
+  },
+  "60013516": {
+    "name": "KLYN-8 IV - Moon 14 - Intaki Syndicate Academy"
   },
   "60013546": {
     "name": "M2-CF1 X - Moon 3 - Intaki Syndicate Bureau"
@@ -337,6 +349,9 @@
   },
   "60013978": {
     "name": "Palas VII - Moon 11 - Royal Khanid Navy Assembly Plant"
+  },
+  "60014059": {
+    "name": "M-MD3B X - Moon 3 - Thukker Mix Factory"
   },
   "60014269": {
     "name": "4GQ-XQ IX - Moon 1 - True Creations Shipyard"
@@ -361,6 +376,15 @@
   },
   "60014743": {
     "name": "Ardene VIII - Moon 11 - Center for Advanced Studies School"
+  },
+  "60014794": {
+    "name": "Hroduko V - Moon 4 - Republic University"
+  },
+  "60014818": {
+    "name": "Aldrat IX - Pator Tech School"
+  },
+  "60014833": {
+    "name": "Illinfrik VII - Moon 12 - Pator Tech School"
   },
   "60015001": {
     "name": "Akiainavas III - School of Applied Knowledge"
@@ -388,6 +412,9 @@
   },
   "60015041": {
     "name": "Malukker I - Republic University"
+  },
+  "60015046": {
+    "name": "Embod IV - Moon 10 - Pator Tech School"
   },
   "60015148": {
     "name": "Thera XII - The Sanctuary Institute of Paleocybernetics"
