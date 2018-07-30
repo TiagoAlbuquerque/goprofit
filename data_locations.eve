@@ -83,6 +83,9 @@
   "60001876": {
     "name": "Ihakana VIII - Moon 6 - Nugoeihuvi Corporation Development Studio"
   },
+  "60002008": {
+    "name": "Aunenen II - Echelon Entertainment Development Studio"
+  },
   "60002077": {
     "name": "Iro IX - Moon 6 - Ishukone Corporation Warehouse"
   },
@@ -94,6 +97,9 @@
   },
   "60003451": {
     "name": "Uotila V - Moon 5 - Mercantile Club Bureau"
+  },
+  "60003616": {
+    "name": "Dabrid V - Moon 1 - Caldari Business Tribunal Accounting"
   },
   "60003628": {
     "name": "Seil IV - Moon 9 - Caldari Business Tribunal Bureau Offices"
@@ -143,20 +149,11 @@
   "60004753": {
     "name": "Emolgranlan VI - Republic Fleet Assembly Plant"
   },
-  "60004807": {
-    "name": "Gulfonodi X - Moon 13 - Republic Fleet Logistic Support"
-  },
   "60004813": {
     "name": "Teonusude III - Moon 1 - Republic Fleet Assembly Plant"
   },
-  "60004822": {
-    "name": "Amamake VI - Moon 5 - Republic Fleet Logistic Support"
-  },
   "60004948": {
     "name": "Josekorn VI - Republic Justice Department Tribunal"
-  },
-  "60005227": {
-    "name": "Yona VIII - Moon 8 - Republic Security Services Assembly Plant"
   },
   "60005686": {
     "name": "Hek VIII - Moon 12 - Boundless Creation Factory"
@@ -248,26 +245,14 @@
   "60010222": {
     "name": "Jaschercis IV - Moon 2 - CreoDron Factory"
   },
-  "60010234": {
-    "name": "Ghesis V - Moon 13 - CreoDron Factory"
-  },
-  "60010894": {
-    "name": "Trosquesere V - Moon 10 - Duvolle Laboratories Factory"
-  },
   "60010936": {
     "name": "Actee I - Duvolle Laboratories Factory"
   },
   "60010948": {
     "name": "Jel V - Duvolle Laboratories Factory"
   },
-  "60011380": {
-    "name": "Sizamod VIII - Moon 5 - Pend Insurance Vault"
-  },
   "60011416": {
     "name": "Oppold VIII - Moon 7 - Pend Insurance Depository"
-  },
-  "60011569": {
-    "name": "Bille X - Moon 1 - University of Caille"
   },
   "60011578": {
     "name": "Egghelende V - Moon 13 - University of Caille"
@@ -290,20 +275,11 @@
   "60012163": {
     "name": "Faspera I - Ammatar Fleet Testing Facilities"
   },
-  "60012166": {
-    "name": "Assah VII - Moon 7 - Ammatar Fleet Assembly Plant"
-  },
   "60012196": {
     "name": "D87E-A VII - Moon 16 - Archangels Assembly Plant"
   },
-  "60012427": {
-    "name": "Egbinger V - CONCORD Treasury"
-  },
   "60012478": {
     "name": "Zatamaka VII - Moon 2 - CONCORD Bureau"
-  },
-  "60012493": {
-    "name": "Esmes IV - Moon 2 - CONCORD Treasury"
   },
   "60012571": {
     "name": "H-PA29 IV - Moon 2 - Guristas Assembly Plant"
@@ -347,9 +323,6 @@
   "60012904": {
     "name": "Litom XI - Moon 2 - Guardian Angels Assembly Plant"
   },
-  "60012970": {
-    "name": "Evati IX - Moon 1 - DED Assembly Plant"
-  },
   "60013051": {
     "name": "G-G78S XI - Moon 3 - Dominations Assembly Plant"
   },
@@ -386,9 +359,6 @@
   "60014272": {
     "name": "ZG8Q-N VII - Moon 6 - True Creations Testing Facilities"
   },
-  "60014290": {
-    "name": "WEQT-K I - Moon 12 - True Power Mineral Reserve"
-  },
   "60014329": {
     "name": "LGK-VP V - Moon 3 - True Power Assembly Plant"
   },
@@ -404,20 +374,17 @@
   "60014689": {
     "name": "Duripant VII - Moon 6 - Federal Navy Academy"
   },
-  "60014728": {
-    "name": "Lisbaetanne V - Moon 8 - Center for Advanced Studies School"
-  },
-  "60014731": {
-    "name": "Slays VII - Moon 3 - Center for Advanced Studies School"
-  },
-  "60014734": {
-    "name": "Foves V - Center for Advanced Studies School"
-  },
   "60014743": {
     "name": "Ardene VIII - Moon 11 - Center for Advanced Studies School"
   },
-  "60014809": {
-    "name": "Ryddinjorn VI - Moon 2 - Pator Tech School"
+  "60014794": {
+    "name": "Hroduko V - Moon 4 - Republic University"
+  },
+  "60014818": {
+    "name": "Aldrat IX - Pator Tech School"
+  },
+  "60014833": {
+    "name": "Illinfrik VII - Moon 12 - Pator Tech School"
   },
   "60015001": {
     "name": "Akiainavas III - School of Applied Knowledge"
@@ -427,9 +394,6 @@
   },
   "60015013": {
     "name": "Odotte III - University of Caille"
-  },
-  "60015015": {
-    "name": "Olelon IV - University of Caille"
   },
   "60015016": {
     "name": "Trossere VII - Moon 3 - University of Caille"
@@ -449,11 +413,8 @@
   "60015041": {
     "name": "Malukker I - Republic University"
   },
-  "60015146": {
-    "name": "Tintoh VIII - Caldari Navy Testing Facilities"
-  },
-  "60015147": {
-    "name": "Ichoriya V - Caldari Navy Logistic Support"
+  "60015046": {
+    "name": "Embod IV - Moon 10 - Pator Tech School"
   },
   "60015148": {
     "name": "Thera XII - The Sanctuary Institute of Paleocybernetics"
