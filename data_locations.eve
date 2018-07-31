@@ -29,6 +29,9 @@
   "1023968078820": {
     "name": "Ashab - Port Royal - EVE-Mogul"
   },
+  "1024486788537": {
+    "name": "Mesybier - Point One Percent Market"
+  },
   "1025106775286": {
     "name": "F-NXLQ - Babylon 5-Bil"
   },
@@ -65,6 +68,9 @@
   "60000085": {
     "name": "Egbinger XI - Moon 3 - CBD Corporation Storage"
   },
+  "60000853": {
+    "name": "Tannolen VI - Moon 7 - Minedrill Mining Outpost"
+  },
   "60000964": {
     "name": "Obe VI - Caldari Provisions Plantation"
   },
@@ -91,6 +97,9 @@
   },
   "60002215": {
     "name": "Mora VI - Moon 4 - Ishukone Corporation Factory"
+  },
+  "60002305": {
+    "name": "Elonaya X - Moon 4 - Lai Dai Corporation Factory"
   },
   "60002743": {
     "name": "Jakanerva II - Moon 1 - Sukuuvestaa Corporation Production Plant"
@@ -239,6 +248,9 @@
   "60009610": {
     "name": "Arraron VII - Astral Mining Inc. Refinery"
   },
+  "60009667": {
+    "name": "Intaki V - Moon 5 - Astral Mining Inc. Refinery"
+  },
   "60009751": {
     "name": "Frarie VI - Moon 1 - Combined Harvest Warehouse"
   },
@@ -256,6 +268,9 @@
   },
   "60011578": {
     "name": "Egghelende V - Moon 13 - University of Caille"
+  },
+  "60011791": {
+    "name": "Ation IX - Moon 4 - Federation Navy Logistic Support"
   },
   "60011824": {
     "name": "Orvolle I - Federation Navy Assembly Plant"
@@ -352,6 +367,9 @@
   },
   "60014059": {
     "name": "M-MD3B X - Moon 3 - Thukker Mix Factory"
+  },
+  "60014083": {
+    "name": "Totkubad III - Thukker Mix Factory"
   },
   "60014269": {
     "name": "4GQ-XQ IX - Moon 1 - True Creations Shipyard"
