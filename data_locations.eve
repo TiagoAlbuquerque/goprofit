@@ -269,6 +269,9 @@
   "60009751": {
     "name": "Frarie VI - Moon 1 - Combined Harvest Warehouse"
   },
+  "60010135": {
+    "name": "Arton II - CreoDron Factory"
+  },
   "60010222": {
     "name": "Jaschercis IV - Moon 2 - CreoDron Factory"
   },
@@ -359,6 +362,9 @@
   "60012904": {
     "name": "Litom XI - Moon 2 - Guardian Angels Assembly Plant"
   },
+  "60012979": {
+    "name": "Hilaban II - Moon 5 - DED Testing Facilities"
+  },
   "60013051": {
     "name": "G-G78S XI - Moon 3 - Dominations Assembly Plant"
   },
@@ -370,6 +376,9 @@
   },
   "60013423": {
     "name": "RLL-9R IX - Intaki Space Police Assembly Plant"
+  },
+  "60013483": {
+    "name": "RF-GGF V - Intaki Syndicate Academy"
   },
   "60013510": {
     "name": "Y-W6GF IX - Moon 3 - Intaki Syndicate Bureau"
@@ -413,8 +422,14 @@
   "60014341": {
     "name": "F9SX-1 V - Moon 1 - True Power Assembly Plant"
   },
+  "60014572": {
+    "name": "Osmeden IX - Moon 8 - X-Sense Chemical Refinery"
+  },
   "60014578": {
     "name": "Osmeden VII - Moon 2 - X-Sense Chemical Refinery"
+  },
+  "60014608": {
+    "name": "Avair X - Hedion University"
   },
   "60014689": {
     "name": "Duripant VII - Moon 6 - Federal Navy Academy"
