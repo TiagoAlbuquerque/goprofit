@@ -110,11 +110,17 @@
   "60002305": {
     "name": "Elonaya X - Moon 4 - Lai Dai Corporation Factory"
   },
+  "60002521": {
+    "name": "U4-Q2V IV - Expert Distribution Warehouse"
+  },
   "60002743": {
     "name": "Jakanerva II - Moon 1 - Sukuuvestaa Corporation Production Plant"
   },
   "60003451": {
     "name": "Uotila V - Moon 5 - Mercantile Club Bureau"
+  },
+  "60003466": {
+    "name": "Jita IV - Moon 4 - Caldari Business Tribunal Bureau Offices"
   },
   "60003616": {
     "name": "Dabrid V - Moon 1 - Caldari Business Tribunal Accounting"
@@ -188,6 +194,9 @@
   "60006358": {
     "name": "Madirmilire VI - Moon 11 - Carthum Conglomerate Warehouse"
   },
+  "60006529": {
+    "name": "Thasinaz VII - Moon 12 - Imperial Armaments Warehouse"
+  },
   "60006649": {
     "name": "Danyana III - Moon 4 - Zoar and Sons Factory"
   },
@@ -260,11 +269,17 @@
   "60008764": {
     "name": "Tash-Murkon Prime V - Moon 1 - Tash-Murkon Family Bureau"
   },
+  "60009019": {
+    "name": "Hilmar VII - Moon 17 - Theology Council Tribunal"
+  },
   "60009427": {
     "name": "Maut VIII - Inner Zone Shipping Storage"
   },
   "60009610": {
     "name": "Arraron VII - Astral Mining Inc. Refinery"
+  },
+  "60009661": {
+    "name": "Ostingele VI - Moon 5 - Astral Mining Inc. Mineral Reserve"
   },
   "60009667": {
     "name": "Intaki V - Moon 5 - Astral Mining Inc. Refinery"
@@ -272,11 +287,17 @@
   "60009751": {
     "name": "Frarie VI - Moon 1 - Combined Harvest Warehouse"
   },
+  "60009856": {
+    "name": "Ardallabier VII - Moon 3 - Quafe Company Warehouse"
+  },
   "60010135": {
     "name": "Arton II - CreoDron Factory"
   },
   "60010222": {
     "name": "Jaschercis IV - Moon 2 - CreoDron Factory"
+  },
+  "60010300": {
+    "name": "Alentene VI - Moon 6 - Roden Shipyards Warehouse"
   },
   "60010894": {
     "name": "Trosquesere V - Moon 10 - Duvolle Laboratories Factory"
@@ -343,9 +364,6 @@
   },
   "60012610": {
     "name": "Aeschee X - Moon 20 - Sisters of EVE Academy"
-  },
-  "60012625": {
-    "name": "Lanngisi III - Moon 2 - Sisters of EVE Bureau"
   },
   "60012646": {
     "name": "Simela IV - Moon 7 - Sisters of EVE Academy"
@@ -437,11 +455,20 @@
   "60014608": {
     "name": "Avair X - Hedion University"
   },
+  "60014632": {
+    "name": "Sarum Prime III - Moon 2 - Imperial Academy"
+  },
   "60014689": {
     "name": "Duripant VII - Moon 6 - Federal Navy Academy"
   },
+  "60014719": {
+    "name": "Cistuvaert V - Moon 12 - Center for Advanced Studies School"
+  },
   "60014743": {
     "name": "Ardene VIII - Moon 11 - Center for Advanced Studies School"
+  },
+  "60014779": {
+    "name": "Hulm VIII - Moon 2 - Republic University"
   },
   "60014794": {
     "name": "Hroduko V - Moon 4 - Republic University"
@@ -470,6 +497,9 @@
   "60015027": {
     "name": "Uitra VI - Moon 4 - State War Academy"
   },
+  "60015029": {
+    "name": "Couster II - Moon 1 - Federal Navy Academy"
+  },
   "60015035": {
     "name": "Clacille IV - Center for Advanced Studies School"
   },
@@ -481,6 +511,9 @@
   },
   "60015046": {
     "name": "Embod IV - Moon 10 - Pator Tech School"
+  },
+  "60015147": {
+    "name": "Ichoriya V - Caldari Navy Logistic Support"
   },
   "60015148": {
     "name": "Thera XII - The Sanctuary Institute of Paleocybernetics"
