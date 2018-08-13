@@ -56,6 +56,9 @@
   "1025949280066": {
     "name": "Perimeter - IChooseYou Tatara Max Reprocess"
   },
+  "1026182763693": {
+    "name": "Oijanen - Waypoint Station"
+  },
   "1026199596235": {
     "name": "Obe - Elliot's Tax Evasion HQ"
   },
@@ -103,6 +106,9 @@
   },
   "60002077": {
     "name": "Iro IX - Moon 6 - Ishukone Corporation Warehouse"
+  },
+  "60002161": {
+    "name": "Hakonen VII - Moon 7 - Ishukone Corporation Factory"
   },
   "60002215": {
     "name": "Mora VI - Moon 4 - Ishukone Corporation Factory"
@@ -452,6 +458,9 @@
   "60014578": {
     "name": "Osmeden VII - Moon 2 - X-Sense Chemical Refinery"
   },
+  "60014599": {
+    "name": "Sehmy VIII - Moon 2 - Hedion University"
+  },
   "60014608": {
     "name": "Avair X - Hedion University"
   },
@@ -491,6 +500,9 @@
   "60015016": {
     "name": "Trossere VII - Moon 3 - University of Caille"
   },
+  "60015021": {
+    "name": "Deepari II - Imperial Academy"
+  },
   "60015025": {
     "name": "Sakenta I - State War Academy"
   },
@@ -511,6 +523,9 @@
   },
   "60015046": {
     "name": "Embod IV - Moon 10 - Pator Tech School"
+  },
+  "60015143": {
+    "name": "Aidart IV - Federal Defense Union Logistic Support"
   },
   "60015147": {
     "name": "Ichoriya V - Caldari Navy Logistic Support"
