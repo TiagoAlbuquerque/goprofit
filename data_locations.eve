@@ -317,6 +317,9 @@
   "60010894": {
     "name": "Trosquesere V - Moon 10 - Duvolle Laboratories Factory"
   },
+  "60010921": {
+    "name": "Oerse VII - Moon 8 - Duvolle Laboratories Factory"
+  },
   "60010936": {
     "name": "Actee I - Duvolle Laboratories Factory"
   },
@@ -518,6 +521,9 @@
   "60015016": {
     "name": "Trossere VII - Moon 3 - University of Caille"
   },
+  "60015020": {
+    "name": "Conoban VII - Moon 8 - Hedion University"
+  },
   "60015021": {
     "name": "Deepari II - Imperial Academy"
   },
@@ -542,11 +548,14 @@
   "60015046": {
     "name": "Embod IV - Moon 10 - Pator Tech School"
   },
-  "60015146": {
-    "name": "Tintoh VIII - Caldari Navy Testing Facilities"
-  },
   "60015143": {
     "name": "Aidart IV - Federal Defense Union Logistic Support"
+  },
+  "60015144": {
+    "name": "Villore VI - Federal Defense Union Logistic Support"
+  },
+  "60015146": {
+    "name": "Tintoh VIII - Caldari Navy Testing Facilities"
   },
   "60015147": {
     "name": "Ichoriya V - Caldari Navy Logistic Support"
