@@ -56,6 +56,9 @@
   "1025949280066": {
     "name": "Perimeter - IChooseYou Tatara Max Reprocess"
   },
+  "1026182763693": {
+    "name": "Oijanen - Waypoint Station"
+  },
   "1026199596235": {
     "name": "Obe - Elliot's Tax Evasion HQ"
   },
@@ -152,6 +155,9 @@
   "60004441": {
     "name": "Kulelen V - Moon 4 - School of Applied Knowledge"
   },
+  "60004456": {
+    "name": "Sankkasen VII - Moon 6 - Science and Trade Institute School"
+  },
   "60004459": {
     "name": "Osmon IV - Moon 5 - Science and Trade Institute School"
   },
@@ -230,6 +236,9 @@
   "60007717": {
     "name": "Hier V - Royal Amarr Institute School"
   },
+  "60007852": {
+    "name": "Yeeramoun VII - Moon 5 - Amarr Civil Service Information Center"
+  },
   "60007921": {
     "name": "Madomi V - Moon 6 - Ministry of War Information Center"
   },
@@ -296,6 +305,9 @@
   "60010222": {
     "name": "Jaschercis IV - Moon 2 - CreoDron Factory"
   },
+  "60010291": {
+    "name": "Onga VI - CreoDron Factory"
+  },
   "60010300": {
     "name": "Alentene VI - Moon 6 - Roden Shipyards Warehouse"
   },
@@ -361,6 +373,9 @@
   },
   "60012592": {
     "name": "NM-OEA VI - Moon 23 - Outer Ring Excavations Mining Outpost"
+  },
+  "60012607": {
+    "name": "Arnon IX - Moon 3 - Sisters of EVE Bureau"
   },
   "60012610": {
     "name": "Aeschee X - Moon 20 - Sisters of EVE Academy"
@@ -446,11 +461,17 @@
   "60014341": {
     "name": "F9SX-1 V - Moon 1 - True Power Assembly Plant"
   },
+  "60014473": {
+    "name": "Ellmay VIII - Moon 12 - X-Sense Chemical Refinery"
+  },
   "60014572": {
     "name": "Osmeden IX - Moon 8 - X-Sense Chemical Refinery"
   },
   "60014578": {
     "name": "Osmeden VII - Moon 2 - X-Sense Chemical Refinery"
+  },
+  "60014599": {
+    "name": "Sehmy VIII - Moon 2 - Hedion University"
   },
   "60014608": {
     "name": "Avair X - Hedion University"
@@ -491,6 +512,9 @@
   "60015016": {
     "name": "Trossere VII - Moon 3 - University of Caille"
   },
+  "60015021": {
+    "name": "Deepari II - Imperial Academy"
+  },
   "60015025": {
     "name": "Sakenta I - State War Academy"
   },
@@ -511,6 +535,9 @@
   },
   "60015046": {
     "name": "Embod IV - Moon 10 - Pator Tech School"
+  },
+  "60015146": {
+    "name": "Tintoh VIII - Caldari Navy Testing Facilities"
   },
   "60015147": {
     "name": "Ichoriya V - Caldari Navy Logistic Support"
