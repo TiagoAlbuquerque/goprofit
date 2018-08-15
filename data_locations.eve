@@ -107,6 +107,9 @@
   "60002077": {
     "name": "Iro IX - Moon 6 - Ishukone Corporation Warehouse"
   },
+  "60002161": {
+    "name": "Hakonen VII - Moon 7 - Ishukone Corporation Factory"
+  },
   "60002215": {
     "name": "Mora VI - Moon 4 - Ishukone Corporation Factory"
   },
@@ -464,6 +467,9 @@
   "60014473": {
     "name": "Ellmay VIII - Moon 12 - X-Sense Chemical Refinery"
   },
+  "60014485": {
+    "name": "Halle X - Moon 4 - X-Sense Chemical Refinery"
+  },
   "60014572": {
     "name": "Osmeden IX - Moon 8 - X-Sense Chemical Refinery"
   },
@@ -536,8 +542,13 @@
   "60015046": {
     "name": "Embod IV - Moon 10 - Pator Tech School"
   },
+<<<<<<< HEAD
   "60015146": {
     "name": "Tintoh VIII - Caldari Navy Testing Facilities"
+=======
+  "60015143": {
+    "name": "Aidart IV - Federal Defense Union Logistic Support"
+>>>>>>> 84225b32f3830f57e293abb474c25a2b3ae5eb4d
   },
   "60015147": {
     "name": "Ichoriya V - Caldari Navy Logistic Support"
