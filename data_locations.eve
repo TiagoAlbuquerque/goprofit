@@ -83,6 +83,9 @@
   "60000085": {
     "name": "Egbinger XI - Moon 3 - CBD Corporation Storage"
   },
+  "60000613": {
+    "name": "Ono V - Moon 2 - Deep Core Mining Inc. Mining Outpost"
+  },
   "60000853": {
     "name": "Tannolen VI - Moon 7 - Minedrill Mining Outpost"
   },
@@ -125,6 +128,9 @@
   "60002305": {
     "name": "Elonaya X - Moon 4 - Lai Dai Corporation Factory"
   },
+  "60002326": {
+    "name": "Torrinos V - Moon 5 - Lai Dai Corporation Factory"
+  },
   "60002521": {
     "name": "U4-Q2V IV - Expert Distribution Warehouse"
   },
@@ -158,6 +164,9 @@
   "60003922": {
     "name": "Hageken V - Moon 2 - Caldari Navy Assembly Plant"
   },
+  "60003991": {
+    "name": "Daras III - Ishukone Watch Assembly Plant"
+  },
   "60004048": {
     "name": "Saisio VII - Moon 1 - Peace and Order Unit Testing Facilities"
   },
@@ -182,6 +191,9 @@
   "60004465": {
     "name": "Uchoshi X - Moon 11 - Science and Trade Institute School"
   },
+  "60004573": {
+    "name": "Eldulf V - Moon 6 - Vherokior Tribe Academy"
+  },
   "60004588": {
     "name": "Rens VI - Moon 8 - Brutor Tribe Treasury"
   },
@@ -190,6 +202,9 @@
   },
   "60004615": {
     "name": "Frarn VI - Moon 18 - Brutor Tribe Bureau"
+  },
+  "60004618": {
+    "name": "Ivar IX - Moon 4 - Brutor Tribe Bureau"
   },
   "60004753": {
     "name": "Emolgranlan VI - Republic Fleet Assembly Plant"
@@ -404,6 +419,9 @@
   "60012646": {
     "name": "Simela IV - Moon 7 - Sisters of EVE Academy"
   },
+  "60012649": {
+    "name": "Athinard IV - Sisters of EVE Bureau"
+  },
   "60012694": {
     "name": "Efu VII - Sisters of EVE Bureau"
   },
@@ -430,6 +448,9 @@
   },
   "60013261": {
     "name": "6NJ8-V VI - Moon 6 - Guristas Production Shipyard"
+  },
+  "60013333": {
+    "name": "Stacmon VII - Moon 1 - Impro Factory"
   },
   "60013411": {
     "name": "IIRH-G VIII - Intaki Space Police Logistic Support"
@@ -484,6 +505,9 @@
   },
   "60014473": {
     "name": "Ellmay VIII - Moon 12 - X-Sense Chemical Refinery"
+  },
+  "60014479": {
+    "name": "Amygnon VIII - Moon 5 - X-Sense Reprocessing Facility"
   },
   "60014485": {
     "name": "Halle X - Moon 4 - X-Sense Chemical Refinery"
@@ -562,6 +586,9 @@
   },
   "60015046": {
     "name": "Embod IV - Moon 10 - Pator Tech School"
+  },
+  "60015133": {
+    "name": "Nourvukaiken V - State Protectorate Logistic Support"
   },
   "60015143": {
     "name": "Aidart IV - Federal Defense Union Logistic Support"
