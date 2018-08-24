@@ -47,8 +47,7 @@ func (d *Deal) amount() int {
 
     out := min(bo.OrderRemain(), so.OrderRemain())
 
-    if out < bo.MinVolume { out = 0 }
-    if out < so.MinVolume { out = 0 }
+    if bo.MinVolume > 1 { out = 0 }
 
     return out
 }

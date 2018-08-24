@@ -122,6 +122,9 @@
   "60002077": {
     "name": "Iro IX - Moon 6 - Ishukone Corporation Warehouse"
   },
+  "60002086": {
+    "name": "Iro XI - Moon 11 - Ishukone Corporation Factory"
+  },
   "60002161": {
     "name": "Hakonen VII - Moon 7 - Ishukone Corporation Factory"
   },
@@ -224,6 +227,9 @@
   "60005686": {
     "name": "Hek VIII - Moon 12 - Boundless Creation Factory"
   },
+  "60005722": {
+    "name": "Eram V - Moon 2 - Eifyr and Co. Biotech Production"
+  },
   "60005740": {
     "name": "Isendeldik VIII - Moon 19 - Six Kin Development Warehouse"
   },
@@ -313,6 +319,9 @@
   },
   "60008764": {
     "name": "Tash-Murkon Prime V - Moon 1 - Tash-Murkon Family Bureau"
+  },
+  "60008989": {
+    "name": "Sasoutikh V - Moon 11 - Theology Council Accounting"
   },
   "60009019": {
     "name": "Hilmar VII - Moon 17 - Theology Council Tribunal"
