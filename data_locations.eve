@@ -86,6 +86,9 @@
   "1028435627182": {
     "name": ""
   },
+  "1028545736927": {
+    "name": ""
+  },
   "60000085": {
     "name": "Egbinger XI - Moon 3 - CBD Corporation Storage"
   },
@@ -103,6 +106,9 @@
   },
   "60001039": {
     "name": "Konora VI - Kaalakiota Corporation Factory"
+  },
+  "60001096": {
+    "name": "Tash-Murkon Prime II - Moon 1 - Kaalakiota Corporation Factory"
   },
   "60001204": {
     "name": "Sirppala II - Moon 3 - Kaalakiota Corporation Factory"
@@ -151,6 +157,9 @@
   },
   "60003037": {
     "name": "Otela II - Expert Housing Foundry"
+  },
+  "60003058": {
+    "name": "Niyabainen VIII - Moon 6 - Expert Housing Production Plant"
   },
   "60003451": {
     "name": "Uotila V - Moon 5 - Mercantile Club Bureau"
@@ -266,6 +275,9 @@
   "60006724": {
     "name": "Thashkarai VI - Zoar and Sons Factory"
   },
+  "60006754": {
+    "name": "Koona VI - Moon 14 - Noble Appliances Factory"
+  },
   "60006901": {
     "name": "Gererique II - Moon 1 - Ducia Foundry Mining Outpost"
   },
@@ -374,8 +386,14 @@
   "60010300": {
     "name": "Alentene VI - Moon 6 - Roden Shipyards Warehouse"
   },
+  "60010873": {
+    "name": "Alentene V - Moon 4 - Duvolle Laboratories Factory"
+  },
   "60010894": {
     "name": "Trosquesere V - Moon 10 - Duvolle Laboratories Factory"
+  },
+  "60010897": {
+    "name": "Grispire V - Duvolle Laboratories Factory"
   },
   "60010921": {
     "name": "Oerse VII - Moon 8 - Duvolle Laboratories Factory"
@@ -451,6 +469,9 @@
   },
   "60012610": {
     "name": "Aeschee X - Moon 20 - Sisters of EVE Academy"
+  },
+  "60012613": {
+    "name": "Apanake VIII - Moon 8 - Sisters of EVE Bureau"
   },
   "60012646": {
     "name": "Simela IV - Moon 7 - Sisters of EVE Academy"
@@ -625,6 +646,9 @@
   },
   "60015046": {
     "name": "Embod IV - Moon 10 - Pator Tech School"
+  },
+  "60015108": {
+    "name": "Villasen V - Lai Dai Protection Service Logistic Support"
   },
   "60015133": {
     "name": "Nourvukaiken V - State Protectorate Logistic Support"
