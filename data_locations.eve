@@ -242,6 +242,9 @@
   "60004813": {
     "name": "Teonusude III - Moon 1 - Republic Fleet Assembly Plant"
   },
+  "60004939": {
+    "name": "Anbald X - Moon 12 - Republic Justice Department Accounting"
+  },
   "60004948": {
     "name": "Josekorn VI - Republic Justice Department Tribunal"
   },
@@ -419,6 +422,9 @@
   "60011416": {
     "name": "Oppold VIII - Moon 7 - Pend Insurance Depository"
   },
+  "60011518": {
+    "name": "Raneilles VI - Moon 1 - Garoun Investment Bank Depository"
+  },
   "60011578": {
     "name": "Egghelende V - Moon 13 - University of Caille"
   },
@@ -574,6 +580,9 @@
   },
   "60014341": {
     "name": "F9SX-1 V - Moon 1 - True Power Assembly Plant"
+  },
+  "60014353": {
+    "name": "TG-Z23 III - Moon 8 - True Power Logistic Support"
   },
   "60014473": {
     "name": "Ellmay VIII - Moon 12 - X-Sense Chemical Refinery"
