@@ -314,8 +314,14 @@
   "60007702": {
     "name": "Emrayur III - Moon 1 - Royal Amarr Institute School"
   },
+  "60007708": {
+    "name": "Karan VIII - Royal Amarr Institute School"
+  },
   "60007717": {
     "name": "Hier V - Royal Amarr Institute School"
+  },
+  "60007723": {
+    "name": "Kulu X - Moon 16 - Royal Amarr Institute School"
   },
   "60007852": {
     "name": "Yeeramoun VII - Moon 5 - Amarr Civil Service Information Center"
@@ -614,6 +620,15 @@
   "60014632": {
     "name": "Sarum Prime III - Moon 2 - Imperial Academy"
   },
+  "60014635": {
+    "name": "Ordat V - Moon 1 - Imperial Academy"
+  },
+  "60014638": {
+    "name": "Fahruni XI - Imperial Academy"
+  },
+  "60014644": {
+    "name": "Paye VI - Moon 1 - Imperial Academy"
+  },
   "60014689": {
     "name": "Duripant VII - Moon 6 - Federal Navy Academy"
   },
@@ -641,17 +656,29 @@
   "60015010": {
     "name": "Pasha VII - Moon 3 - Royal Amarr Institute School"
   },
+  "60015011": {
+    "name": "Safilbab VIII - Moon 4 - Royal Amarr Institute School"
+  },
+  "60015012": {
+    "name": "Seitam VI - Royal Amarr Institute School"
+  },
   "60015013": {
     "name": "Odotte III - University of Caille"
   },
   "60015016": {
     "name": "Trossere VII - Moon 3 - University of Caille"
   },
+  "60015019": {
+    "name": "Chaktaren VII - Moon 3 - Hedion University"
+  },
   "60015020": {
     "name": "Conoban VII - Moon 8 - Hedion University"
   },
   "60015021": {
     "name": "Deepari II - Imperial Academy"
+  },
+  "60015023": {
+    "name": "Hanan VI - Imperial Academy"
   },
   "60015025": {
     "name": "Sakenta I - State War Academy"
