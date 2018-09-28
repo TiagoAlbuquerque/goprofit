@@ -395,6 +395,9 @@
   "60009856": {
     "name": "Ardallabier VII - Moon 3 - Quafe Company Warehouse"
   },
+  "60009865": {
+    "name": "Blameston IV - Moon 12 - Quafe Company Retail Center"
+  },
   "60010129": {
     "name": "Aydoteaux II - CreoDron Factory"
   },
@@ -409,6 +412,9 @@
   },
   "60010300": {
     "name": "Alentene VI - Moon 6 - Roden Shipyards Warehouse"
+  },
+  "60010483": {
+    "name": "Stoure IX - Moon 1 - Poteque Pharmaceuticals Biotech Research Center"
   },
   "60010873": {
     "name": "Alentene V - Moon 4 - Duvolle Laboratories Factory"
@@ -436,6 +442,9 @@
   },
   "60011578": {
     "name": "Egghelende V - Moon 13 - University of Caille"
+  },
+  "60011740": {
+    "name": "Oursulaert III - Federation Navy Testing Facilities"
   },
   "60011791": {
     "name": "Ation IX - Moon 4 - Federation Navy Logistic Support"
