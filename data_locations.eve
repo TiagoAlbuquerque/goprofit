@@ -209,6 +209,9 @@
   "60004216": {
     "name": "Liekuri VI - Spacelane Patrol Assembly Plant"
   },
+  "60004420": {
+    "name": "Todaki VI - Moon 1 - School of Applied Knowledge"
+  },
   "60004441": {
     "name": "Kulelen V - Moon 4 - School of Applied Knowledge"
   },
@@ -479,6 +482,9 @@
   "60012265": {
     "name": "Pakhshi IX - Moon 20 - CONCORD Bureau"
   },
+  "60012280": {
+    "name": "Tratokard II - Moon 1 - CONCORD Bureau"
+  },
   "60012478": {
     "name": "Zatamaka VII - Moon 2 - CONCORD Bureau"
   },
@@ -559,6 +565,9 @@
   },
   "60013483": {
     "name": "RF-GGF V - Intaki Syndicate Academy"
+  },
+  "60013495": {
+    "name": "A-ZLHX XI - Moon 1 - Intaki Syndicate Bureau"
   },
   "60013510": {
     "name": "Y-W6GF IX - Moon 3 - Intaki Syndicate Bureau"
