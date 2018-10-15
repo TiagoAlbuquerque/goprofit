@@ -296,6 +296,9 @@
   "60006901": {
     "name": "Gererique II - Moon 1 - Ducia Foundry Mining Outpost"
   },
+  "60006961": {
+    "name": "Sagain V - Inherent Implants Biotech Production"
+  },
   "60007015": {
     "name": "Amdonen VII - Moon 7 - Imperial Shipment Storage"
   },
@@ -466,6 +469,9 @@
   },
   "60012079": {
     "name": "Octanneve III - Moon 1 - Federation Customs Logistic Support"
+  },
+  "60012133": {
+    "name": "Gamis X - Ammatar Fleet Logistic Support"
   },
   "60012136": {
     "name": "Dysa II - Ammatar Fleet Assembly Plant"
@@ -718,6 +724,9 @@
   },
   "60015120": {
     "name": "Ichoriya VI - Kaalakiota Corporation Factory"
+  },
+  "60015131": {
+    "name": "Onnamon I - State War Academy"
   },
   "60015133": {
     "name": "Nourvukaiken V - State Protectorate Logistic Support"
