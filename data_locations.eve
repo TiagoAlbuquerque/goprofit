@@ -86,15 +86,6 @@
   "1028388598769": {
     "name": "Niyabainen - Free Market 0.0%, 1 Jump Jita"
   },
-  "1028435627182": {
-    "name": ""
-  },
-  "1028545736927": {
-    "name": ""
-  },
-  "1028858195912": {
-    "name": ""
-  },
   "60000085": {
     "name": "Egbinger XI - Moon 3 - CBD Corporation Storage"
   },
@@ -290,6 +281,9 @@
   "60006649": {
     "name": "Danyana III - Moon 4 - Zoar and Sons Factory"
   },
+  "60006658": {
+    "name": "Misaba V - Moon 3 - Zoar and Sons Factory"
+  },
   "60006664": {
     "name": "Omigiav IV - Moon 12 - Zoar and Sons Warehouse"
   },
@@ -440,6 +434,9 @@
   "60010897": {
     "name": "Grispire V - Duvolle Laboratories Factory"
   },
+  "60010915": {
+    "name": "Maire IV - Moon 4 - Duvolle Laboratories Factory"
+  },
   "60010921": {
     "name": "Oerse VII - Moon 8 - Duvolle Laboratories Factory"
   },
@@ -476,8 +473,14 @@
   "60011998": {
     "name": "Halle VII - Moon 6 - Federal Intelligence Office Assembly Plant"
   },
+  "60012010": {
+    "name": "Renyn IX - Federation Customs Assembly Plant"
+  },
   "60012079": {
     "name": "Octanneve III - Moon 1 - Federation Customs Logistic Support"
+  },
+  "60012103": {
+    "name": "Luse VI - Moon 1 - Federation Customs Assembly Plant"
   },
   "60012133": {
     "name": "Gamis X - Ammatar Fleet Logistic Support"
@@ -491,11 +494,17 @@
   "60012196": {
     "name": "D87E-A VII - Moon 16 - Archangels Assembly Plant"
   },
+  "60012199": {
+    "name": "V7D-JD IX - Moon 17 - Archangels Assembly Plant"
+  },
   "60012265": {
     "name": "Pakhshi IX - Moon 20 - CONCORD Bureau"
   },
   "60012280": {
     "name": "Tratokard II - Moon 1 - CONCORD Bureau"
+  },
+  "60012334": {
+    "name": "Jan VI - Moon 21 - CONCORD Academy"
   },
   "60012478": {
     "name": "Zatamaka VII - Moon 2 - CONCORD Bureau"
@@ -667,6 +676,9 @@
   },
   "60014689": {
     "name": "Duripant VII - Moon 6 - Federal Navy Academy"
+  },
+  "60014698": {
+    "name": "Harerget II - Moon 1 - Federal Navy Academy"
   },
   "60014719": {
     "name": "Cistuvaert V - Moon 12 - Center for Advanced Studies School"
