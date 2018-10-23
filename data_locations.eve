@@ -146,6 +146,9 @@
   "60002215": {
     "name": "Mora VI - Moon 4 - Ishukone Corporation Factory"
   },
+  "60002245": {
+    "name": "Airkio VII - Moon 3 - Lai Dai Corporation Factory"
+  },
   "60002305": {
     "name": "Elonaya X - Moon 4 - Lai Dai Corporation Factory"
   },
@@ -466,6 +469,9 @@
   },
   "60011578": {
     "name": "Egghelende V - Moon 13 - University of Caille"
+  },
+  "60011725": {
+    "name": "Adacyne IV - Moon 14 - Federal Administration Bureau Offices"
   },
   "60011740": {
     "name": "Oursulaert III - Federation Navy Testing Facilities"
