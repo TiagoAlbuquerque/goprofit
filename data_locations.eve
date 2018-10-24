@@ -98,6 +98,9 @@
   "1028900232285": {
     "name": ""
   },
+  "1028918241960": {
+    "name": ""
+  },
   "60000085": {
     "name": "Egbinger XI - Moon 3 - CBD Corporation Storage"
   },
@@ -121,6 +124,9 @@
   },
   "60001204": {
     "name": "Sirppala II - Moon 3 - Kaalakiota Corporation Factory"
+  },
+  "60001321": {
+    "name": "Nausschie IX - Moon 2 - Wiyrkomi Corporation Factory"
   },
   "60001615": {
     "name": "Kulelen VI - Perkone Factory"
@@ -161,6 +167,9 @@
   "60002371": {
     "name": "Aurohunen V - Moon 10 - Propel Dynamics Factory"
   },
+  "60002494": {
+    "name": "Shesha I - Expert Distribution Retail Center"
+  },
   "60002521": {
     "name": "U4-Q2V IV - Expert Distribution Warehouse"
   },
@@ -196,6 +205,12 @@
   },
   "60003787": {
     "name": "Motsu VII - Moon 6 - Caldari Navy Logistic Support"
+  },
+  "60003829": {
+    "name": "Tsuguwa VI - Caldari Navy Assembly Plant"
+  },
+  "60003853": {
+    "name": "Venilen IX - Moon 7 - Caldari Navy Testing Facilities"
   },
   "60003895": {
     "name": "Kakakela VI - Moon 15 - Caldari Navy Assembly Plant"
@@ -352,6 +367,9 @@
   },
   "60007852": {
     "name": "Yeeramoun VII - Moon 5 - Amarr Civil Service Information Center"
+  },
+  "60007864": {
+    "name": "Mili VIII - Moon 12 - Amarr Civil Service Bureau Offices"
   },
   "60007921": {
     "name": "Madomi V - Moon 6 - Ministry of War Information Center"
@@ -790,6 +808,9 @@
   },
   "60015133": {
     "name": "Nourvukaiken V - State Protectorate Logistic Support"
+  },
+  "60015139": {
+    "name": "Abudban IV - Tribal Liberation Force Logistic Support"
   },
   "60015143": {
     "name": "Aidart IV - Federal Defense Union Logistic Support"
