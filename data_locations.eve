@@ -41,6 +41,9 @@
   "1023968078820": {
     "name": "Ashab - Port Royal - EVE-Mogul"
   },
+  "1024312264159": {
+    "name": "Amygnon - Rivet City"
+  },
   "1024486788537": {
     "name": "Mesybier - Point One Percent Market"
   },
@@ -76,6 +79,9 @@
   },
   "1026776107283": {
     "name": "Tanoo - Primum Forum Publicae 0.1 Tax"
+  },
+  "1027437340950": {
+    "name": "Hek - ICY Tarara"
   },
   "1027522624787": {
     "name": "Mahtista - lowest tax"
@@ -118,6 +124,9 @@
   },
   "60001039": {
     "name": "Konora VI - Kaalakiota Corporation Factory"
+  },
+  "60001090": {
+    "name": "Baviasi VI - Moon 3 - Kaalakiota Corporation Factory"
   },
   "60001096": {
     "name": "Tash-Murkon Prime II - Moon 1 - Kaalakiota Corporation Factory"
@@ -220,6 +229,9 @@
   },
   "60003922": {
     "name": "Hageken V - Moon 2 - Caldari Navy Assembly Plant"
+  },
+  "60003952": {
+    "name": "Uesuro V - Moon 15 - Lai Dai Protection Service Assembly Plant"
   },
   "60003991": {
     "name": "Daras III - Ishukone Watch Assembly Plant"
@@ -488,6 +500,9 @@
   "60011518": {
     "name": "Raneilles VI - Moon 1 - Garoun Investment Bank Depository"
   },
+  "60011533": {
+    "name": "Amygnon VI - Moon 1 - Garoun Investment Bank Vault"
+  },
   "60011578": {
     "name": "Egghelende V - Moon 13 - University of Caille"
   },
@@ -508,6 +523,9 @@
   },
   "60011959": {
     "name": "Ommare VI - Federal Intelligence Office Assembly Plant"
+  },
+  "60011968": {
+    "name": "Ignebaener VI - Moon 1 - Federal Intelligence Office Logistic Support"
   },
   "60011998": {
     "name": "Halle VII - Moon 6 - Federal Intelligence Office Assembly Plant"
