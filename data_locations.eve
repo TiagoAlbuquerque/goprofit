@@ -92,24 +92,6 @@
   "1028388598769": {
     "name": "Niyabainen - Free Market 0.0%, 1 Jump Jita"
   },
-  "1028439987377": {
-    "name": ""
-  },
-  "1028858195912": {
-    "name": ""
-  },
-  "1028878850608": {
-    "name": ""
-  },
-  "1028900232285": {
-    "name": ""
-  },
-  "1028918241960": {
-    "name": ""
-  },
-  "1028972726998": {
-    "name": ""
-  },
   "60000085": {
     "name": "Egbinger XI - Moon 3 - CBD Corporation Storage"
   },
@@ -542,6 +524,9 @@
   "60012103": {
     "name": "Luse VI - Moon 1 - Federation Customs Assembly Plant"
   },
+  "60012130": {
+    "name": "Hothomouh VII - Moon 2 - Ammatar Fleet Assembly Plant"
+  },
   "60012133": {
     "name": "Gamis X - Ammatar Fleet Logistic Support"
   },
@@ -563,11 +548,35 @@
   "60012280": {
     "name": "Tratokard II - Moon 1 - CONCORD Bureau"
   },
+  "60012286": {
+    "name": "Hilfhurmur VIII - Moon 6 - CONCORD Logistic Support"
+  },
+  "60012298": {
+    "name": "Shamahi IX - Moon 12 - CONCORD Bureau"
+  },
+  "60012319": {
+    "name": "Mastakomon VIII - Moon 1 - CONCORD Bureau"
+  },
   "60012334": {
     "name": "Jan VI - Moon 21 - CONCORD Academy"
   },
+  "60012394": {
+    "name": "Avada V - CONCORD Assembly Plant"
+  },
+  "60012427": {
+    "name": "Egbinger V - CONCORD Treasury"
+  },
   "60012478": {
     "name": "Zatamaka VII - Moon 2 - CONCORD Bureau"
+  },
+  "60012499": {
+    "name": "Goinard III - Moon 2 - CONCORD Bureau"
+  },
+  "60012502": {
+    "name": "Assiettes IV - Moon 1 - CONCORD Logistic Support"
+  },
+  "60012523": {
+    "name": "Tennen VIII - Moon 4 - CONCORD Assembly Plant"
   },
   "60012565": {
     "name": "K3JR-J VIII - Guristas Assembly Plant"
@@ -625,6 +634,15 @@
   },
   "60012904": {
     "name": "Litom XI - Moon 2 - Guardian Angels Assembly Plant"
+  },
+  "60012967": {
+    "name": "Hostni VII - Moon 18 - DED Assembly Plant"
+  },
+  "60012970": {
+    "name": "Evati IX - Moon 1 - DED Assembly Plant"
+  },
+  "60012976": {
+    "name": "Todifrauan VII - Moon 8 - DED Assembly Plant"
   },
   "60012979": {
     "name": "Hilaban II - Moon 5 - DED Testing Facilities"
