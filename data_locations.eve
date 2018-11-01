@@ -92,6 +92,12 @@
   "1028388598769": {
     "name": "Niyabainen - Free Market 0.0%, 1 Jump Jita"
   },
+  "1028858195912": {
+    "name": ""
+  },
+  "1028972726998": {
+    "name": ""
+  },
   "60000085": {
     "name": "Egbinger XI - Moon 3 - CBD Corporation Storage"
   },
@@ -151,6 +157,9 @@
   },
   "60002245": {
     "name": "Airkio VII - Moon 3 - Lai Dai Corporation Factory"
+  },
+  "60002248": {
+    "name": "Kakakela VI - Moon 5 - Lai Dai Corporation Factory"
   },
   "60002305": {
     "name": "Elonaya X - Moon 4 - Lai Dai Corporation Factory"
@@ -356,11 +365,23 @@
   "60007708": {
     "name": "Karan VIII - Royal Amarr Institute School"
   },
+  "60007711": {
+    "name": "Komaa V - Royal Amarr Institute School"
+  },
+  "60007714": {
+    "name": "Noranim IV - Moon 16 - Royal Amarr Institute School"
+  },
   "60007717": {
     "name": "Hier V - Royal Amarr Institute School"
   },
+  "60007720": {
+    "name": "Gergish X - Moon 3 - Royal Amarr Institute School"
+  },
   "60007723": {
     "name": "Kulu X - Moon 16 - Royal Amarr Institute School"
+  },
+  "60007729": {
+    "name": "Dresi II - Royal Amarr Institute School"
   },
   "60007852": {
     "name": "Yeeramoun VII - Moon 5 - Amarr Civil Service Information Center"
@@ -581,6 +602,9 @@
   "60012565": {
     "name": "K3JR-J VIII - Guristas Assembly Plant"
   },
+  "60012568": {
+    "name": "H-PA29 V - Moon 1 - Guristas Assembly Plant"
+  },
   "60012571": {
     "name": "H-PA29 IV - Moon 2 - Guristas Assembly Plant"
   },
@@ -746,8 +770,29 @@
   "60014599": {
     "name": "Sehmy VIII - Moon 2 - Hedion University"
   },
+  "60014602": {
+    "name": "Azedi II - Hedion University"
+  },
+  "60014605": {
+    "name": "Rumida V - Moon 1 - Hedion University"
+  },
   "60014608": {
     "name": "Avair X - Hedion University"
+  },
+  "60014614": {
+    "name": "Komaa VI - Moon 17 - Hedion University"
+  },
+  "60014617": {
+    "name": "Mista VI - Moon 16 - Hedion University"
+  },
+  "60014620": {
+    "name": "Moutid II - Moon 14 - Hedion University"
+  },
+  "60014623": {
+    "name": "Nema X - Moon 6 - Hedion University"
+  },
+  "60014629": {
+    "name": "Chaven VIII - Moon 1 - Imperial Academy"
   },
   "60014632": {
     "name": "Sarum Prime III - Moon 2 - Imperial Academy"
@@ -758,8 +803,20 @@
   "60014638": {
     "name": "Fahruni XI - Imperial Academy"
   },
+  "60014641": {
+    "name": "Hikansog VII - Imperial Academy"
+  },
   "60014644": {
     "name": "Paye VI - Moon 1 - Imperial Academy"
+  },
+  "60014647": {
+    "name": "Ajna VIII - Moon 5 - Imperial Academy"
+  },
+  "60014650": {
+    "name": "Azedi V - Moon 1 - Imperial Academy"
+  },
+  "60014656": {
+    "name": "Schmaeel VIII - Moon 9 - Imperial Academy"
   },
   "60014689": {
     "name": "Duripant VII - Moon 6 - Federal Navy Academy"
@@ -788,6 +845,9 @@
   "60015001": {
     "name": "Akiainavas III - School of Applied Knowledge"
   },
+  "60015009": {
+    "name": "Kerepa I - Royal Amarr Institute School"
+  },
   "60015010": {
     "name": "Pasha VII - Moon 3 - Royal Amarr Institute School"
   },
@@ -803,6 +863,9 @@
   "60015016": {
     "name": "Trossere VII - Moon 3 - University of Caille"
   },
+  "60015018": {
+    "name": "Annad V - Hedion University"
+  },
   "60015019": {
     "name": "Chaktaren VII - Moon 3 - Hedion University"
   },
@@ -811,6 +874,9 @@
   },
   "60015021": {
     "name": "Deepari II - Imperial Academy"
+  },
+  "60015022": {
+    "name": "Fora V - Moon 3 - Imperial Academy"
   },
   "60015023": {
     "name": "Hanan VI - Imperial Academy"
@@ -835,6 +901,12 @@
   },
   "60015046": {
     "name": "Embod IV - Moon 10 - Pator Tech School"
+  },
+  "60015050": {
+    "name": "Irnal I - Imperial Academy"
+  },
+  "60015051": {
+    "name": "Marthia I - Royal Amarr Institute School"
   },
   "60015108": {
     "name": "Villasen V - Lai Dai Protection Service Logistic Support"
