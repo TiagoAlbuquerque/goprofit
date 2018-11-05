@@ -833,6 +833,9 @@
   "60014794": {
     "name": "Hroduko V - Moon 4 - Republic University"
   },
+  "60014797": {
+    "name": "Gultratren V - Moon 4 - Republic University"
+  },
   "60014818": {
     "name": "Aldrat IX - Pator Tech School"
   },
@@ -892,6 +895,12 @@
   },
   "60015036": {
     "name": "Clellinon VI - Moon 11 - Center for Advanced Studies School"
+  },
+  "60015037": {
+    "name": "Hadaugago II - Moon 1 - Republic Military School"
+  },
+  "60015039": {
+    "name": "Larkugei IX - Republic Military School"
   },
   "60015041": {
     "name": "Malukker I - Republic University"
