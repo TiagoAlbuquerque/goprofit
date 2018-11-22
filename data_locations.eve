@@ -236,6 +236,9 @@
   "60004048": {
     "name": "Saisio VII - Moon 1 - Peace and Order Unit Testing Facilities"
   },
+  "60004168": {
+    "name": "Sankkasen II - Spacelane Patrol Assembly Plant"
+  },
   "60004204": {
     "name": "Ibura IX - Moon 11 - Spacelane Patrol Testing Facilities"
   },
@@ -535,6 +538,9 @@
   },
   "60011866": {
     "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant"
+  },
+  "60011950": {
+    "name": "Boystin V - Moon 6 - Federal Intelligence Office Assembly Plant"
   },
   "60011959": {
     "name": "Ommare VI - Federal Intelligence Office Assembly Plant"
