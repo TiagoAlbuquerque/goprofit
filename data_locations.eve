@@ -233,6 +233,9 @@
   "60004048": {
     "name": "Saisio VII - Moon 1 - Peace and Order Unit Testing Facilities"
   },
+  "60004168": {
+    "name": "Sankkasen II - Spacelane Patrol Assembly Plant"
+  },
   "60004204": {
     "name": "Ibura IX - Moon 11 - Spacelane Patrol Testing Facilities"
   },
@@ -362,6 +365,9 @@
   "60007702": {
     "name": "Emrayur III - Moon 1 - Royal Amarr Institute School"
   },
+  "60007705": {
+    "name": "Fihrneh VI - Moon 1 - Royal Amarr Institute School"
+  },
   "60007708": {
     "name": "Karan VIII - Royal Amarr Institute School"
   },
@@ -379,6 +385,9 @@
   },
   "60007723": {
     "name": "Kulu X - Moon 16 - Royal Amarr Institute School"
+  },
+  "60007726": {
+    "name": "Hikansog VII - Moon 9 - Royal Amarr Institute School"
   },
   "60007729": {
     "name": "Dresi II - Royal Amarr Institute School"
@@ -526,6 +535,9 @@
   },
   "60011866": {
     "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant"
+  },
+  "60011950": {
+    "name": "Boystin V - Moon 6 - Federal Intelligence Office Assembly Plant"
   },
   "60011959": {
     "name": "Ommare VI - Federal Intelligence Office Assembly Plant"
@@ -779,6 +791,9 @@
   "60014608": {
     "name": "Avair X - Hedion University"
   },
+  "60014611": {
+    "name": "Riavayed IX - Moon 12 - Hedion University"
+  },
   "60014614": {
     "name": "Komaa VI - Moon 17 - Hedion University"
   },
@@ -790,6 +805,9 @@
   },
   "60014623": {
     "name": "Nema X - Moon 6 - Hedion University"
+  },
+  "60014626": {
+    "name": "Korridi IV - Hedion University"
   },
   "60014629": {
     "name": "Chaven VIII - Moon 1 - Imperial Academy"
