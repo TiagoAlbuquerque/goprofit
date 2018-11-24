@@ -128,6 +128,9 @@
   "60001615": {
     "name": "Kulelen VI - Perkone Factory"
   },
+  "60001621": {
+    "name": "Tasti IX - Moon 10 - Perkone Factory"
+  },
   "60001738": {
     "name": "Otalieto VII - Moon 2 - Caldari Steel Warehouse"
   },
@@ -151,6 +154,9 @@
   },
   "60002161": {
     "name": "Hakonen VII - Moon 7 - Ishukone Corporation Factory"
+  },
+  "60002197": {
+    "name": "Kuomi VIII - Moon 22 - Ishukone Corporation Factory"
   },
   "60002215": {
     "name": "Mora VI - Moon 4 - Ishukone Corporation Factory"
@@ -292,6 +298,9 @@
   },
   "60005056": {
     "name": "Lustrevik VIII - Moon 9 - Republic Security Services Assembly Plant"
+  },
+  "60005233": {
+    "name": "Hagilur IV - Moon 2 - Minmatar Mining Corporation Mining Outpost"
   },
   "60005686": {
     "name": "Hek VIII - Moon 12 - Boundless Creation Factory"
