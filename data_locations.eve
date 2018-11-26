@@ -47,6 +47,12 @@
   "1024486788537": {
     "name": "Mesybier - Point One Percent Market"
   },
+  "1024925177717": {
+    "name": "Eram - Tradestation Babylon 9"
+  },
+  "1025012761433": {
+    "name": "Sobaseki - Lonetrek Cloning - EVE-Mogul"
+  },
   "1025106775286": {
     "name": "F-NXLQ - Babylon 5-Bil"
   },
@@ -89,10 +95,19 @@
   "1028250670679": {
     "name": "Otitoh - Outside trades."
   },
+  "1028339225240": {
+    "name": ""
+  },
   "1028388598769": {
     "name": "Niyabainen - Free Market 0.0%, 1 Jump Jita"
   },
   "1028858195912": {
+    "name": ""
+  },
+  "1028975998376": {
+    "name": ""
+  },
+  "1029204055283": {
     "name": ""
   },
   "60000085": {
@@ -106,6 +121,9 @@
   },
   "60000964": {
     "name": "Obe VI - Caldari Provisions Plantation"
+  },
+  "60000967": {
+    "name": "Osaa IV - Moon 11 - Caldari Provisions Plantation"
   },
   "60001030": {
     "name": "Odebeinn V - Moon 5 - Kaalakiota Corporation Factory"
@@ -224,6 +242,9 @@
   "60003853": {
     "name": "Venilen IX - Moon 7 - Caldari Navy Testing Facilities"
   },
+  "60003871": {
+    "name": "Nonni IV - Caldari Navy Assembly Plant"
+  },
   "60003895": {
     "name": "Kakakela VI - Moon 15 - Caldari Navy Assembly Plant"
   },
@@ -328,6 +349,9 @@
   },
   "60006505": {
     "name": "Teonusude VI - Imperial Armaments Factory"
+  },
+  "60006526": {
+    "name": "Esescama VIII - Moon 3 - Imperial Armaments Warehouse"
   },
   "60006529": {
     "name": "Thasinaz VII - Moon 12 - Imperial Armaments Warehouse"
@@ -448,6 +472,9 @@
   },
   "60008530": {
     "name": "Akes V - Moon 2 - Emperor Family Academy"
+  },
+  "60008539": {
+    "name": "Riavayed II - Emperor Family Bureau"
   },
   "60008764": {
     "name": "Tash-Murkon Prime V - Moon 1 - Tash-Murkon Family Bureau"
@@ -751,6 +778,9 @@
   },
   "60014239": {
     "name": "ZH-KEV VI - Moon 6 - True Creations Storage Bay"
+  },
+  "60014248": {
+    "name": "5J-UEX IV - Moon 7 - True Creations Shipyard"
   },
   "60014269": {
     "name": "4GQ-XQ IX - Moon 1 - True Creations Shipyard"
