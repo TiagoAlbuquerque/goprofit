@@ -92,6 +92,9 @@
   "1027522624787": {
     "name": "Mahtista - lowest tax"
   },
+  "1027884443062": {
+    "name": "Manarq - EveSkillboard Trade Hub"
+  },
   "1028250670679": {
     "name": "Otitoh - Outside trades."
   },
@@ -104,14 +107,26 @@
   "1028858195912": {
     "name": ""
   },
+  "1028968292136": {
+    "name": ""
+  },
   "1028975998376": {
+    "name": ""
+  },
+  "1029009504396": {
     "name": ""
   },
   "1029204055283": {
     "name": ""
   },
+  "60000046": {
+    "name": "Vorsk IV - Moon 1 - CBD Corporation Storage"
+  },
   "60000085": {
     "name": "Egbinger XI - Moon 3 - CBD Corporation Storage"
+  },
+  "60000358": {
+    "name": "Perimeter VI - Ytiri Storage"
   },
   "60000613": {
     "name": "Ono V - Moon 2 - Deep Core Mining Inc. Mining Outpost"
@@ -394,6 +409,9 @@
   },
   "60007216": {
     "name": "Uhodoh VI - Moon 1 - Amarr Certified News Development Studio"
+  },
+  "60007495": {
+    "name": "Obe VI - Moon 1 - Joint Harvesting Plantation"
   },
   "60007642": {
     "name": "Siyi I - Nurtura Plantation"
@@ -806,6 +824,9 @@
   "60014359": {
     "name": "O5Y3-W VI - Moon 1 - True Power Logistic Support"
   },
+  "60014437": {
+    "name": "Tanoo IV - Trust Partners Trading Post"
+  },
   "60014473": {
     "name": "Ellmay VIII - Moon 12 - X-Sense Chemical Refinery"
   },
@@ -896,11 +917,17 @@
   "60014779": {
     "name": "Hulm VIII - Moon 2 - Republic University"
   },
+  "60014791": {
+    "name": "Gerek V - Moon 3 - Republic University"
+  },
   "60014794": {
     "name": "Hroduko V - Moon 4 - Republic University"
   },
   "60014797": {
     "name": "Gultratren V - Moon 4 - Republic University"
+  },
+  "60014809": {
+    "name": "Ryddinjorn VI - Moon 2 - Pator Tech School"
   },
   "60014818": {
     "name": "Aldrat IX - Pator Tech School"
