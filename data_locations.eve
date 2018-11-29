@@ -671,6 +671,9 @@
   "60012523": {
     "name": "Tennen VIII - Moon 4 - CONCORD Assembly Plant"
   },
+  "60012562": {
+    "name": "N5Y-4N VII - Moon 20 - Guristas Logistic Support"
+  },
   "60012565": {
     "name": "K3JR-J VIII - Guristas Assembly Plant"
   },
@@ -722,8 +725,14 @@
   "60012799": {
     "name": "OSY-UD IX - Moon 16 - Serpentis Corporation Chemical Storage"
   },
+  "60012826": {
+    "name": "K-QWHE VI - Moon 15 - Serpentis Corporation Chemical Refinery"
+  },
   "60012853": {
     "name": "Utopia VI - Moon 12 - Serpentis Corporation Chemical Refinery"
+  },
+  "60012868": {
+    "name": "H-ADOC IV - Moon 1 - Guardian Angels Assembly Plant"
   },
   "60012898": {
     "name": "G-0Q86 VII - Moon 1 - Guardian Angels Assembly Plant"
