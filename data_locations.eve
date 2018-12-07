@@ -119,6 +119,12 @@
   "1029204055283": {
     "name": ""
   },
+  "1029231415088": {
+    "name": ""
+  },
+  "1029296658658": {
+    "name": ""
+  },
   "60000046": {
     "name": "Vorsk IV - Moon 1 - CBD Corporation Storage"
   },
@@ -494,6 +500,9 @@
   "60008539": {
     "name": "Riavayed II - Emperor Family Bureau"
   },
+  "60008692": {
+    "name": "Kor-Azor Prime II - Kor-Azor Family Bureau"
+  },
   "60008764": {
     "name": "Tash-Murkon Prime V - Moon 1 - Tash-Murkon Family Bureau"
   },
@@ -565,6 +574,9 @@
   },
   "60010948": {
     "name": "Jel V - Duvolle Laboratories Factory"
+  },
+  "60010957": {
+    "name": "Vey VIII - Moon 15 - FedMart Warehouse"
   },
   "60011212": {
     "name": "Jufvitte IX - Aliastra Warehouse"
@@ -952,6 +964,9 @@
   },
   "60015001": {
     "name": "Akiainavas III - School of Applied Knowledge"
+  },
+  "60015005": {
+    "name": "Jouvulen III - Science and Trade Institute School"
   },
   "60015009": {
     "name": "Kerepa I - Royal Amarr Institute School"
