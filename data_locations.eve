@@ -224,6 +224,9 @@
   "60002743": {
     "name": "Jakanerva II - Moon 1 - Sukuuvestaa Corporation Production Plant"
   },
+  "60002944": {
+    "name": "Tartoken V - Moon 8 - Caldari Constructions Production Plant"
+  },
   "60003037": {
     "name": "Otela II - Expert Housing Foundry"
   },
@@ -343,6 +346,9 @@
   },
   "60005056": {
     "name": "Lustrevik VIII - Moon 9 - Republic Security Services Assembly Plant"
+  },
+  "60005176": {
+    "name": "Neesher VI - Moon 20 - Republic Security Services Assembly Plant"
   },
   "60005233": {
     "name": "Hagilur IV - Moon 2 - Minmatar Mining Corporation Mining Outpost"
@@ -769,6 +775,9 @@
   },
   "60013051": {
     "name": "G-G78S XI - Moon 3 - Dominations Assembly Plant"
+  },
+  "60013144": {
+    "name": "Vouskiaho III - Genolution Biotech Production"
   },
   "60013261": {
     "name": "6NJ8-V VI - Moon 6 - Guristas Production Shipyard"
