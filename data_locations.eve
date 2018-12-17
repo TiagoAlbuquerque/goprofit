@@ -350,6 +350,9 @@
   "60005176": {
     "name": "Neesher VI - Moon 20 - Republic Security Services Assembly Plant"
   },
+  "60005179": {
+    "name": "Neesher VI - Moon 15 - Republic Security Services Assembly Plant"
+  },
   "60005233": {
     "name": "Hagilur IV - Moon 2 - Minmatar Mining Corporation Mining Outpost"
   },
@@ -845,6 +848,9 @@
   "60014272": {
     "name": "ZG8Q-N VII - Moon 6 - True Creations Testing Facilities"
   },
+  "60014281": {
+    "name": "OOO-FS IV - Moon 10 - True Creations Logistic Support"
+  },
   "60014326": {
     "name": "DSS-EZ IV - Moon 1 - True Power Refinery"
   },
@@ -1048,6 +1054,9 @@
   },
   "60015051": {
     "name": "Marthia I - Royal Amarr Institute School"
+  },
+  "60015087": {
+    "name": "Mercomesier III - Federal Defense Union Logistic Support"
   },
   "60015108": {
     "name": "Villasen V - Lai Dai Protection Service Logistic Support"
