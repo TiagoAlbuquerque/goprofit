@@ -140,6 +140,12 @@
   "1029385372500": {
     "name": ""
   },
+  "1029444317178": {
+    "name": ""
+  },
+  "1029458165505": {
+    "name": ""
+  },
   "60000046": {
     "name": "Vorsk IV - Moon 1 - CBD Corporation Storage"
   },
@@ -377,6 +383,9 @@
   "60005179": {
     "name": "Neesher VI - Moon 15 - Republic Security Services Assembly Plant"
   },
+  "60005218": {
+    "name": "Tourier VI - Moon 13 - Republic Security Services Assembly Plant"
+  },
   "60005233": {
     "name": "Hagilur IV - Moon 2 - Minmatar Mining Corporation Mining Outpost"
   },
@@ -391,6 +400,9 @@
   },
   "60005962": {
     "name": "Octanneve IV - Moon 1 - Freedom Extension Retail Center"
+  },
+  "60006103": {
+    "name": "Vashkah VI - Moon 2 - Amarr Constructions Warehouse"
   },
   "60006241": {
     "name": "Zororzih VII - Moon 12 - Carthum Conglomerate Factory"
@@ -575,6 +587,9 @@
   "60009865": {
     "name": "Blameston IV - Moon 12 - Quafe Company Retail Center"
   },
+  "60010057": {
+    "name": "Eystur IV - Quafe Company Factory"
+  },
   "60010129": {
     "name": "Aydoteaux II - CreoDron Factory"
   },
@@ -650,6 +665,9 @@
   "60011866": {
     "name": "Dodixie IX - Moon 20 - Federation Navy Assembly Plant"
   },
+  "60011893": {
+    "name": "Stacmon V - Moon 9 - Federation Navy Assembly Plant"
+  },
   "60011950": {
     "name": "Boystin V - Moon 6 - Federal Intelligence Office Assembly Plant"
   },
@@ -683,14 +701,65 @@
   "60012163": {
     "name": "Faspera I - Ammatar Fleet Testing Facilities"
   },
+  "60012184": {
+    "name": "K-MGJ7 IV - Moon 11 - Archangels Testing Facilities"
+  },
+  "60012187": {
+    "name": "H-ADOC IV - Moon 12 - Archangels Logistic Support"
+  },
+  "60012190": {
+    "name": "K-MGJ7 IV - Moon 4 - Archangels Testing Facilities"
+  },
+  "60012193": {
+    "name": "PO4F-3 VI - Moon 4 - Archangels Assembly Plant"
+  },
   "60012196": {
     "name": "D87E-A VII - Moon 16 - Archangels Assembly Plant"
   },
   "60012199": {
     "name": "V7D-JD IX - Moon 17 - Archangels Assembly Plant"
   },
+  "60012202": {
+    "name": "HLW-HP VI - Moon 1 - Archangels Assembly Plant"
+  },
+  "60012205": {
+    "name": "HLW-HP III - Moon 3 - Archangels Assembly Plant"
+  },
   "60012208": {
     "name": "RA-NXN I - Archangels Assembly Plant"
+  },
+  "60012211": {
+    "name": "CL-85V IX - Moon 2 - Archangels Assembly Plant"
+  },
+  "60012217": {
+    "name": "AAM-1A II - Moon 11 - Archangels Testing Facilities"
+  },
+  "60012220": {
+    "name": "ES-UWY VI - Archangels Logistic Support"
+  },
+  "60012223": {
+    "name": "Y-DW5K IV - Moon 5 - Archangels Logistic Support"
+  },
+  "60012226": {
+    "name": "S1DP-Y IX - Moon 17 - Archangels Testing Facilities"
+  },
+  "60012229": {
+    "name": "CL-1JE III - Archangels Assembly Plant"
+  },
+  "60012232": {
+    "name": "BPK-XK V - Moon 20 - Archangels Logistic Support"
+  },
+  "60012235": {
+    "name": "G-0Q86 V - Moon 5 - Archangels Logistic Support"
+  },
+  "60012238": {
+    "name": "Doril I - Archangels Assembly Plant"
+  },
+  "60012241": {
+    "name": "Hemin VII - Moon 12 - Archangels Logistic Support"
+  },
+  "60012244": {
+    "name": "Jorund VI - Archangels Assembly Plant"
   },
   "60012265": {
     "name": "Pakhshi IX - Moon 20 - CONCORD Bureau"
@@ -730,6 +799,12 @@
   },
   "60012523": {
     "name": "Tennen VIII - Moon 4 - CONCORD Assembly Plant"
+  },
+  "60012556": {
+    "name": "6NJ8-V VII - Moon 2 - Guristas Logistic Support"
+  },
+  "60012559": {
+    "name": "Y-4CFK V - Moon 17 - Guristas Testing Facilities"
   },
   "60012562": {
     "name": "N5Y-4N VII - Moon 20 - Guristas Logistic Support"
@@ -883,6 +958,9 @@
   },
   "60014281": {
     "name": "OOO-FS IV - Moon 10 - True Creations Logistic Support"
+  },
+  "60014290": {
+    "name": "WEQT-K I - Moon 12 - True Power Mineral Reserve"
   },
   "60014326": {
     "name": "DSS-EZ IV - Moon 1 - True Power Refinery"
