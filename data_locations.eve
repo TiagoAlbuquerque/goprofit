@@ -116,6 +116,9 @@
   "1028858195912": {
     "name": ""
   },
+  "1028954897526": {
+    "name": ""
+  },
   "1028968292136": {
     "name": ""
   },
@@ -172,6 +175,9 @@
   },
   "60001039": {
     "name": "Konora VI - Kaalakiota Corporation Factory"
+  },
+  "60001045": {
+    "name": "Hodrold VIII - Moon 2 - Kaalakiota Corporation Factory"
   },
   "60001090": {
     "name": "Baviasi VI - Moon 3 - Kaalakiota Corporation Factory"
@@ -362,6 +368,9 @@
   "60004618": {
     "name": "Ivar IX - Moon 4 - Brutor Tribe Bureau"
   },
+  "60004702": {
+    "name": "Oppold VI - Moon 16 - Republic Parliament Bureau"
+  },
   "60004753": {
     "name": "Emolgranlan VI - Republic Fleet Assembly Plant"
   },
@@ -524,6 +533,9 @@
   "60008206": {
     "name": "Nibainkier VII - Ministry of Internal Order Assembly Plant"
   },
+  "60008374": {
+    "name": "Bhizheba IX - Moon 1 - Amarr Navy Logistic Support"
+  },
   "60008422": {
     "name": "Mani VII - Moon 10 - Amarr Navy Assembly Plant"
   },
@@ -578,6 +590,9 @@
   "60009667": {
     "name": "Intaki V - Moon 5 - Astral Mining Inc. Refinery"
   },
+  "60009676": {
+    "name": "Agrallarier VIII - Moon 3 - Astral Mining Inc. Refinery"
+  },
   "60009751": {
     "name": "Frarie VI - Moon 1 - Combined Harvest Warehouse"
   },
@@ -589,6 +604,9 @@
   },
   "60010057": {
     "name": "Eystur IV - Quafe Company Factory"
+  },
+  "60010072": {
+    "name": "Dammalin VII - Moon 5 - Quafe Company Factory"
   },
   "60010129": {
     "name": "Aydoteaux II - CreoDron Factory"
@@ -982,6 +1000,9 @@
   },
   "60014437": {
     "name": "Tanoo IV - Trust Partners Trading Post"
+  },
+  "60014455": {
+    "name": "Uanzin V - Moon 1 - Trust Partners Warehouse"
   },
   "60014473": {
     "name": "Ellmay VIII - Moon 12 - X-Sense Chemical Refinery"
