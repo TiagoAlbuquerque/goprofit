@@ -149,6 +149,15 @@
   "1029458165505": {
     "name": ""
   },
+  "1029501578349": {
+    "name": ""
+  },
+  "1029639612154": {
+    "name": ""
+  },
+  "1029660636680": {
+    "name": ""
+  },
   "60000046": {
     "name": "Vorsk IV - Moon 1 - CBD Corporation Storage"
   },
@@ -248,6 +257,9 @@
   "60002521": {
     "name": "U4-Q2V IV - Expert Distribution Warehouse"
   },
+  "60002605": {
+    "name": "Lantorn VI - Moon 4 - Expert Distribution Warehouse"
+  },
   "60002743": {
     "name": "Jakanerva II - Moon 1 - Sukuuvestaa Corporation Production Plant"
   },
@@ -322,6 +334,9 @@
   },
   "60004168": {
     "name": "Sankkasen II - Spacelane Patrol Assembly Plant"
+  },
+  "60004189": {
+    "name": "Uedama VI - Moon 8 - Spacelane Patrol Logistic Support"
   },
   "60004204": {
     "name": "Ibura IX - Moon 11 - Spacelane Patrol Testing Facilities"
@@ -407,6 +422,9 @@
   "60005740": {
     "name": "Isendeldik VIII - Moon 19 - Six Kin Development Warehouse"
   },
+  "60005956": {
+    "name": "Boystin VI - Moon 11 - Freedom Extension Storage"
+  },
   "60005962": {
     "name": "Octanneve IV - Moon 1 - Freedom Extension Retail Center"
   },
@@ -448,6 +466,9 @@
   },
   "60006754": {
     "name": "Koona VI - Moon 14 - Noble Appliances Factory"
+  },
+  "60006895": {
+    "name": "Garisas VI - Ducia Foundry Refinery"
   },
   "60006901": {
     "name": "Gererique II - Moon 1 - Ducia Foundry Mining Outpost"
@@ -923,6 +944,9 @@
   "60013423": {
     "name": "RLL-9R IX - Intaki Space Police Assembly Plant"
   },
+  "60013429": {
+    "name": "EF-F36 III - Moon 1 - Intaki Space Police Logistic Support"
+  },
   "60013483": {
     "name": "RF-GGF V - Intaki Syndicate Academy"
   },
@@ -1192,6 +1216,9 @@
   },
   "60015108": {
     "name": "Villasen V - Lai Dai Protection Service Logistic Support"
+  },
+  "60015117": {
+    "name": "Samanuni XI - Caldari Navy Warehouse"
   },
   "60015120": {
     "name": "Ichoriya VI - Kaalakiota Corporation Factory"
