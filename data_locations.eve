@@ -152,10 +152,22 @@
   "1029501578349": {
     "name": ""
   },
+  "1029574949583": {
+    "name": ""
+  },
+  "1029623107791": {
+    "name": ""
+  },
   "1029639612154": {
     "name": ""
   },
   "1029660636680": {
+    "name": ""
+  },
+  "1029683920528": {
+    "name": ""
+  },
+  "1029685929553": {
     "name": ""
   },
   "60000046": {
@@ -275,6 +287,9 @@
   "60003319": {
     "name": "UM-Q7F X - Modern Finances Depository"
   },
+  "60003400": {
+    "name": "Ahynada VII - Mercantile Club Bureau"
+  },
   "60003451": {
     "name": "Uotila V - Moon 5 - Mercantile Club Bureau"
   },
@@ -289,6 +304,9 @@
   },
   "60003616": {
     "name": "Dabrid V - Moon 1 - Caldari Business Tribunal Accounting"
+  },
+  "60003625": {
+    "name": "Gyerzen IV - Moon 1 - Caldari Business Tribunal Law School"
   },
   "60003628": {
     "name": "Seil IV - Moon 9 - Caldari Business Tribunal Bureau Offices"
@@ -650,6 +668,9 @@
   "60010825": {
     "name": "4C-B7X V - Moon 7 - Chemal Tech Factory"
   },
+  "60010840": {
+    "name": "Gisleres V - Moon 8 - Chemal Tech Factory"
+  },
   "60010873": {
     "name": "Alentene V - Moon 4 - Duvolle Laboratories Factory"
   },
@@ -932,6 +953,9 @@
   "60013144": {
     "name": "Vouskiaho III - Genolution Biotech Production"
   },
+  "60013159": {
+    "name": "Sakht VI - Moon 7 - Genolution Biotech Production"
+  },
   "60013261": {
     "name": "6NJ8-V VI - Moon 6 - Guristas Production Shipyard"
   },
@@ -985,6 +1009,9 @@
   },
   "60014083": {
     "name": "Totkubad III - Thukker Mix Factory"
+  },
+  "60014182": {
+    "name": "FV-SE8 VIII - Moon 1 - True Creations Logistic Support"
   },
   "60014239": {
     "name": "ZH-KEV VI - Moon 6 - True Creations Storage Bay"
@@ -1108,6 +1135,9 @@
   },
   "60014698": {
     "name": "Harerget II - Moon 1 - Federal Navy Academy"
+  },
+  "60014707": {
+    "name": "Alparena V - Moon 4 - Federal Navy Academy"
   },
   "60014719": {
     "name": "Cistuvaert V - Moon 12 - Center for Advanced Studies School"
