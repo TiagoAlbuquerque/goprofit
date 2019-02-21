@@ -116,6 +116,9 @@
   "1028858195912": {
     "name": ""
   },
+  "1028878453064": {
+    "name": ""
+  },
   "1028954897526": {
     "name": ""
   },
@@ -129,6 +132,9 @@
     "name": ""
   },
   "1029053925600": {
+    "name": ""
+  },
+  "1029068969003": {
     "name": ""
   },
   "1029204055283": {
@@ -179,7 +185,16 @@
   "1029768968208": {
     "name": ""
   },
+  "1029792736908": {
+    "name": ""
+  },
   "1029813660536": {
+    "name": ""
+  },
+  "1029871813982": {
+    "name": ""
+  },
+  "1029898792553": {
     "name": ""
   },
   "60000046": {
@@ -341,6 +356,9 @@
   "60003871": {
     "name": "Nonni IV - Caldari Navy Assembly Plant"
   },
+  "60003886": {
+    "name": "Umokka X - Moon 4 - Caldari Navy Testing Facilities"
+  },
   "60003895": {
     "name": "Kakakela VI - Moon 15 - Caldari Navy Assembly Plant"
   },
@@ -361,6 +379,9 @@
   },
   "60004048": {
     "name": "Saisio VII - Moon 1 - Peace and Order Unit Testing Facilities"
+  },
+  "60004099": {
+    "name": "Ono VII - Moon 10 - Spacelane Patrol Testing Facilities"
   },
   "60004168": {
     "name": "Sankkasen II - Spacelane Patrol Assembly Plant"
@@ -419,6 +440,9 @@
   "60004753": {
     "name": "Emolgranlan VI - Republic Fleet Assembly Plant"
   },
+  "60004807": {
+    "name": "Gulfonodi X - Moon 13 - Republic Fleet Logistic Support"
+  },
   "60004813": {
     "name": "Teonusude III - Moon 1 - Republic Fleet Assembly Plant"
   },
@@ -436,6 +460,9 @@
   },
   "60005179": {
     "name": "Neesher VI - Moon 15 - Republic Security Services Assembly Plant"
+  },
+  "60005194": {
+    "name": "Bawilan V - Republic Security Services Assembly Plant"
   },
   "60005218": {
     "name": "Tourier VI - Moon 13 - Republic Security Services Assembly Plant"
@@ -982,6 +1009,9 @@
   },
   "60013333": {
     "name": "Stacmon VII - Moon 1 - Impro Factory"
+  },
+  "60013387": {
+    "name": "PC9-AY III - Intaki Commerce Trading Post"
   },
   "60013411": {
     "name": "IIRH-G VIII - Intaki Space Police Logistic Support"
