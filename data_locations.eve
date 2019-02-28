@@ -167,6 +167,9 @@
   "1029639612154": {
     "name": ""
   },
+  "1029649163839": {
+    "name": ""
+  },
   "1029660636680": {
     "name": ""
   },
@@ -701,6 +704,9 @@
   "60010300": {
     "name": "Alentene VI - Moon 6 - Roden Shipyards Warehouse"
   },
+  "60010303": {
+    "name": "Alenia V - Moon 4 - Roden Shipyards Factory"
+  },
   "60010483": {
     "name": "Stoure IX - Moon 1 - Poteque Pharmaceuticals Biotech Research Center"
   },
@@ -1054,6 +1060,9 @@
   },
   "60013981": {
     "name": "Badivefi VIII - Moon 10 - Royal Khanid Navy Logistic Support"
+  },
+  "60013990": {
+    "name": "Gehi IX - Moon 4 - Royal Khanid Navy Assembly Plant"
   },
   "60014059": {
     "name": "M-MD3B X - Moon 3 - Thukker Mix Factory"
