@@ -200,7 +200,13 @@
   "1029898792553": {
     "name": ""
   },
+  "1029924541301": {
+    "name": ""
+  },
   "1030166771736": {
+    "name": ""
+  },
+  "1030222911483": {
     "name": ""
   },
   "60000046": {
@@ -275,6 +281,9 @@
   "60002161": {
     "name": "Hakonen VII - Moon 7 - Ishukone Corporation Factory"
   },
+  "60002170": {
+    "name": "Vuorrassi V - Moon 6 - Ishukone Corporation Factory"
+  },
   "60002197": {
     "name": "Kuomi VIII - Moon 22 - Ishukone Corporation Factory"
   },
@@ -295,6 +304,9 @@
   },
   "60002371": {
     "name": "Aurohunen V - Moon 10 - Propel Dynamics Factory"
+  },
+  "60002476": {
+    "name": "Vittenyn IV - Moon 6 - Expert Distribution Warehouse"
   },
   "60002494": {
     "name": "Shesha I - Expert Distribution Retail Center"
@@ -770,6 +782,9 @@
   "60011578": {
     "name": "Egghelende V - Moon 13 - University of Caille"
   },
+  "60011659": {
+    "name": "Laic IX - Moon 2 - Federal Administration Archives"
+  },
   "60011725": {
     "name": "Adacyne IV - Moon 14 - Federal Administration Bureau Offices"
   },
@@ -805,6 +820,9 @@
   },
   "60012010": {
     "name": "Renyn IX - Federation Customs Assembly Plant"
+  },
+  "60012049": {
+    "name": "Basgerin V - Moon 1 - Federation Customs Testing Facilities"
   },
   "60012079": {
     "name": "Octanneve III - Moon 1 - Federation Customs Logistic Support"
