@@ -62,6 +62,9 @@
   "1025106775286": {
     "name": "F-NXLQ - Babylon 5-Bil"
   },
+  "1025236165897": {
+    "name": "Lossa - SU-901 Industry and Trade Hub"
+  },
   "1025249024932": {
     "name": "Sobaseki - - IChooseYou Market"
   },
@@ -107,6 +110,9 @@
   "1028339225240": {
     "name": ""
   },
+  "1028370750672": {
+    "name": ""
+  },
   "1028388598769": {
     "name": "Niyabainen - Free Market 0.0%, 1 Jump Jita"
   },
@@ -117,6 +123,9 @@
     "name": ""
   },
   "1028878453064": {
+    "name": ""
+  },
+  "1028940141567": {
     "name": ""
   },
   "1028954897526": {
@@ -464,11 +473,17 @@
   "60004753": {
     "name": "Emolgranlan VI - Republic Fleet Assembly Plant"
   },
+  "60004801": {
+    "name": "Gelfiven IX - Moon 17 - Republic Fleet Assembly Plant"
+  },
   "60004807": {
     "name": "Gulfonodi X - Moon 13 - Republic Fleet Logistic Support"
   },
   "60004813": {
     "name": "Teonusude III - Moon 1 - Republic Fleet Assembly Plant"
+  },
+  "60004873": {
+    "name": "Hegfunden IV - Moon 1 - Republic Fleet Assembly Plant"
   },
   "60004939": {
     "name": "Anbald X - Moon 12 - Republic Justice Department Accounting"
@@ -505,6 +520,9 @@
   },
   "60005740": {
     "name": "Isendeldik VIII - Moon 19 - Six Kin Development Warehouse"
+  },
+  "60005776": {
+    "name": "Uttindar V - Moon 9 - Freedom Extension Storage"
   },
   "60005956": {
     "name": "Boystin VI - Moon 11 - Freedom Extension Storage"
@@ -794,6 +812,9 @@
   "60011578": {
     "name": "Egghelende V - Moon 13 - University of Caille"
   },
+  "60011581": {
+    "name": "Eletta VIII - Moon 19 - University of Caille"
+  },
   "60011659": {
     "name": "Laic IX - Moon 2 - Federal Administration Archives"
   },
@@ -853,6 +874,9 @@
   },
   "60012163": {
     "name": "Faspera I - Ammatar Fleet Testing Facilities"
+  },
+  "60012181": {
+    "name": "Ishkad VIII - Ammatar Fleet Testing Facilities"
   },
   "60012184": {
     "name": "K-MGJ7 IV - Moon 11 - Archangels Testing Facilities"
@@ -952,6 +976,9 @@
   },
   "60012523": {
     "name": "Tennen VIII - Moon 4 - CONCORD Assembly Plant"
+  },
+  "60012550": {
+    "name": "Berta VI - Moon 19 - Ammatar Consulate Bureau"
   },
   "60012556": {
     "name": "6NJ8-V VII - Moon 2 - Guristas Logistic Support"

@@ -4,6 +4,6 @@
   "f_locations": "data_locations.eve",
   "f_regions": "data_regions.eve",
   "min_pm3": 100000,
-  "tax": 0.035,
+  "tax": 0.0225,
   "threads": 1
 }
