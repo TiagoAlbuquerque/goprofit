@@ -1,4 +1,7 @@
 {
+  "1021153079633": {
+    "name": "Jufvitte - Fort Glorty Market -Refine T1rig"
+  },
   "1021247952552": {
     "name": "Ahtulaima - qoou's Fortizar"
   },
@@ -140,6 +143,9 @@
   "1029009504396": {
     "name": ""
   },
+  "1029036975486": {
+    "name": ""
+  },
   "1029053925600": {
     "name": ""
   },
@@ -221,6 +227,9 @@
   "1030524644061": {
     "name": ""
   },
+  "1031229795425": {
+    "name": ""
+  },
   "60000046": {
     "name": "Vorsk IV - Moon 1 - CBD Corporation Storage"
   },
@@ -268,6 +277,12 @@
   },
   "60001621": {
     "name": "Tasti IX - Moon 10 - Perkone Factory"
+  },
+  "60001675": {
+    "name": "Anin IX - Moon 16 - Caldari Steel Factory"
+  },
+  "60001732": {
+    "name": "Iitanmadan VIII - Moon 1 - Caldari Steel Factory"
   },
   "60001738": {
     "name": "Otalieto VII - Moon 2 - Caldari Steel Warehouse"
@@ -331,6 +346,18 @@
   },
   "60002743": {
     "name": "Jakanerva II - Moon 1 - Sukuuvestaa Corporation Production Plant"
+  },
+  "60002746": {
+    "name": "Abagawa VII - Moon 14 - Sukuuvestaa Corporation Factory"
+  },
+  "60002770": {
+    "name": "Ikao VII - Moon 1 - Sukuuvestaa Corporation Production Plant"
+  },
+  "60002773": {
+    "name": "Kamio VI - Moon 7 - Sukuuvestaa Corporation Production Plant"
+  },
+  "60002803": {
+    "name": "Airkio II - Sukuuvestaa Corporation Factory"
   },
   "60002944": {
     "name": "Tartoken V - Moon 8 - Caldari Constructions Production Plant"
@@ -533,6 +560,9 @@
   "60006103": {
     "name": "Vashkah VI - Moon 2 - Amarr Constructions Warehouse"
   },
+  "60006199": {
+    "name": "Myyhera VIII - Moon 12 - Amarr Constructions Production Plant"
+  },
   "60006241": {
     "name": "Zororzih VII - Moon 12 - Carthum Conglomerate Factory"
   },
@@ -553,6 +583,9 @@
   },
   "60006529": {
     "name": "Thasinaz VII - Moon 12 - Imperial Armaments Warehouse"
+  },
+  "60006646": {
+    "name": "Danyana IV - Moon 1 - Zoar and Sons Factory"
   },
   "60006649": {
     "name": "Danyana III - Moon 4 - Zoar and Sons Factory"
@@ -580,6 +613,9 @@
   },
   "60006961": {
     "name": "Sagain V - Inherent Implants Biotech Production"
+  },
+  "60006970": {
+    "name": "Amdonen VIII - Moon 13 - Inherent Implants Biotech Production"
   },
   "60007015": {
     "name": "Amdonen VII - Moon 7 - Imperial Shipment Storage"
@@ -647,6 +683,12 @@
   "60007948": {
     "name": "Hophib XII - Ministry of War Archives"
   },
+  "60007951": {
+    "name": "Ned IV - Ministry of War Archives"
+  },
+  "60008041": {
+    "name": "Aghesi VI - Moon 10 - Ministry of Assessment Bureau Offices"
+  },
   "60008062": {
     "name": "Fabum III - Ministry of Assessment Archives"
   },
@@ -661,6 +703,9 @@
   },
   "60008374": {
     "name": "Bhizheba IX - Moon 1 - Amarr Navy Logistic Support"
+  },
+  "60008392": {
+    "name": "Diaderi VIII - Moon 4 - Amarr Navy Assembly Plant"
   },
   "60008422": {
     "name": "Mani VII - Moon 10 - Amarr Navy Assembly Plant"
@@ -691,6 +736,9 @@
   },
   "60008692": {
     "name": "Kor-Azor Prime II - Kor-Azor Family Bureau"
+  },
+  "60008761": {
+    "name": "Hilaban II - Moon 7 - Tash-Murkon Family Academy"
   },
   "60008764": {
     "name": "Tash-Murkon Prime V - Moon 1 - Tash-Murkon Family Bureau"
@@ -746,6 +794,9 @@
   "60010135": {
     "name": "Arton II - CreoDron Factory"
   },
+  "60010147": {
+    "name": "Hakeri XI - Moon 5 - CreoDron Factory"
+  },
   "60010222": {
     "name": "Jaschercis IV - Moon 2 - CreoDron Factory"
   },
@@ -764,8 +815,14 @@
   "60010693": {
     "name": "Yiratal VIII - Moon 4 - The Scope Publisher"
   },
+  "60010762": {
+    "name": "Vale VI - Moon 2 - Chemal Tech Research Center"
+  },
   "60010825": {
     "name": "4C-B7X V - Moon 7 - Chemal Tech Factory"
+  },
+  "60010828": {
+    "name": "D5IW-F VIII - Moon 2 - Chemal Tech Factory"
   },
   "60010840": {
     "name": "Gisleres V - Moon 8 - Chemal Tech Factory"
@@ -781,6 +838,9 @@
   },
   "60010915": {
     "name": "Maire IV - Moon 4 - Duvolle Laboratories Factory"
+  },
+  "60010918": {
+    "name": "Octanneve III - Duvolle Laboratories Factory"
   },
   "60010921": {
     "name": "Oerse VII - Moon 8 - Duvolle Laboratories Factory"
@@ -814,6 +874,9 @@
   },
   "60011581": {
     "name": "Eletta VIII - Moon 19 - University of Caille"
+  },
+  "60011587": {
+    "name": "Scolluzer VII - Moon 1 - University of Caille"
   },
   "60011659": {
     "name": "Laic IX - Moon 2 - Federal Administration Archives"
@@ -998,6 +1061,9 @@
   "60012571": {
     "name": "H-PA29 IV - Moon 2 - Guristas Assembly Plant"
   },
+  "60012574": {
+    "name": "P-VYVL VII - Moon 1 - Guristas Assembly Plant"
+  },
   "60012577": {
     "name": "PF-QHK VII - Moon 6 - Guristas Logistic Support"
   },
@@ -1034,8 +1100,47 @@
   "60012739": {
     "name": "Tar III - Secure Commerce Commission Depository"
   },
+  "60012742": {
+    "name": "H-ADOC VII - Moon 12 - Salvation Angels Warehouse"
+  },
+  "60012745": {
+    "name": "G-G78S VII - Salvation Angels Chemical Refinery"
+  },
+  "60012748": {
+    "name": "V-IUEL VII - Moon 15 - Salvation Angels Warehouse"
+  },
+  "60012751": {
+    "name": "5E-VR8 I - Moon 10 - Salvation Angels Chemical Refinery"
+  },
   "60012754": {
     "name": "XX9-WV VII - Moon 3 - Salvation Angels Trading Post"
+  },
+  "60012757": {
+    "name": "HLW-HP VI - Moon 10 - Salvation Angels Chemical Refinery"
+  },
+  "60012760": {
+    "name": "MDD-79 VIII - Moon 15 - Salvation Angels Warehouse"
+  },
+  "60012763": {
+    "name": "K-QWHE VI - Moon 10 - Salvation Angels Chemical Refinery"
+  },
+  "60012766": {
+    "name": "M-N7WD VIII - Moon 18 - Salvation Angels Trading Post"
+  },
+  "60012769": {
+    "name": "QFEW-K IV - Salvation Angels Chemical Refinery"
+  },
+  "60012772": {
+    "name": "LJ-YSW VI - Moon 14 - Salvation Angels Trading Post"
+  },
+  "60012775": {
+    "name": "CL-1JE V - Moon 15 - Salvation Angels Chemical Refinery"
+  },
+  "60012778": {
+    "name": "Litom III - Salvation Angels Trading Post"
+  },
+  "60012781": {
+    "name": "Doril V - Moon 1 - Salvation Angels Chemical Refinery"
   },
   "60012799": {
     "name": "OSY-UD IX - Moon 16 - Serpentis Corporation Chemical Storage"
@@ -1049,11 +1154,41 @@
   "60012868": {
     "name": "H-ADOC IV - Moon 1 - Guardian Angels Assembly Plant"
   },
+  "60012871": {
+    "name": "UW9B-F X - Guardian Angels Logistic Support"
+  },
+  "60012874": {
+    "name": "D87E-A VII - Moon 6 - Guardian Angels Assembly Plant"
+  },
+  "60012877": {
+    "name": "PO4F-3 V - Moon 6 - Guardian Angels Assembly Plant"
+  },
+  "60012880": {
+    "name": "HLW-HP VI - Moon 7 - Guardian Angels Assembly Plant"
+  },
+  "60012886": {
+    "name": "YKE4-3 III - Moon 1 - Guardian Angels Testing Facilities"
+  },
+  "60012889": {
+    "name": "CL-85V VI - Moon 8 - Guardian Angels Assembly Plant"
+  },
+  "60012892": {
+    "name": "QFEW-K VI - Moon 1 - Guardian Angels Assembly Plant"
+  },
+  "60012895": {
+    "name": "QFEW-K IV - Guardian Angels Assembly Plant"
+  },
   "60012898": {
     "name": "G-0Q86 VII - Moon 1 - Guardian Angels Assembly Plant"
   },
+  "60012901": {
+    "name": "J4UD-J VI - Moon 3 - Guardian Angels Testing Facilities"
+  },
   "60012904": {
     "name": "Litom XI - Moon 2 - Guardian Angels Assembly Plant"
+  },
+  "60012907": {
+    "name": "Hemin VII - Moon 15 - Guardian Angels Logistic Support"
   },
   "60012967": {
     "name": "Hostni VII - Moon 18 - DED Assembly Plant"
@@ -1067,8 +1202,29 @@
   "60012979": {
     "name": "Hilaban II - Moon 5 - DED Testing Facilities"
   },
+  "60013045": {
+    "name": "Obe VI - Moon 2 - DED Testing Facilities"
+  },
   "60013051": {
     "name": "G-G78S XI - Moon 3 - Dominations Assembly Plant"
+  },
+  "60013054": {
+    "name": "J7A-UR VI - Dominations Testing Facilities"
+  },
+  "60013057": {
+    "name": "XX9-WV VII - Moon 1 - Dominations Logistic Support"
+  },
+  "60013060": {
+    "name": "K-QWHE VII - Moon 8 - Dominations Assembly Plant"
+  },
+  "60013063": {
+    "name": "M-N7WD VIII - Moon 12 - Dominations Assembly Plant"
+  },
+  "60013066": {
+    "name": "LJ-YSW VII - Moon 11 - Dominations Logistic Support"
+  },
+  "60013069": {
+    "name": "Utopia VI - Moon 22 - Dominations Assembly Plant"
   },
   "60013144": {
     "name": "Vouskiaho III - Genolution Biotech Production"
@@ -1085,17 +1241,86 @@
   "60013333": {
     "name": "Stacmon VII - Moon 1 - Impro Factory"
   },
+  "60013360": {
+    "name": "FD-MLJ VII - Moon 2 - Intaki Bank Depository"
+  },
+  "60013369": {
+    "name": "TXW-EI I - Intaki Bank Depository"
+  },
+  "60013378": {
+    "name": "D85-VD VII - Intaki Bank Vault"
+  },
+  "60013381": {
+    "name": "F67E-Q VIII - Moon 2 - Intaki Commerce Trading Post"
+  },
+  "60013384": {
+    "name": "X-M2LR VI - Moon 8 - Intaki Commerce Warehouse"
+  },
   "60013387": {
     "name": "PC9-AY III - Intaki Commerce Trading Post"
+  },
+  "60013390": {
+    "name": "PC9-AY VIII - Moon 7 - Intaki Commerce Warehouse"
+  },
+  "60013393": {
+    "name": "DP34-U V - Moon 1 - Intaki Commerce Trading Post"
+  },
+  "60013396": {
+    "name": "MXYS-8 II - Intaki Commerce Warehouse"
+  },
+  "60013402": {
+    "name": "98Q-8O VII - Moon 16 - Intaki Commerce Trading Post"
+  },
+  "60013405": {
+    "name": "Poitot VI - Moon 17 - Intaki Space Police Assembly Plant"
+  },
+  "60013408": {
+    "name": "FD-MLJ VII - Moon 4 - Intaki Space Police Assembly Plant"
   },
   "60013411": {
     "name": "IIRH-G VIII - Intaki Space Police Logistic Support"
   },
+  "60013417": {
+    "name": "T22-QI VI - Moon 9 - Intaki Space Police Testing Facilities"
+  },
+  "60013420": {
+    "name": "ZN0-SR VI - Moon 4 - Intaki Space Police Assembly Plant"
+  },
   "60013423": {
     "name": "RLL-9R IX - Intaki Space Police Assembly Plant"
   },
+  "60013426": {
+    "name": "57-YRU IV - Moon 9 - Intaki Space Police Logistic Support"
+  },
   "60013429": {
     "name": "EF-F36 III - Moon 1 - Intaki Space Police Logistic Support"
+  },
+  "60013435": {
+    "name": "9GYL-O V - Moon 13 - Intaki Space Police Assembly Plant"
+  },
+  "60013438": {
+    "name": "VLGD-R V - Moon 3 - Intaki Space Police Logistic Support"
+  },
+  "60013441": {
+    "name": "V4-L0X IV - Moon 1 - Intaki Space Police Assembly Plant"
+  },
+  "60013444": {
+    "name": "1-NKVT X - Intaki Space Police Logistic Support"
+  },
+  "60013447": {
+    "name": "S-U8A4 V - Intaki Space Police Logistic Support"
+  },
+  "60013453": {
+    "name": "Y-W6GF VIII - Moon 17 - Intaki Space Police Logistic Support"
+  },
+  "60013456": {
+    "name": "KFR-ZE VII - Moon 6 - Intaki Space Police Assembly Plant"
+  },
+  "60013459": {
+    "name": "0LTQ-C V - Moon 18 - Intaki Space Police Assembly Plant"
+  },
+  "60013462": {
+    "name": "BMNV-P XI - Moon 11 - Intaki Space Police Assembly Plant"
   },
   "60013483": {
     "name": "RF-GGF V - Intaki Syndicate Academy"
@@ -1139,20 +1364,122 @@
   "60014083": {
     "name": "Totkubad III - Thukker Mix Factory"
   },
+  "60014113": {
+    "name": "Hodrold VII - Moon 8 - Thukker Mix Factory"
+  },
+  "60014149": {
+    "name": "37S-KO III - Moon 1 - True Creations Shipyard"
+  },
+  "60014155": {
+    "name": "37S-KO VI - Moon 14 - True Creations Assembly Plant"
+  },
+  "60014158": {
+    "name": "NZG-LF III - Moon 5 - True Creations Shipyard"
+  },
+  "60014161": {
+    "name": "NZG-LF III - Moon 11 - True Creations Shipyard"
+  },
+  "60014164": {
+    "name": "GDO-7H VI - Moon 1 - True Creations Assembly Plant"
+  },
+  "60014170": {
+    "name": "6Y-0TW II - Moon 5 - True Creations Shipyard"
+  },
+  "60014173": {
+    "name": "6Y-0TW II - Moon 16 - True Creations Assembly Plant"
+  },
+  "60014176": {
+    "name": "UF-KKH III - Moon 4 - True Creations Shipyard"
+  },
+  "60014179": {
+    "name": "O5Y3-W VII - Moon 3 - True Creations Shipyard"
+  },
   "60014182": {
     "name": "FV-SE8 VIII - Moon 1 - True Creations Logistic Support"
+  },
+  "60014185": {
+    "name": "42-UOW V - True Creations Shipyard"
+  },
+  "60014188": {
+    "name": "A4UG-O VII - Moon 16 - True Creations Shipyard"
+  },
+  "60014191": {
+    "name": "W-VXL9 IV - Moon 21 - True Creations Assembly Plant"
+  },
+  "60014194": {
+    "name": "XFBE-T I - Moon 5 - True Creations Shipyard"
+  },
+  "60014197": {
+    "name": "T-NNJZ V - Moon 2 - True Creations Storage Bay"
+  },
+  "60014200": {
+    "name": "0T-LIB V - Moon 6 - True Creations Testing Facilities"
+  },
+  "60014203": {
+    "name": "GU-54G VIII - Moon 1 - True Creations Shipyard"
+  },
+  "60014206": {
+    "name": "D9D-GD V - Moon 2 - True Creations Shipyard"
+  },
+  "60014209": {
+    "name": "GU-54G VIII - Moon 5 - True Creations Assembly Plant"
+  },
+  "60014212": {
+    "name": "Y-4U62 VIII - Moon 2 - True Creations Shipyard"
+  },
+  "60014215": {
+    "name": "Y-4U62 V - Moon 1 - True Creations Shipyard"
+  },
+  "60014218": {
+    "name": "RRWI-5 III - True Creations Logistic Support"
+  },
+  "60014221": {
+    "name": "9RQ-L8 VII - Moon 11 - True Creations Shipyard"
+  },
+  "60014224": {
+    "name": "TG-Z23 V - Moon 7 - True Creations Storage Bay"
+  },
+  "60014227": {
+    "name": "TG-Z23 II - Moon 4 - True Creations Logistic Support"
+  },
+  "60014230": {
+    "name": "HM-UVD VI - Moon 4 - True Creations Shipyard"
+  },
+  "60014233": {
+    "name": "HM-UVD VII - Moon 5 - True Creations Shipyard"
+  },
+  "60014236": {
+    "name": "G-ME2K VIII - Moon 14 - True Creations Testing Facilities"
   },
   "60014239": {
     "name": "ZH-KEV VI - Moon 6 - True Creations Storage Bay"
   },
+  "60014242": {
+    "name": "S-BWWQ III - Moon 4 - True Creations Storage Bay"
+  },
   "60014248": {
     "name": "5J-UEX IV - Moon 7 - True Creations Shipyard"
+  },
+  "60014251": {
+    "name": "1H4V-O II - Moon 1 - True Creations Shipyard"
+  },
+  "60014254": {
+    "name": "5J-UEX IV - Moon 1 - True Creations Assembly Plant"
+  },
+  "60014257": {
+    "name": "KP-FQ1 III - Moon 9 - True Creations Storage Bay"
+  },
+  "60014260": {
+    "name": "RLDS-R I - True Creations Shipyard"
   },
   "60014269": {
     "name": "4GQ-XQ IX - Moon 1 - True Creations Shipyard"
   },
   "60014272": {
     "name": "ZG8Q-N VII - Moon 6 - True Creations Testing Facilities"
+  },
+  "60014278": {
+    "name": "O-FTHE V - True Creations Storage Bay"
   },
   "60014281": {
     "name": "OOO-FS IV - Moon 10 - True Creations Logistic Support"
@@ -1274,6 +1601,12 @@
   "60014743": {
     "name": "Ardene VIII - Moon 11 - Center for Advanced Studies School"
   },
+  "60014746": {
+    "name": "Olide IV - Moon 4 - Center for Advanced Studies School"
+  },
+  "60014749": {
+    "name": "Ammold V - Republic Military School"
+  },
   "60014779": {
     "name": "Hulm VIII - Moon 2 - Republic University"
   },
@@ -1285,6 +1618,9 @@
   },
   "60014797": {
     "name": "Gultratren V - Moon 4 - Republic University"
+  },
+  "60014806": {
+    "name": "Nakugard V - Republic University"
   },
   "60014809": {
     "name": "Ryddinjorn VI - Moon 2 - Pator Tech School"
@@ -1364,6 +1700,9 @@
   "60015046": {
     "name": "Embod IV - Moon 10 - Pator Tech School"
   },
+  "60015049": {
+    "name": "Synchelle I - Federal Navy Academy"
+  },
   "60015050": {
     "name": "Irnal I - Imperial Academy"
   },
@@ -1375,6 +1714,9 @@
   },
   "60015108": {
     "name": "Villasen V - Lai Dai Protection Service Logistic Support"
+  },
+  "60015111": {
+    "name": "Kinakka III - Lai Dai Corporation Factory"
   },
   "60015117": {
     "name": "Samanuni XI - Caldari Navy Warehouse"
