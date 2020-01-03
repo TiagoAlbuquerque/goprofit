@@ -227,7 +227,13 @@
   "1030524644061": {
     "name": ""
   },
+  "1031157285868": {
+    "name": ""
+  },
   "1031229795425": {
+    "name": ""
+  },
+  "1031825519382": {
     "name": ""
   },
   "60000046": {
@@ -286,6 +292,12 @@
   },
   "60001738": {
     "name": "Otalieto VII - Moon 2 - Caldari Steel Warehouse"
+  },
+  "60001765": {
+    "name": "Isseras IV - Zainou Biotech Production"
+  },
+  "60001786": {
+    "name": "Wuos VI - Zainou Biotech Research Center"
   },
   "60001789": {
     "name": "Haatomo VII - Moon 7 - Zainou Biotech Production"
@@ -461,6 +473,9 @@
   "60004441": {
     "name": "Kulelen V - Moon 4 - School of Applied Knowledge"
   },
+  "60004450": {
+    "name": "Amsen VI - Moon 1 - Science and Trade Institute School"
+  },
   "60004456": {
     "name": "Sankkasen VII - Moon 6 - Science and Trade Institute School"
   },
@@ -538,6 +553,9 @@
   },
   "60005233": {
     "name": "Hagilur IV - Moon 2 - Minmatar Mining Corporation Mining Outpost"
+  },
+  "60005251": {
+    "name": "Moselgi XI - Minmatar Mining Corporation Refinery"
   },
   "60005686": {
     "name": "Hek VIII - Moon 12 - Boundless Creation Factory"
@@ -722,6 +740,9 @@
   "60008494": {
     "name": "Amarr VIII (Oris) - Emperor Family Academy"
   },
+  "60008524": {
+    "name": "Unkah VI - Moon 7 - Emperor Family Bureau"
+  },
   "60008527": {
     "name": "Mimen X - Emperor Family Bureau"
   },
@@ -730,6 +751,9 @@
   },
   "60008539": {
     "name": "Riavayed II - Emperor Family Bureau"
+  },
+  "60008557": {
+    "name": "Soumi I - Moon 1 - Emperor Family Bureau"
   },
   "60008674": {
     "name": "Sharhelund VIII - Moon 5 - Sarum Family Assembly Plant"
@@ -751,6 +775,9 @@
   },
   "60009019": {
     "name": "Hilmar VII - Moon 17 - Theology Council Tribunal"
+  },
+  "60009163": {
+    "name": "Jolevier VII - Moon 17 - TransStellar Shipping Storage"
   },
   "60009235": {
     "name": "Orduin VIII - Moon 12 - TransStellar Shipping Storage"
@@ -797,8 +824,23 @@
   "60010147": {
     "name": "Hakeri XI - Moon 5 - CreoDron Factory"
   },
+  "60010162": {
+    "name": "Atlulle VIII - Moon 6 - CreoDron Factory"
+  },
+  "60010180": {
+    "name": "Weld IV - Moon 4 - CreoDron Factory"
+  },
+  "60010183": {
+    "name": "Klingt IX - Moon 11 - CreoDron Factory"
+  },
+  "60010213": {
+    "name": "Noghere VIII - Moon 18 - CreoDron Warehouse"
+  },
   "60010222": {
     "name": "Jaschercis IV - Moon 2 - CreoDron Factory"
+  },
+  "60010264": {
+    "name": "Bapraya IV - Moon 1 - CreoDron Factory"
   },
   "60010291": {
     "name": "Onga VI - CreoDron Factory"
@@ -811,6 +853,9 @@
   },
   "60010483": {
     "name": "Stoure IX - Moon 1 - Poteque Pharmaceuticals Biotech Research Center"
+  },
+  "60010687": {
+    "name": "Heorah VI - Moon 14 - The Scope Publisher"
   },
   "60010693": {
     "name": "Yiratal VIII - Moon 4 - The Scope Publisher"
@@ -898,6 +943,9 @@
   },
   "60011893": {
     "name": "Stacmon V - Moon 9 - Federation Navy Assembly Plant"
+  },
+  "60011929": {
+    "name": "Aufay V - Moon 1 - Federal Intelligence Office Testing Facilities"
   },
   "60011950": {
     "name": "Boystin V - Moon 6 - Federal Intelligence Office Assembly Plant"
@@ -1009,6 +1057,9 @@
   },
   "60012286": {
     "name": "Hilfhurmur VIII - Moon 6 - CONCORD Logistic Support"
+  },
+  "60012295": {
+    "name": "Sooma X - CONCORD Academy"
   },
   "60012298": {
     "name": "Shamahi IX - Moon 12 - CONCORD Bureau"
@@ -1328,14 +1379,26 @@
   "60013495": {
     "name": "A-ZLHX XI - Moon 1 - Intaki Syndicate Bureau"
   },
+  "60013507": {
+    "name": "CIS-7X IX - Moon 6 - Intaki Syndicate Bureau"
+  },
   "60013510": {
     "name": "Y-W6GF IX - Moon 3 - Intaki Syndicate Bureau"
+  },
+  "60013513": {
+    "name": "KLYN-8 IV - Moon 21 - Intaki Syndicate Bureau"
   },
   "60013516": {
     "name": "KLYN-8 IV - Moon 14 - Intaki Syndicate Academy"
   },
+  "60013522": {
+    "name": "T22-QI VI - Moon 6 - Intaki Syndicate Academy"
+  },
   "60013540": {
     "name": "35-RK9 IX - Moon 4 - Intaki Syndicate Bureau"
+  },
+  "60013543": {
+    "name": "MXYS-8 IV - Moon 1 - Intaki Syndicate Treasury"
   },
   "60013546": {
     "name": "M2-CF1 X - Moon 3 - Intaki Syndicate Bureau"
@@ -1366,6 +1429,12 @@
   },
   "60014113": {
     "name": "Hodrold VII - Moon 8 - Thukker Mix Factory"
+  },
+  "60014122": {
+    "name": "31-MLU IX - Moon 1 - Thukker Mix Factory"
+  },
+  "60014137": {
+    "name": "Ibaria III - Thukker Mix Warehouse"
   },
   "60014149": {
     "name": "37S-KO III - Moon 1 - True Creations Shipyard"
@@ -1486,6 +1555,9 @@
   },
   "60014290": {
     "name": "WEQT-K I - Moon 12 - True Power Mineral Reserve"
+  },
+  "60014317": {
+    "name": "RV5-DW VII - Moon 2 - True Power Assembly Plant"
   },
   "60014326": {
     "name": "DSS-EZ IV - Moon 1 - True Power Refinery"
@@ -1708,6 +1780,9 @@
   },
   "60015051": {
     "name": "Marthia I - Royal Amarr Institute School"
+  },
+  "60015063": {
+    "name": "Tannakan VII - 24th Imperial Crusade Logistic Support"
   },
   "60015087": {
     "name": "Mercomesier III - Federal Defense Union Logistic Support"

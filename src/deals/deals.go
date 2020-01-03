@@ -60,7 +60,7 @@ func (d *Deal) amountCargo(cargo float64) int {
 }
 
 func tax() float64 {
-    return 1-0.01
+    return 1-0.0225
 }
 
 func (d *Deal) profitPerUnit() float64 {
