@@ -932,6 +932,9 @@
   "60011740": {
     "name": "Oursulaert III - Federation Navy Testing Facilities"
   },
+  "60011749": {
+    "name": "Luminaire VII (Caldari Prime) - Moon 6 - Federation Navy Assembly Plant"
+  },
   "60011791": {
     "name": "Ation IX - Moon 4 - Federation Navy Logistic Support"
   },
@@ -1423,6 +1426,9 @@
   },
   "60014059": {
     "name": "M-MD3B X - Moon 3 - Thukker Mix Factory"
+  },
+  "60014074": {
+    "name": "Futzchag II - Thukker Mix Factory"
   },
   "60014083": {
     "name": "Totkubad III - Thukker Mix Factory"
