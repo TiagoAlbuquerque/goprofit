@@ -2,7 +2,6 @@ package main
 
 import (
 	"./controller"
-
 	"fmt"
 	"os"
 	"os/signal"

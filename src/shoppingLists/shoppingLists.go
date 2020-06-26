@@ -1,6 +1,7 @@
 package shoppingLists
 
 import (
+    "../conf"
     "../deals"
     "../utils"
     "../locations"
@@ -60,7 +61,7 @@ func (s *shopList) reset() {
 func (s *shopList) Profit() float64 {
     if s.profit > 0.0 { return s.profit }
     it := s.deals.GetIterator()
-    cargo := 122.4
+    cargo := conf.Cargo()
     profit := 0.0
     strg := ""
     for it.Next() {

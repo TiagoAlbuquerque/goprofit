@@ -1,19 +1,20 @@
 package controller
 
 import (
+    "../conf"
     "../deals"
     "../items"
-    "../locations"
+    "../utils"
     "../orders"
     "../regions"
+    "../locations"
     "../shoppingLists"
-    "../utils"
+
     //    "../utils/avl"
 
-    "encoding/json"
     "fmt"
     "io/ioutil"
-
+    "encoding/json"
     "github.com/ti/nasync"
 )
 
@@ -105,7 +106,9 @@ func Terminate() {
     orders.Cleanup()
     shoppingLists.Cleanup()
 
+    conf.Terminate()
     items.Terminate()
     regions.Terminate()
     locations.Terminate()
+
 }

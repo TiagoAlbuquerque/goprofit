@@ -64,6 +64,7 @@ var saveToFileFlag bool = false
 var mutex sync.Mutex
 
 func getItemInfo(id int) Item {
+    println()
     println("new Item")
     url := fmt.Sprintf(itemUrl, id)
     println(url)
