@@ -11,7 +11,7 @@ import (
  //   "sort"
 )
 
-func GetUrl(url string) *http.Response {
+func GetURL(url string) *http.Response {
     var res *http.Response
     var err error
     for ok := false; !ok; {
@@ -26,7 +26,7 @@ func JsonFromUrl(url string, out interface{}){
     var body []byte
     var err error
     for ok := false; !ok; {
-        res := GetUrl(url)
+        res := GetURL(url)
         defer res.Body.Close()
         body, err = ioutil.ReadAll(res.Body)
         ok = (err == nil)
