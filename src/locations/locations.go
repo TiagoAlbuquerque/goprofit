@@ -23,8 +23,6 @@ var locations map[int64]location
 var saveToFileFlag = false
 
 func getLocationInfo(id int64) location {
-    println()
-    println("new Location")
     var url string
     var loc location
     println(id)
@@ -35,9 +33,11 @@ func getLocationInfo(id int64) location {
     } else {
         url = fmt.Sprintf(locationsURL, id)
     }
-    println(url)
     utils.JsonFromUrl(url, &loc)
     loc.Distances = map[int64]int{}
+    println()
+    println("new Location")
+    println(url)
     println(loc.Name)
     locations[id] = loc
     saveToFileFlag = true

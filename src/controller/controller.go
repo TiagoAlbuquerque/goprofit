@@ -44,7 +44,7 @@ func consumePages(cPages chan []orders.Order, cOK chan bool) {
 func getMarketPage(url string, cPages chan []orders.Order) {
     var mPage []orders.Order
     for ok := false; !ok; {
-        res := utils.GetUrl(url)
+        res := utils.GetURL(url)
         defer res.Body.Close()
         body, _ := ioutil.ReadAll(res.Body)
         json.Unmarshal(body, &mPage)
