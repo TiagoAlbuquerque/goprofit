@@ -82,7 +82,7 @@ func get_market_pages_count(id int, c chan bool){
     url := fmt.Sprintf(markets_url, id, 1)
     var pages []string
     for ok := false; !ok; {
-        res := utils.GetUrl(url)
+        res := utils.GetURL(url)
         defer res.Body.Close()
         pages, ok = res.Header["X-Pages"]
     }
