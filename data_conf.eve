@@ -1,8 +1,9 @@
 {
-  "cargo": 130,
+  "cargo": 124,
   "f_items": "data_items.eve",
   "f_locations": "data_locations.eve",
   "f_regions": "data_regions.eve",
+  "max_invest": 300000000.0,
   "min_pm3": 10000,
   "tax": 0.0225,
   "threads": 1

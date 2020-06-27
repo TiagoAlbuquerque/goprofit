@@ -6,6 +6,7 @@ import (
     "../utils"
     "../locations"
     "../utils/avl"
+    "../utils/color"
     "fmt"
     "sync"
 )
@@ -17,6 +18,7 @@ type shopList struct {
     deals *avl.Avl
     st string
     cargoUsed float64
+    investment float64
 }
 
 type dealAvlData struct {
@@ -36,7 +38,11 @@ type shopListAvlData struct {
 func (a shopListAvlData) Less (b *avl.Data) bool {
     c := (*b)
     d := c.(shopListAvlData)
-    return a.sl.Profit() < d.sl.Profit()
+    //return a.sl.profitPerJump() < d.sl.profitPerJump()
+    if a.sl.getProfit() == d.sl.getProfit() {
+        return a.sl.distance() > d.sl.distance()
+    }
+    return a.sl.getProfit() < d.sl.getProfit()
 }
 
 var shopLists_m map[int64]map[int64]*shopList
@@ -46,6 +52,10 @@ var mutex sync.Mutex
 func (s *shopList) add(d *deals.Deal) {
     ad := avl.Data(dealAvlData{d})
     s.deals.Put(&ad)
+}
+
+func (s *shopList) distance() int {
+    return locations.GetDistance(s.sellID, s.buyID)
 }
 
 func (s *shopList) key() (int64, int64) {
@@ -58,22 +68,28 @@ func (s *shopList) reset() {
     s.cargoUsed = 0.0
 }
 
-func (s *shopList) Profit() float64 {
+func (s *shopList) profitPerJump() float64 {
+    return s.getProfit()/float64(s.distance())
+}
+
+func (s *shopList) getProfit() float64 {
     if s.profit > 0.0 { return s.profit }
     it := s.deals.GetIterator()
     cargo := conf.Cargo()
-    profit := 0.0
+    isk := conf.MaxInvest()
+    sumProfit := 0.0
     strg := ""
     for it.Next() {
         adp := it.Value()
         deal := (*adp).(dealAvlData).deal
-        cargo, profit, strg = deal.Execute(cargo)
-        if profit > 0.0 {
+        cargo, isk, sumProfit, strg = deal.Execute(cargo, isk)
+        if sumProfit > 0.0 {
             s.st += strg
         }
-        s.profit += profit
+        s.profit += sumProfit
     }
-    s.cargoUsed = 122.4-cargo
+    s.cargoUsed = conf.Cargo() - cargo
+    s.investment = conf.MaxInvest() - isk
     it = s.deals.GetIterator()
     for it.Next() {
         adp := it.Value()
@@ -84,10 +100,13 @@ func (s *shopList) Profit() float64 {
 }
 
 func (s *shopList) String() string {
-    s.st = fmt.Sprintf("\nto:   %s", locations.Name(s.buyID))+s.st
-    s.st = fmt.Sprintf("\nfrom: %s", locations.Name(s.sellID))+s.st
+    s.st = fmt.Sprintf("\nfrom: %s", color.Fg(4, locations.Name(s.sellID)))+
+        fmt.Sprintf("\tto:   %s", color.Fg(4, locations.Name(s.buyID)))+
+        fmt.Sprintf("\t%d jumps", s.distance())+s.st
     s.st += fmt.Sprintf("\ntotal volume: %.2f", s.cargoUsed)
-    s.st = s.st + fmt.Sprintf("\ntotal profit: %s\n", utils.FormatCommas(s.profit))
+    s.st += fmt.Sprintf("\ninvestment: %s", color.Fg(1 ,utils.FormatCommas(s.investment)))
+    s.st += fmt.Sprintf("\ntotal profit: %s", color.Fg(2 ,utils.FormatCommas(s.profit)))
+    s.st += fmt.Sprintf("\nprofit per jump: %s", color.Fg(2 ,utils.FormatCommas(s.profitPerJump())))
     return s.st
 }
 
@@ -101,8 +120,7 @@ func getShopList(d *deals.Deal) *shopList {
         if !ok {
             shopLists_m[orig] = map[int64]*shopList{}
         }
-        sl = &shopList{d.SellLocID(), d.BuyLocID(), 0.0, avl.NewAvl(avl.REVERSED), "", 0.0}
-
+        sl = &shopList{d.SellLocID(), d.BuyLocID(), 0.0, avl.NewAvl(avl.REVERSED), "", 0.0, 0.0}
         shopLists_m[orig][dest] = sl
     }
     return sl
@@ -118,35 +136,29 @@ func ConsumeDeals(cDeals chan *deals.Deal, cOK chan bool) {
 
 func PrintTop(n int) {
     fmt.Println("LISTAS")
-    shopLists_t := avl.NewAvl(avl.REVERSED)
+    shopListsTree := avl.NewAvl(avl.REVERSED)
     cOK := make(chan bool)
     defer close(cOK)
 
     go utils.ProgressBar(len(shopLists_m), cOK)
-//    var top *shopList
-  //  topProfit := 0.0
     for _, im := range shopLists_m {
         for _, lp := range im {
-    //        if lp.Profit() > topProfit {
-      //          top = lp
-        //        topProfit = lp.Profit()
-          //  }
             ad := avl.Data(shopListAvlData{lp})
-            shopLists_t.Put(&ad)
+            shopListsTree.Put(&ad)
         }
         cOK <- true
     }
-  //  fmt.Println(top)
-    it := shopLists_t.GetIterator()
+    it := shopListsTree.GetIterator()
     for it.Next() {
         slp := it.Value()
         sl := (*slp).(shopListAvlData).sl
 
         fmt.Println(sl)
 
-        n -=1
+        n--
         if n == 0 { break }
     }//*/
+    println()
 }
 
 func Cleanup() {

@@ -9,7 +9,8 @@ import (
     "../regions"
     "../locations"
     "../shoppingLists"
-
+    "../utils/color"
+ 
     //    "../utils/avl"
 
     "fmt"
@@ -20,7 +21,7 @@ import (
 
 func placeOrders(ordersL []orders.Order, cOK chan bool) {
 
-    utils.StatusIndicator("Processing market page")
+    utils.StatusIndicator(color.Fg(3, "Processing market page"))
 
     cDeals := make(chan *deals.Deal)
     defer close(cDeals)
@@ -36,7 +37,7 @@ func placeOrders(ordersL []orders.Order, cOK chan bool) {
 func consumePages(cPages chan []orders.Order, cOK chan bool) {
     for  page := range cPages {
         placeOrders(page, cOK)
-        utils.StatusIndicator("Waiting page download")
+        utils.StatusIndicator(color.Fg(8, "Waiting page download"))
     }
 }
 
@@ -63,7 +64,7 @@ func consumeMarketPages(cURL chan string, cPages chan []orders.Order) {
 func getMarketPages(lURL []string, cPages chan []orders.Order) {
     cURL := make(chan string)
     defer close(cURL)
-    for i := 0; i < 210; i+=1 {
+    for i := 0; i < 210; i++ {
         go consumeMarketPages(cURL, cPages)
     }
     for _, url := range lURL {

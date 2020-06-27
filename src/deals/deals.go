@@ -1,6 +1,7 @@
 package deals
 
 import (
+    "../conf"
     "../items"
     "../orders"
 //    "../utils/avl"
@@ -20,11 +21,11 @@ func (d *Deal) Key() (int64, int64) {
 }
 
 func (d *Deal) SellLocID() int64{
-    return orders.Get(d.sellOrder).LocationID
+    return int64(orders.Get(d.sellOrder).SystemID)
 }
 
 func (d *Deal) BuyLocID() int64{
-    return orders.Get(d.buyOrder).LocationID
+    return int64(orders.Get(d.buyOrder).SystemID)
 }
 
 func (d *Deal) Pm3() float64 {
@@ -36,12 +37,16 @@ func (d *Deal) Pm3() float64 {
     return out
 }
 
-func min(a, b int) int {
-    if a < b { return a }
-    return b
+func min(nums ...int) int {
+    out := math.Inf(1)
+    for _, val := range nums{
+        out = math.Min(float64(out), float64(val))
+    }
+    return int(out)
 }
 
-func (d *Deal) amount() int {
+//amount that is available compose in buy/sell order
+func (d *Deal) amountAvailable() int {
     bo := orders.Get(d.buyOrder)
     so := orders.Get(d.sellOrder)
 
@@ -52,15 +57,20 @@ func (d *Deal) amount() int {
     return out
 }
 
+//amount that can be bought
+func (d *Deal) amountBuy(iskAvail float64) int {
+    sop := orders.Get(d.sellOrder).Price // sell order price
+    return int(math.Floor(iskAvail/sop))
+}
+
+//amount that can fit in cargo
 func (d *Deal) amountCargo(cargo float64) int {
-    out := d.amount()
-    itm := items.Get(d.item)
-    out = min(out, int(math.Floor(cargo/itm.Volume)))
-    return out
+    itmVol := items.Get(d.item).Volume
+    return int(math.Floor(cargo/itmVol))
 }
 
 func tax() float64 {
-    return 1-0.0225
+    return 1.0-conf.Tax()
 }
 
 func (d *Deal) profitPerUnit() float64 {
@@ -77,7 +87,7 @@ func (d *Deal) profitQnt(qnt int) float64 {
     return out
 }
 
-func (d *Deal) Execute(cargo float64) (float64, float64, string) {
+func (d *Deal) Execute(cargo float64, isk float64) (float64, float64, float64, string) {
     itm := items.Get(d.item)
     bo := orders.Get(d.buyOrder)
     so := orders.Get(d.sellOrder)
@@ -85,13 +95,15 @@ func (d *Deal) Execute(cargo float64) (float64, float64, string) {
     itmVol := itm.Volume
     itmName := itm.Name
 
-    qnt := d.amountCargo(cargo)
+    qnt := min(d.amountAvailable(), d.amountCargo(cargo), d.amountBuy(isk))
 
     bo.Execute(qnt)
     so.Execute(qnt)
 
     vol := float64(qnt)*itmVol
     cargo -= vol
+    cost := float64(qnt)*so.Price
+    isk -= cost
 
     bFor := so.Price
     sFor := bo.Price
@@ -104,7 +116,7 @@ func (d *Deal) Execute(cargo float64) (float64, float64, string) {
                         sFor,
                         profit)
 
-    return cargo, profit, strg
+    return cargo,isk, profit, strg
 }
 
 func (d *Deal) Reset() {
@@ -130,7 +142,7 @@ func makeDeal(itmID int, boID int64, soID int64, cDeals chan *Deal) bool {
 func computeBuyOrder(bOrder orders.Order, cDeals chan *Deal) {
     itm := items.Get(bOrder.ItemID)
 
-    for _, sOrder := range itm.Sell_orders {
+    for _, sOrder := range itm.SellOrders {
         makeDeal(itm.ItemID, bOrder.OrderID, sOrder, cDeals)
     }
 }
@@ -138,7 +150,7 @@ func computeBuyOrder(bOrder orders.Order, cDeals chan *Deal) {
 func computeSellOrder(sOrder orders.Order, cDeals chan *Deal) {
     itm := items.Get(sOrder.ItemID)
 
-    for _, bOrder := range itm.Buy_orders {
+    for _, bOrder := range itm.BuyOrders {
         makeDeal(itm.ItemID, bOrder, sOrder.OrderID, cDeals)
     }
 }

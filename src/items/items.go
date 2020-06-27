@@ -39,11 +39,11 @@ type Item struct {
     ItemID int `json:"type_id"`
     Volume float64 `json:"volume"`
 
-    //Buy_orders *avl.Avl
-    //Sell_orders *avl.Avl
+    //BuyOrders *avl.Avl
+    //SellOrders *avl.Avl
 
-    Buy_orders map[int64]int64
-    Sell_orders map[int64]int64
+    BuyOrders map[int64]int64
+    SellOrders map[int64]int64
 }
 
 type OrderAvlData struct {
@@ -56,8 +56,8 @@ func (a OrderAvlData) Less (b *avl.Data) bool{
     return a.Order.Price < d.Order.Price
 }
 
-const itemUrl = "https://esi.evetech.net/latest/universe/types/%d"
-const f_name = "data_items.eve"
+const itemURL = "https://esi.evetech.net/latest/universe/types/%d"
+const fileName = "data_items.eve"
 
 var items map[int]Item
 var saveToFileFlag bool = false
@@ -66,26 +66,26 @@ var mutex sync.Mutex
 func getItemInfo(id int) Item {
     println()
     println("new Item")
-    url := fmt.Sprintf(itemUrl, id)
+    url := fmt.Sprintf(itemURL, id)
     println(url)
     var item Item
     utils.JsonFromUrl(url, &item)
-    fmt.Println(item.Name)
-//    item.Buy_orders = avl.NewAvl(avl.REVERSED)
-//    item.Sell_orders = avl.NewAvl(avl.DIRECT)
-    item.Buy_orders = make(map[int64]int64)
-    item.Sell_orders = make(map[int64]int64)
+    println(item.Name)
+//    item.BuyOrder = avl.NewAvl(avl.REVERSED)
+//    item.SellOrders = avl.NewAvl(avl.DIRECT)
+    item.BuyOrders = make(map[int64]int64)
+    item.SellOrders = make(map[int64]int64)
     items[id] = item
     saveToFileFlag = true
     return item
 }
 
-func Get(itemId int) Item{
+func Get(itemID int) Item{
     mutex.Lock()
     defer mutex.Unlock()
-    item, ok := items[itemId]
+    item, ok := items[itemID]
     if !ok {
-        item = getItemInfo(itemId)
+        item = getItemInfo(itemID)
     }
     return item
 }
@@ -98,9 +98,9 @@ func Set(item Item) {
 
 func (item *Item) place(o orders.Order) {
     if o.IsBuyOrder {
-        item.Buy_orders[o.OrderID] = o.OrderID
+        item.BuyOrders[o.OrderID] = o.OrderID
     } else {
-        item.Sell_orders[o.OrderID] = o.OrderID
+        item.SellOrders[o.OrderID] = o.OrderID
     }
 }
 
@@ -120,21 +120,21 @@ func PlaceOrder(o orders.Order) {
 
 func Cleanup(){
     for _, item := range items {
-        //item.Buy_orders = avl.NewAvl(avl.REVERSED)
-        //item.Sell_orders = avl.NewAvl(avl.DIRECT)
-        item.Buy_orders = make(map[int64]int64)
-        item.Sell_orders = make(map[int64]int64)
+        //item.BuyOrders = avl.NewAvl(avl.REVERSED)
+        //item.SellOrders = avl.NewAvl(avl.DIRECT)
+        item.BuyOrders = make(map[int64]int64)
+        item.SellOrders = make(map[int64]int64)
         Set(item)
     }
 }
 
 func init(){
     mutex = sync.Mutex{}
-    raw, err := ioutil.ReadFile(f_name)
+    raw, err := ioutil.ReadFile(fileName)
     if err == nil {
         json.Unmarshal(raw, &items)
     } else {
-        fmt.Printf("Failed to open %s\n", f_name)
+        fmt.Printf("Failed to open %s\n", fileName)
         items = make(map[int]Item)
     }
 
@@ -144,6 +144,6 @@ func init(){
 func Terminate() {
     if !saveToFileFlag { return }
 
-    utils.Save(f_name, items)
+    utils.Save(fileName, items)
     saveToFileFlag = false
 }

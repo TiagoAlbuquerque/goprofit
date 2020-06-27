@@ -2,6 +2,7 @@ package locations
 
 import (
     "fmt"
+    "math"
     "io/ioutil"
     "encoding/json"
 
@@ -10,40 +11,43 @@ import (
 
 type location struct{
     Name string `json:"name"`
+    Distances map[int64]int `json:"distances"`
 }
 
 const fName = "data_locations.eve"
 const locationsURL = "https://esi.evetech.net/latest/universe/stations/%d"
-const structuresURL = "https://stop.hammerti.me.uk/api/citadel/%d"
+const structuresURL = "https://esi.evetech.net/latest/universe/systems/%d"
+const systemsURL = "https://esi.evetech.net/latest/universe/systems/%d"
 
 var locations map[int64]location
 var saveToFileFlag = false
 
 func getLocationInfo(id int64) location {
+    println()
     println("new Location")
     var url string
     var loc location
-    if id > 99999999 {
+    println(id)
+    if id < 60000000 { 
+        url = fmt.Sprintf(systemsURL, id)
+    } else if id > 99999999 {
         url = fmt.Sprintf(structuresURL, id)
-        mloc := map[int64]location{}
-        println(url)
-        utils.JsonFromUrl(url, &mloc)
-        loc = mloc[id]
     } else {
         url = fmt.Sprintf(locationsURL, id)
-        println(url)
-        utils.JsonFromUrl(url, &loc)
     }
-    fmt.Println(loc.Name)
+    println(url)
+    utils.JsonFromUrl(url, &loc)
+    loc.Distances = map[int64]int{}
+    println(loc.Name)
     locations[id] = loc
     saveToFileFlag = true
     return loc
 }
 
-func getLocation(locId int64) *location{
-    loc, ok := locations[locId]
+func getLocation(locID int64) *location{
+    loc, ok := locations[locID]
     if !ok {
-        loc = getLocationInfo(locId)
+        loc = getLocationInfo(locID)
     }
     return &loc
 }
@@ -56,6 +60,23 @@ func init() {
         fmt.Printf("Failed to open %s\n", fName)
         locations = make(map[int64]location)
     }
+}
+
+func GetDistance(id1, id2 int64) int {
+    a := int64(math.Min(float64(id1), float64(id2)))
+    b := int64(math.Max(float64(id1), float64(id2)))
+    loc := getLocation(a)
+    dist, ok := loc.Distances[b]
+    if !ok {
+        var route []int
+        url := fmt.Sprintf("https://esi.evetech.net/latest/route/%d/%d/", a, b)
+        //println(url)
+        utils.JsonFromUrl(url, &route)        
+        loc.Distances[b] = len(route)
+        saveToFileFlag = true
+    }
+    dist, ok = loc.Distances[b]
+    return dist
 }
 
 func Name(id int64) string{
