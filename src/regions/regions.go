@@ -18,9 +18,9 @@ import (
 //    "math"
         )
 
-const regions_url = "https://esi.evetech.net/latest/universe/regions/"
-const markets_url = "https://esi.evetech.net/latest/markets/%d/orders/?order_type=all&page=%d"
-const f_name = "data_regions.eve"
+const regionsURL = "https://esi.evetech.net/latest/universe/regions/"
+const marketsURL = "https://esi.evetech.net/latest/markets/%d/orders/?order_type=all&page=%d"
+const fName = "data_regions.eve"
 
 type Region struct {
     Constellations []int `json:"constellations"`
@@ -36,14 +36,14 @@ var regions map[int]Region
 
 var saveToFileFlag bool = false
 
-func get_regions_list() []int {
+func getRegionsList() []int {
     var out []int
-    utils.JsonFromUrl(regions_url, &out)
+    utils.JsonFromUrl(regionsURL, &out)
     return out
 }
 
-func get_region_info(id int, c chan bool) {
-    url := fmt.Sprint(regions_url, id)
+func getRegionInfo(id int, c chan bool) {
+    url := fmt.Sprint(regionsURL, id)
     var region Region
     utils.JsonFromUrl(url, &region)
     region.Marked = true
@@ -52,15 +52,15 @@ func get_region_info(id int, c chan bool) {
     c <- true
 }
 
-func get_regions_info(){
+func getRegionsInfo(){
     fmt.Println("Getting regions info")
-    list := get_regions_list()
+    list := getRegionsList()
     c := make(chan bool)
     total := len(list)
     async := nasync.New(100, 100)
     defer async.Close()
     for i := 0; i < total; i++ {
-        async.Do(get_region_info, list[i], c)
+        async.Do(getRegionInfo, list[i], c)
     }
     utils.ProgressBar(total, c)
 }
@@ -70,7 +70,7 @@ func GetMarketsPagesList() []string {
     for id, reg := range regions {
         if reg.Marked {
             for i:=1; i < reg.pages+1; i++ {
-                url := fmt.Sprintf(markets_url, id, i)
+                url := fmt.Sprintf(marketsURL, id, i)
                 out = append(out, url)
             }
         }
@@ -78,8 +78,8 @@ func GetMarketsPagesList() []string {
     return out
 }
 
-func get_market_pages_count(id int, c chan bool){
-    url := fmt.Sprintf(markets_url, id, 1)
+func getMarketPagesCount(id int, c chan bool){
+    url := fmt.Sprintf(marketsURL, id, 1)
     var pages []string
     for ok := false; !ok; {
         res := utils.GetURL(url)
@@ -92,7 +92,7 @@ func get_market_pages_count(id int, c chan bool){
     c <- true
 }
 
-func update_markets_pages_count(){
+func updateMarketsPagesCount(){
     fmt.Println("Updating markets pages count")
     c := make(chan bool)
     total := 0
@@ -101,7 +101,7 @@ func update_markets_pages_count(){
     for id, reg := range regions {
         if reg.Marked {
             total++
-            async.Do(get_market_pages_count, id, c)
+            async.Do(getMarketPagesCount, id, c)
         }
     }
     utils.ProgressBar(total, c)
@@ -137,20 +137,20 @@ func GetMarketsPages(){
 */
 
 func init(){
-    raw, err := ioutil.ReadFile(f_name)
+    raw, err := ioutil.ReadFile(fName)
     if err == nil {
         json.Unmarshal(raw, &regions)
     } else {
-        fmt.Printf("Failed to open %s\n", f_name)
+        fmt.Printf("Failed to open %s\n", fName)
         regions = make(map[int]Region)
-        get_regions_info()
+        getRegionsInfo()
     }
 
-    update_markets_pages_count()
+    updateMarketsPagesCount()
 }
 
 func Terminate(){
     if !saveToFileFlag { return }
-    utils.Save(f_name, regions)
+    utils.Save(fName, regions)
     saveToFileFlag = false
 }

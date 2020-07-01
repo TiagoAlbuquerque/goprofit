@@ -16,8 +16,8 @@ type Deal struct{
 
 var deals []Deal
 
-func (d *Deal) Key() (int64, int64) {
-    return orders.Get(d.sellOrder).LocationID, orders.Get(d.buyOrder).LocationID
+func (d *Deal) Key() int64 {
+    return (orders.Get(d.sellOrder).SystemID*10000000000) + orders.Get(d.buyOrder).SystemID
 }
 
 func (d *Deal) SellLocID() int64{
@@ -52,13 +52,11 @@ func (d *Deal) amountAvailable() int {
 
     out := min(bo.OrderRemain(), so.OrderRemain())
 
-    if bo.MinVolume > 1 { out = 0 }
-
     return out
 }
 
 //amount that can be bought
-func (d *Deal) amountBuy(iskAvail float64) int {
+func (d *Deal) amountIsk(iskAvail float64) int {
     sop := orders.Get(d.sellOrder).Price // sell order price
     return int(math.Floor(iskAvail/sop))
 }
@@ -87,7 +85,12 @@ func (d *Deal) profitQnt(qnt int) float64 {
     return out
 }
 
-func (d *Deal) Execute(cargo float64, isk float64) (float64, float64, float64, string) {
+
+func (d *Deal) getQuantity(cargo, isk float64) int {
+    return min(d.amountAvailable(), d.amountCargo(cargo), d.amountIsk(isk))
+}
+
+func (d *Deal) Execute(cargo, isk float64) (float64, float64, float64, string) {
     itm := items.Get(d.item)
     bo := orders.Get(d.buyOrder)
     so := orders.Get(d.sellOrder)
@@ -95,8 +98,7 @@ func (d *Deal) Execute(cargo float64, isk float64) (float64, float64, float64, s
     itmVol := itm.Volume
     itmName := itm.Name
 
-    qnt := min(d.amountAvailable(), d.amountCargo(cargo), d.amountBuy(isk))
-
+    qnt := d.getQuantity(cargo, isk)
     bo.Execute(qnt)
     so.Execute(qnt)
 
@@ -129,9 +131,20 @@ func (d *Deal) Reset() {
     orders.Set(so)
 }
 
+func (d *Deal) valid() bool {
+    bo := orders.Get(d.buyOrder)
+
+    if d.profitPerUnit() <= 0.0 ||
+    d.Pm3() < conf.Minpm3() ||
+    bo.MinVolume > 1 {
+        return false
+    }
+    return true
+}
+
 func makeDeal(itmID int, boID int64, soID int64, cDeals chan *Deal) bool {
     d := Deal{itmID, boID, soID}
-    if d.profitPerUnit() > 0.0 && d.Pm3() > 100000{
+    if d.valid() {
         deals = append(deals, d)
         cDeals <- &d
         return true

@@ -25,7 +25,6 @@ var saveToFileFlag = false
 func getLocationInfo(id int64) location {
     var url string
     var loc location
-    println(id)
     if id < 60000000 { 
         url = fmt.Sprintf(systemsURL, id)
     } else if id > 99999999 {
@@ -62,24 +61,33 @@ func init() {
     }
 }
 
+//GetDistance will return the number of jumps on a route from id1 to id2
 func GetDistance(id1, id2 int64) int {
     a := int64(math.Min(float64(id1), float64(id2)))
     b := int64(math.Max(float64(id1), float64(id2)))
     loc := getLocation(a)
     dist, ok := loc.Distances[b]
+    if loc.Distances[b] == 0 {
+        loc.Distances[b] = 1
+    }
     if !ok {
         var route []int
         url := fmt.Sprintf("https://esi.evetech.net/latest/route/%d/%d/", a, b)
-        //println(url)
+        utils.StatusIndicator(url)
         utils.JsonFromUrl(url, &route)        
         loc.Distances[b] = len(route)
+        if loc.Distances[b] == 0 {
+            loc.Distances[b] = 1
+        }
         saveToFileFlag = true
     }
     dist, ok = loc.Distances[b]
+    
     return dist
 }
 
-func Name(id int64) string{
+//GetName will return the name of the system for a defined id
+func GetName(id int64) string{
     loc := getLocation(id)
     return loc.Name
 }
