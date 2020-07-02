@@ -1,9 +1,7 @@
 package color
 
-import (
-)
 var colors = [...]string{
-	"\033[0m", //reset 0
+	"\033[0m",  //reset 0
 	"\033[31m", //red 1
 	"\033[32m", //green 2
 	"\033[33m", //yellow 3
@@ -15,6 +13,8 @@ var colors = [...]string{
 
 //Fg will format the string foreground (text) to output in the specified color
 func Fg(color int, txt string) string {
-	if color>= len(colors) { return txt }
-	return colors[color]+txt+colors[0]
+	if color >= len(colors) {
+		return txt
+	}
+	return colors[color] + txt + colors[0]
 }

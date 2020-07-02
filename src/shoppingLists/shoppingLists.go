@@ -149,11 +149,9 @@ func ConsumeDeals(cDeals chan *deals.Deal, cOK chan bool) {
 func PrintTop(n int) {
 	fmt.Println("LISTAS")
 
-	//go utils.ProgressBar(lists.Len(), cSorting)
 	start := time.Now()
 	utils.Top(lists)
 	utils.StatusLine("sorted in: " + fmt.Sprint(time.Now().Sub(start)))
-	println()
 
 	for i := 0; i < n; i++ {
 		fmt.Println(lists[i])

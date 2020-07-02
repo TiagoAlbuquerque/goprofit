@@ -9,7 +9,6 @@ import (
 	"strings"
 
 	"gopkg.in/cheggaaa/pb.v1"
-	//   "sort"
 )
 
 func GetURL(url string) *http.Response {
