@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+//Order mimics the structure of EVE Online ESI market OrdersMap
 type Order struct {
 	Duration     int       `json:"duration"`
 	IsBuyOrder   bool      `json:"is_buy_order"`
@@ -21,24 +22,28 @@ type Order struct {
 	Executed     int
 }
 
-var orders map[int64]Order
+var orders map[int64]*Order
 var mutex sync.Mutex
 
+//OrderRemain will return how much of the order is still available to be executed
 func (o *Order) OrderRemain() int {
 	return o.VolumeRemain - o.Executed
 }
 
+//Execute will fill up the order on qnt amount
 func (o *Order) Execute(qnt int) {
 	o.Executed += qnt
-	Set(*o)
+	//Set(*o)
 }
 
+//Reset will reset the order to an unexecuted state
 func (o *Order) Reset() {
 	o.Executed = 0
-	Set(*o)
+	//Set(*o)
 }
 
-func Get(oID int64) Order {
+//Get will return the market order to an specific ID
+func Get(oID int64) *Order {
 	mutex.Lock()
 	defer mutex.Unlock()
 	out := orders[oID]
@@ -48,11 +53,12 @@ func Get(oID int64) Order {
 func Set(o Order) {
 	mutex.Lock()
 	defer mutex.Unlock()
-	orders[o.OrderID] = o
+	orders[o.OrderID] = &o
 }
 
+//Cleanup will empty down the OrdersMap list
 func Cleanup() {
-	orders = make(map[int64]Order)
+	orders = make(map[int64]*Order)
 }
 
 func init() {

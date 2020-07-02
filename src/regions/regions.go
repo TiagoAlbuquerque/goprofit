@@ -21,7 +21,7 @@ const regionsURL = "https://esi.evetech.net/latest/universe/regions/"
 const marketsURL = "https://esi.evetech.net/latest/markets/%d/orders/?order_type=all&page=%d"
 const fName = "data_regions.eve"
 
-type Region struct {
+type region struct {
 	Constellations []int  `json:"constellations"`
 	Description    string `json:"description"`
 	Name           string `json:"name"`
@@ -32,7 +32,7 @@ type Region struct {
 
 //type mOrder order.Order
 
-var regions map[int]Region
+var regions map[int]region
 
 var saveToFileFlag bool = false
 
@@ -44,10 +44,10 @@ func getRegionsList() []int {
 
 func getRegionInfo(id int, c chan bool) {
 	url := fmt.Sprint(regionsURL, id)
-	var region Region
-	utils.JsonFromUrl(url, &region)
-	region.Marked = true
-	regions[id] = region
+	var reg region
+	utils.JsonFromUrl(url, &reg)
+	reg.Marked = true
+	regions[id] = reg
 	saveToFileFlag = true
 	c <- true
 }
@@ -65,6 +65,7 @@ func getRegionsInfo() {
 	utils.ProgressBar(total, c)
 }
 
+//GetMarketsPagesList will produce a list of URLs for market pages
 func GetMarketsPagesList() []string {
 	var out []string
 	for id, reg := range regions {
@@ -113,13 +114,14 @@ func init() {
 		json.Unmarshal(raw, &regions)
 	} else {
 		fmt.Printf("Failed to open %s\n", fName)
-		regions = make(map[int]Region)
+		regions = make(map[int]region)
 		getRegionsInfo()
 	}
 
 	updateMarketsPagesCount()
 }
 
+//Terminate will save modifications to the regions to its configuration file
 func Terminate() {
 	if !saveToFileFlag {
 		return

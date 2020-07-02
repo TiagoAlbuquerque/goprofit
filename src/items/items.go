@@ -1,13 +1,13 @@
 package items
 
 import (
-	"../orders"
 	"../utils"
-	"../utils/avl"
 
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+
+	"../orders"
 
 	//    "os"
 	//    "container/list"
@@ -39,31 +39,18 @@ type Item struct {
 	ItemID         int     `json:"type_id"`
 	Volume         float64 `json:"volume"`
 
-	//BuyOrders *avl.Avl
-	//SellOrders *avl.Avl
-
-	BuyOrders  map[int64]int64
-	SellOrders map[int64]int64
-}
-
-type OrderAvlData struct {
-	Order *orders.Order
-}
-
-func (a OrderAvlData) Less(b *avl.Data) bool {
-	c := (*b)
-	d := c.(OrderAvlData)
-	return a.Order.Price < d.Order.Price
+	BuyOrders  []int64
+	SellOrders []int64
 }
 
 const itemURL = "https://esi.evetech.net/latest/universe/types/%d"
 const fileName = "data_items.eve"
 
-var items map[int]Item
+var items map[int]*Item
 var saveToFileFlag bool = false
 var mutex sync.Mutex
 
-func getItemInfo(id int) Item {
+func getItemInfo(id int) *Item {
 	println()
 	println("new Item")
 	url := fmt.Sprintf(itemURL, id)
@@ -71,16 +58,14 @@ func getItemInfo(id int) Item {
 	var item Item
 	utils.JsonFromUrl(url, &item)
 	println(item.Name)
-	//    item.BuyOrder = avl.NewAvl(avl.REVERSED)
-	//    item.SellOrders = avl.NewAvl(avl.DIRECT)
-	item.BuyOrders = make(map[int64]int64)
-	item.SellOrders = make(map[int64]int64)
-	items[id] = item
+	item.BuyOrders = []int64{}
+	item.SellOrders = []int64{}
+	items[id] = &item
 	saveToFileFlag = true
-	return item
+	return &item
 }
 
-func Get(itemID int) Item {
+func Get(itemID int) *Item {
 	mutex.Lock()
 	defer mutex.Unlock()
 	item, ok := items[itemID]
@@ -90,21 +75,15 @@ func Get(itemID int) Item {
 	return item
 }
 
-func Set(item Item) {
-	mutex.Lock()
-	defer mutex.Unlock()
-	items[item.ItemID] = item
-}
-
 func (item *Item) place(o orders.Order) {
 	if o.IsBuyOrder {
-		item.BuyOrders[o.OrderID] = o.OrderID
+		item.BuyOrders = append(item.BuyOrders, o.OrderID)
 	} else {
-		item.SellOrders[o.OrderID] = o.OrderID
+		item.SellOrders = append(item.SellOrders, o.OrderID)
 	}
 }
 
-func (item *Item) isOfficer() bool {
+func (item *Item) IsOfficer() bool {
 	for _, v := range item.DogmaAttributes {
 		if v.AttributeID == 1692 && v.Value == 5.0 {
 			return true
@@ -115,20 +94,13 @@ func (item *Item) isOfficer() bool {
 
 func PlaceOrder(o orders.Order) {
 	item := Get(o.ItemID)
-	if item.isOfficer() {
-		return
-	}
 	item.place(o)
-	Set(item)
 }
 
 func Cleanup() {
 	for _, item := range items {
-		//item.BuyOrders = avl.NewAvl(avl.REVERSED)
-		//item.SellOrders = avl.NewAvl(avl.DIRECT)
-		item.BuyOrders = make(map[int64]int64)
-		item.SellOrders = make(map[int64]int64)
-		Set(item)
+		item.BuyOrders = []int64{}
+		item.SellOrders = []int64{}
 	}
 }
 
@@ -139,7 +111,7 @@ func init() {
 		json.Unmarshal(raw, &items)
 	} else {
 		fmt.Printf("Failed to open %s\n", fileName)
-		items = make(map[int]Item)
+		items = make(map[int]*Item)
 	}
 
 	Cleanup()

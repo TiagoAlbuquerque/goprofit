@@ -88,8 +88,6 @@ func FetchMarket() {
 
 	go consumePages(cPages, cOK)
 
-	//go getMarketPages(lURL, cPages)
-
 	for _, url := range lURL {
 		async.Do(getMarketPage, url, cPages)
 		//  go getMarketPage(url, cPages)

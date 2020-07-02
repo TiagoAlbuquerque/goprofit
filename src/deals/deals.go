@@ -123,11 +123,11 @@ func (d *Deal) Execute(cargo, isk float64) (float64, float64, float64, string) {
 func (d *Deal) Reset() {
 	bo := orders.Get(d.buyOrder)
 	bo.Reset()
-	orders.Set(bo)
+	//orders.Set(bo)
 
 	so := orders.Get(d.sellOrder)
 	so.Reset()
-	orders.Set(so)
+	//orders.Set(so)
 }
 
 func (d *Deal) valid() bool {
@@ -135,20 +135,19 @@ func (d *Deal) valid() bool {
 
 	if d.profitPerUnit() <= 0.0 ||
 		d.Pm3() < conf.Minpm3() ||
-		bo.MinVolume > 1 {
+		bo.MinVolume > 1 ||
+		items.Get(d.item).IsOfficer() {
 		return false
 	}
 	return true
 }
 
-func makeDeal(itmID int, boID int64, soID int64, cDeals chan *Deal) bool {
+func makeDeal(itmID int, boID int64, soID int64, cDeals chan *Deal) {
 	d := Deal{itmID, boID, soID}
 	if d.valid() {
 		deals = append(deals, d)
 		cDeals <- &d
-		return true
 	}
-	return false
 }
 
 func computeBuyOrder(bOrder orders.Order, cDeals chan *Deal) {
@@ -177,5 +176,4 @@ func ComputeDeals(o orders.Order, cDeals chan *Deal) {
 	} else {
 		computeSellOrder(o, cDeals)
 	}
-
 }
