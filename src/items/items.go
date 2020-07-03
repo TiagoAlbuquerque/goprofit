@@ -16,6 +16,7 @@ import (
 	//        "reflect"
 )
 
+//Item mimics the structure of an EVE Online ESI item
 type Item struct {
 	Capacity        float32 `json:"capacity"`
 	Description     string  `json:"description"`

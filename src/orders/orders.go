@@ -50,6 +50,7 @@ func Get(oID int64) *Order {
 	return out
 }
 
+//Set will store the receiver Order
 func Set(o Order) {
 	mutex.Lock()
 	defer mutex.Unlock()

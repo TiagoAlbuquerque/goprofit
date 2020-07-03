@@ -22,7 +22,7 @@ import (
 
 func placeOrders(ordersL []orders.Order, cOK chan bool) {
 
-	utils.StatusLine(color.Fg(3, "Processing market page"))
+	utils.StatusLine(color.Fg8b(3, "Processing market page"))
 
 	cDeals := make(chan *deals.Deal)
 	defer close(cDeals)
@@ -38,7 +38,7 @@ func placeOrders(ordersL []orders.Order, cOK chan bool) {
 func consumePages(cPages chan []orders.Order, cOK chan bool) {
 	for page := range cPages {
 		placeOrders(page, cOK)
-		utils.StatusLine(color.Fg(1, "Waiting page download"))
+		utils.StatusLine(color.Fg8b(1, "Waiting page download"))
 	}
 }
 

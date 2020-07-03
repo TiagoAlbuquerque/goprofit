@@ -4,30 +4,37 @@ import (
 	"../conf"
 	"../items"
 	"../orders"
+	"../utils"
+	"../utils/color"
 
 	"fmt"
 	"math"
 )
 
+//Deal is astructure to couple a sell and a buy order of a specific item
 type Deal struct {
-	item                int
-	buyOrder, sellOrder int64
+	item                  int
+	buyOrderID, sellOrder int64
 }
 
 var deals []Deal
 
+//Key will produce key for the marketlist at witch
 func (d *Deal) Key() int64 {
-	return (orders.Get(d.sellOrder).SystemID * 10000000000) + orders.Get(d.buyOrder).SystemID
+	return (orders.Get(d.sellOrder).SystemID * 10000000000) + orders.Get(d.buyOrderID).SystemID
 }
 
+//SellLocID will return the sell location ID for the current deal
 func (d *Deal) SellLocID() int64 {
 	return int64(orders.Get(d.sellOrder).SystemID)
 }
 
+//BuyLocID will return the buy location ID for the current deal
 func (d *Deal) BuyLocID() int64 {
-	return int64(orders.Get(d.buyOrder).SystemID)
+	return int64(orders.Get(d.buyOrderID).SystemID)
 }
 
+//Pm3 will return the profit amount normalized by cubic meter ocupied by the item
 func (d *Deal) Pm3() float64 {
 	itm := items.Get(d.item)
 	prf := d.profitPerUnit()
@@ -47,7 +54,7 @@ func min(nums ...int) int {
 
 //amount that is available compose in buy/sell order
 func (d *Deal) amountAvailable() int {
-	bo := orders.Get(d.buyOrder)
+	bo := orders.Get(d.buyOrderID)
 	so := orders.Get(d.sellOrder)
 
 	out := min(bo.OrderRemain(), so.OrderRemain())
@@ -72,7 +79,7 @@ func tax() float64 {
 }
 
 func (d *Deal) profitPerUnit() float64 {
-	bo := orders.Get(d.buyOrder)
+	bo := orders.Get(d.buyOrderID)
 	so := orders.Get(d.sellOrder)
 	ppu := (bo.Price * tax()) - so.Price
 	return ppu
@@ -89,9 +96,10 @@ func (d *Deal) getQuantity(cargo, isk float64) int {
 	return min(d.amountAvailable(), d.amountCargo(cargo), d.amountIsk(isk))
 }
 
+//Execute will execute the deal for as many item as its availabe to trade in this deal, can be stored in the ships cargobay, and have enough isk to purchase
 func (d *Deal) Execute(cargo, isk float64) (float64, float64, float64, string) {
 	itm := items.Get(d.item)
-	bo := orders.Get(d.buyOrder)
+	bo := orders.Get(d.buyOrderID)
 	so := orders.Get(d.sellOrder)
 
 	itmVol := itm.Volume
@@ -110,18 +118,19 @@ func (d *Deal) Execute(cargo, isk float64) (float64, float64, float64, string) {
 	sFor := bo.Price
 	profit := d.profitQnt(qnt)
 
-	strg := fmt.Sprintf("\n%d\t%s \tbuy for: %.2f \tsell for: %.2f \tprofit: %.2f",
+	strg := fmt.Sprintf("\n%d \t%s \tb: %s \ts: %s \tp: %s",
 		qnt,
 		itmName,
-		bFor,
-		sFor,
-		profit)
+		color.Fg8b(3, utils.KMB(bFor)),
+		color.Fg8b(6, utils.KMB(sFor)),
+		color.Fg8b(2, utils.KMB(profit)))
 
 	return cargo, isk, profit, strg
 }
 
+//Reset will restore the deal to unexecuted state
 func (d *Deal) Reset() {
-	bo := orders.Get(d.buyOrder)
+	bo := orders.Get(d.buyOrderID)
 	bo.Reset()
 	//orders.Set(bo)
 
@@ -131,7 +140,7 @@ func (d *Deal) Reset() {
 }
 
 func (d *Deal) valid() bool {
-	bo := orders.Get(d.buyOrder)
+	bo := orders.Get(d.buyOrderID)
 
 	if d.profitPerUnit() <= 0.0 ||
 		d.Pm3() < conf.Minpm3() ||
@@ -166,10 +175,12 @@ func computeSellOrder(sOrder orders.Order, cDeals chan *Deal) {
 	}
 }
 
+//Cleanup will discard all deals stored
 func Cleanup() {
 	deals = []Deal{}
 }
 
+//ComputeDeals will produce Deals based on received orders
 func ComputeDeals(o orders.Order, cDeals chan *Deal) {
 	if o.IsBuyOrder {
 		computeBuyOrder(o, cDeals)

@@ -63,11 +63,11 @@ func (sl *shopList) add(d *deals.Deal) {
 	sl.deals.Put(&ad)
 }
 
-func (sl *shopList) distance() int {
+func (sl shopList) distance() int {
 	return locations.GetDistance(sl.sellID, sl.buyID)
 }
 
-func (sl *shopList) key() int64 {
+func (sl shopList) key() int64 {
 	return (sl.sellID * 10000000000) + sl.buyID
 }
 
@@ -112,15 +112,15 @@ func (sl *shopList) getProfit() float64 {
 	return sl.profit
 }
 
-func (sl *shopList) String() string {
-	return fmt.Sprintf("\nfrom: %s", color.Fg(4, locations.GetName(sl.sellID))) +
-		fmt.Sprintf("\tto:   %s", color.Fg(4, locations.GetName(sl.buyID))) +
+func (sl shopList) String() string {
+	return fmt.Sprintf("\nfrom: %s", color.Fg8b(4, locations.GetName(sl.sellID))) +
+		fmt.Sprintf("\tto:   %s", color.Fg8b(4, locations.GetName(sl.buyID))) +
 		fmt.Sprintf("\t%d jumps", sl.distance()) +
 		sl.st +
 		fmt.Sprintf("\ntotal volume: %.2f", sl.cargoUsed) +
-		fmt.Sprintf("\ninvestment: %s", color.Fg(1, utils.FormatCommas(sl.investment))) +
-		fmt.Sprintf("\ntotal profit: %s", color.Fg(2, utils.FormatCommas(sl.profit))) +
-		fmt.Sprintf("\nprofit per jump: %s", color.Fg(2, utils.FormatCommas(sl.profitPerJump())))
+		fmt.Sprintf("\ninvestment: %s", color.Fg8b(1, utils.FormatCommas(sl.investment))) +
+		fmt.Sprintf("\ntotal profit: %s", color.Fg8b(2, utils.FormatCommas(sl.profit))) +
+		fmt.Sprintf("\nprofit per jump: %s", color.Fg8b(5, utils.FormatCommas(sl.profitPerJump())))
 }
 
 func getShopList(d *deals.Deal) *shopList {

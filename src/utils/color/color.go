@@ -1,20 +1,17 @@
 package color
 
-var colors = [...]string{
-	"\033[0m",  //reset 0
-	"\033[31m", //red 1
-	"\033[32m", //green 2
-	"\033[33m", //yellow 3
-	"\033[34m", //blue 4
-	"\033[35m", //purple 5
-	"\033[36m", //cyan 6
-	"\033[37m", //gray 7
+import "fmt"
+
+const reset = "\033[0m"
+const c256 = "\033[38;5;%dm"
+const cRGB = "\033[38;2;%d;%d;%dm"
+
+//Fg8b will format the string foreground (text) to output in the specified 8-bit color
+func Fg8b(c int, txt string) string {
+	return fmt.Sprintf(c256+txt+reset, c)
 }
 
-//Fg will format the string foreground (text) to output in the specified color
-func Fg(color int, txt string) string {
-	if color >= len(colors) {
-		return txt
-	}
-	return colors[color] + txt + colors[0]
+//FgRGB will format the string foreground (text) to output in the specified rgb color
+func FgRGB(r, g, b byte, txt string) string {
+	return fmt.Sprintf(cRGB+txt+reset, r, g, b)
 }

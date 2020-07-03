@@ -134,6 +134,14 @@ func commas(s string) string {
 	}
 }
 
+func KMB(num float64) string {
+	out := FormatCommas(num)
+	out = strings.Replace(out, "000.00", "K", 1)
+	out = strings.Replace(out, "000 K", "M", 1)
+	out = strings.Replace(out, "000 M", "B", 1)
+	return out
+}
+
 func FormatCommas(num float64) string {
 	parts := strings.Split(fmt.Sprintf("%.2f", num), ".")
 	if parts[0][0] == '-' {
