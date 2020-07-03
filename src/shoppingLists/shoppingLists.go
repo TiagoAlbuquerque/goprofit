@@ -20,10 +20,12 @@ type shopList struct {
 	sellID     int64
 	buyID      int64
 	profit     float64
-	deals      deals.DealsList
-	st         string
 	cargoUsed  float64
 	investment float64
+	st         string
+	deals      deals.DealsList
+	selected   deals.SelectedDealsList
+	itemProfit map[int]float64
 }
 
 type dealAvlData struct {
@@ -62,8 +64,6 @@ var mutex sync.Mutex
 var cSorting chan bool
 
 func (sl *shopList) add(d deals.Deal) {
-	//ad := avl.Data(dealAvlData{d})
-	//sl.deals.Put(&ad)
 	sl.deals = append(sl.deals, d)
 }
 
@@ -76,10 +76,11 @@ func (sl shopList) key() int64 {
 }
 
 func (sl *shopList) reset() {
-	sl.deals = deals.DealsList{} //avl.NewAvl(avl.REVERSED)
+	sl.deals = deals.DealsList{}
+	sl.selected = deals.SelectedDealsList{}
+	sl.itemProfit = map[int]float64{}
 	sl.profit = 0.0
 	sl.cargoUsed = 0.0
-	sl.st = ""
 }
 
 func (sl *shopList) profitPerJump() float64 {
@@ -90,44 +91,45 @@ func (sl *shopList) getProfit() float64 {
 	if sl.profit > 0.0 {
 		return sl.profit
 	}
-	itemProfitMap := map[int]float64{}
-
-	//it := sl.deals.GetIterator()
 	cargo := conf.Cargo()
 	isk := conf.MaxInvest()
-	sumProfit := 0.0
-	strg := ""
-	//for it.Next() {
+	dProfit := 0.0
+	qnt := 0
 	sort.Sort(sl.deals)
 	for _, deal := range sl.deals {
-		//adp := it.Value()
-		//deal := (*adp).(dealAvlData).deal
-		cargo, isk, sumProfit, strg = deal.Execute(cargo, isk)
-		if sumProfit > 0.0 {
-			sl.st += strg
+		cargo, isk, qnt, dProfit = deal.Execute(cargo, isk)
+		if dProfit > 0.0 {
+			sl.itemProfit[deal.GetItemID()] += dProfit
+			sl.selected = append(sl.selected, deals.SelectedDeal{deal, qnt, dProfit})
+			sl.profit += dProfit
 		}
-		itemProfitMap[deal.GetItemID()] += sumProfit
-		sl.profit += sumProfit
 	}
 	sl.cargoUsed = conf.Cargo() - cargo
 	sl.investment = conf.MaxInvest() - isk
-	//it = sl.deals.GetIterator()
-	//for it.Next() {
 	for _, deal := range sl.deals {
-		//adp := it.Value()
-		//deal := (*adp).(dealAvlData).deal
 		deal.Reset()
 	}
-
-	//cSorting <- true
 	return sl.profit
 }
 
 func (sl shopList) String() string {
+	st := ""
+	less := func(i, j int) bool {
+		iItemID := sl.selected[i].Deal.GetItemID()
+		jItemID := sl.selected[j].Deal.GetItemID()
+		if iItemID == jItemID {
+			return i < j
+		}
+		return sl.itemProfit[iItemID] > sl.itemProfit[jItemID]
+	}
+	sort.Slice(sl.selected, less) //*/
+	for _, sd := range sl.selected {
+		st += sd.String()
+	}
 	return fmt.Sprintf("\nfrom: %s", color.Fg8b(4, locations.GetName(sl.sellID))) +
 		fmt.Sprintf(" to: %s", color.Fg8b(4, locations.GetName(sl.buyID))) +
 		fmt.Sprintf(" %d jumps", sl.distance()) +
-		sl.st +
+		st +
 		fmt.Sprintf("\ntotal volume: %.2f", sl.cargoUsed) +
 		fmt.Sprintf("\ninvestment: %s", color.Fg8b(1, utils.FormatCommas(sl.investment))) +
 		fmt.Sprintf("\ntotal profit: %s", color.Fg8b(2, utils.FormatCommas(sl.profit))) +
@@ -140,7 +142,7 @@ func getShopList(d deals.Deal) *shopList {
 	key := d.Key()
 	sl, ok := listsMap[key]
 	if !ok {
-		sl = &shopList{d.SellLocID(), d.BuyLocID(), 0.0, deals.DealsList{}, "", 0.0, 0.0}
+		sl = &shopList{d.SellLocID(), d.BuyLocID(), 0.0, 0.0, 0.0, "", deals.DealsList{}, deals.SelectedDealsList{}, map[int]float64{}}
 		listsMap[key] = sl
 		lists = append(lists, sl)
 	}
