@@ -1,10 +1,11 @@
 package main
 
 import (
-	"./controller"
 	"fmt"
 	"os"
 	"os/signal"
+
+	"./controller"
 )
 
 func main() {

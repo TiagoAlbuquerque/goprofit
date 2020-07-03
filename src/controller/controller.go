@@ -24,7 +24,7 @@ func placeOrders(ordersL []orders.Order, cOK chan bool) {
 
 	utils.StatusLine(color.Fg8b(3, "Processing market page"))
 
-	cDeals := make(chan *deals.Deal)
+	cDeals := make(chan deals.Deal)
 	defer close(cDeals)
 	go shoppinglists.ConsumeDeals(cDeals, cOK)
 

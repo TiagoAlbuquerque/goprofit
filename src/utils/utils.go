@@ -114,7 +114,11 @@ func Top(list sortable) {
 }
 
 func StatusLine(text string) {
-	fmt.Printf("\033[A\r\033[K%s\n", text)
+	up := "\033[A"  //move cursor up one line
+	cr := "\r"      //carriage return [volta para o início]
+	cl := "\033[2K" //clear line
+
+	fmt.Printf(up+cr+cl+"%s\n", text)
 }
 
 func ProgressBar(total int, c chan bool) {
