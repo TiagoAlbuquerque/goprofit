@@ -22,8 +22,8 @@ type shopList struct {
 	cargoUsed  float64
 	investment float64
 	st         string
-	deals      deals.DealsList
-	selected   deals.SelectedDealsList
+	deals      deals.List
+	selected   deals.SelectedList
 	itemProfit map[int]float64
 }
 
@@ -65,8 +65,8 @@ func (sl shopList) key() int64 {
 }
 
 func (sl *shopList) reset() {
-	sl.deals = deals.DealsList{}
-	sl.selected = deals.SelectedDealsList{}
+	sl.deals = deals.List{}
+	sl.selected = deals.SelectedList{}
 	sl.itemProfit = map[int]float64{}
 	sl.profit = 0.0
 	sl.cargoUsed = 0.0
@@ -89,7 +89,7 @@ func (sl *shopList) getProfit() float64 {
 		cargo, isk, qnt, dProfit = deal.Execute(cargo, isk)
 		if dProfit > 0.0 {
 			sl.itemProfit[deal.GetItemID()] += dProfit
-			sl.selected = append(sl.selected, deals.SelectedDeal{deal, qnt, dProfit})
+			sl.selected = append(sl.selected, deals.SelectedDeal{Deal: deal, Qnt: qnt, Profit: dProfit})
 			sl.profit += dProfit
 		}
 	}
@@ -128,7 +128,7 @@ func getShopList(d deals.Deal) *shopList {
 	key := d.Key()
 	sl, ok := listsMap[key]
 	if !ok {
-		sl = &shopList{d.SellLocID(), d.BuyLocID(), 0.0, 0.0, 0.0, "", deals.DealsList{}, deals.SelectedDealsList{}, map[int]float64{}}
+		sl = &shopList{d.SellLocID(), d.BuyLocID(), 0.0, 0.0, 0.0, "", deals.List{}, deals.SelectedList{}, map[int]float64{}}
 		listsMap[key] = sl
 		lists = append(lists, sl)
 	}

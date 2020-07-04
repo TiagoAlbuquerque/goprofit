@@ -11,6 +11,7 @@ import (
 	"gopkg.in/cheggaaa/pb.v1"
 )
 
+//GetURL will return the httpresponse of a http Get of the provided URL
 func GetURL(url string) *http.Response {
 	var res *http.Response
 	var err error
@@ -22,7 +23,8 @@ func GetURL(url string) *http.Response {
 	return res
 }
 
-func JsonFromUrl(url string, out interface{}) {
+//JSONFromURL will unmarshall an JSON received by the http response of the provided URL
+func JSONFromURL(url string, out interface{}) {
 	var body []byte
 	var err error
 	for ok := false; !ok; {
@@ -38,8 +40,9 @@ func JsonFromUrl(url string, out interface{}) {
 	json.Unmarshal(body, out)
 }
 
-func Load(f_name string) (interface{}, error) {
-	raw, err := ioutil.ReadFile(f_name)
+//Load will read and unmarshal from JSON the providade file path
+func Load(fName string) (interface{}, error) {
+	raw, err := ioutil.ReadFile(fName)
 	if err != nil {
 		return nil, err
 	}
@@ -49,15 +52,16 @@ func Load(f_name string) (interface{}, error) {
 	return c, nil
 }
 
-func Save(f_name string, data interface{}) {
+//Save will marshal to JSON and save the providade data to the specified file
+func Save(fName string, data interface{}) {
 	out, _ := json.MarshalIndent(data, "", "  ")
-	f, err := os.Create(f_name)
+	f, err := os.Create(fName)
 	if err != nil {
 		panic(err)
 	}
 	defer f.Close()
 	f.Write(out)
-	fmt.Println(f_name, " saved")
+	fmt.Println(fName, " saved")
 }
 
 type sortable interface {
@@ -109,10 +113,12 @@ func qTop(list sortable, inicio, fim int) {
 	}
 }
 
+//Top will get the first few items of a sortable list in order
 func Top(list sortable) {
 	qTop(list, 0, list.Len()-1)
 }
 
+//StatusLine will print the providade text in the status indicator line
 func StatusLine(text string) {
 	up := "\033[A"  //move cursor up one line
 	cr := "\r"      //carriage return [volta para o início]
@@ -121,6 +127,7 @@ func StatusLine(text string) {
 	fmt.Printf(up+cr+cl+"%s\n", text)
 }
 
+//ProgressBar will start a new progressbar
 func ProgressBar(total int, c chan bool) {
 	bar := pb.StartNew(total)
 	for i := 0; i < total; i++ {
@@ -133,19 +140,29 @@ func ProgressBar(total int, c chan bool) {
 func commas(s string) string {
 	if len(s) <= 3 {
 		return s
-	} else {
-		return commas(s[0:len(s)-3]) + " " + s[len(s)-3:]
 	}
+	return commas(s[0:len(s)-3]) + " " + s[len(s)-3:]
 }
 
+//KMB will format will compress long values into K M or B formats
 func KMB(num float64) string {
-	out := FormatCommas(num)
-	out = strings.Replace(out, "000.00", "K", 1)
-	out = strings.Replace(out, "000 K", "M", 1)
-	out = strings.Replace(out, "000 M", "B", 1)
-	return out
+	kmb := ""
+	if num >= 1000 {
+		num /= 1000
+		kmb = "K"
+	}
+	if num >= 1000 {
+		num /= 1000
+		kmb = "M"
+	}
+	if num >= 1000 {
+		num /= 1000
+		kmb = "B"
+	}
+	return fmt.Sprintf("%.3f %s", num, kmb)
 }
 
+//FormatCommas will produce spaces at every power of 1000 as 1 000 000 000
 func FormatCommas(num float64) string {
 	parts := strings.Split(fmt.Sprintf("%.2f", num), ".")
 	if parts[0][0] == '-' {

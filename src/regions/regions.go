@@ -38,14 +38,14 @@ var saveToFileFlag bool = false
 
 func getRegionsList() []int {
 	var out []int
-	utils.JsonFromUrl(regionsURL, &out)
+	utils.JSONFromURL(regionsURL, &out)
 	return out
 }
 
 func getRegionInfo(id int, c chan bool) {
 	url := fmt.Sprint(regionsURL, id)
 	var reg region
-	utils.JsonFromUrl(url, &reg)
+	utils.JSONFromURL(url, &reg)
 	reg.Marked = true
 	regions[id] = reg
 	saveToFileFlag = true

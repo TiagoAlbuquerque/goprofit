@@ -17,22 +17,26 @@ type Deal struct {
 	buyOrderID, sellOrderID int64
 }
 
+//SelectedDeal is a structure that will store a deal, the amount executed in such deal and the profit obtained
 type SelectedDeal struct {
 	Deal   Deal
 	Qnt    int
 	Profit float64
 }
 
-type DealsList []Deal
-type SelectedDealsList []SelectedDeal
+//List is a slice of Deal
+type List []Deal
 
-func (dl DealsList) Len() int {
+//SelectedList is a slice of SelectedDeal
+type SelectedList []SelectedDeal
+
+func (dl List) Len() int {
 	return len(dl)
 }
-func (dl DealsList) Less(i, j int) bool {
+func (dl List) Less(i, j int) bool {
 	return dl[i].Pm3() > dl[j].Pm3()
 }
-func (dl DealsList) Swap(i, j int) {
+func (dl List) Swap(i, j int) {
 	dl[i], dl[j] = dl[j], dl[i]
 }
 
@@ -50,7 +54,7 @@ func (sd SelectedDeal) String() string {
 		color.Fg8b(2, utils.KMB(profit)))
 }
 
-var deals DealsList
+var deals List
 
 //GetItemID will return the item ID of this deal
 func (d Deal) GetItemID() int {
@@ -131,55 +135,26 @@ func (d Deal) getQuantity(cargo, isk float64) int {
 	return min(d.amountAvailable(), d.amountCargo(cargo), d.amountIsk(isk))
 }
 
-//Execute will execute the deal for as many item as its availabe to trade in this deal, can be stored in the ships cargobay, and have enough isk to purchase
-func (d *Deal) Execute(cargo, isk float64) (float64, float64, int, float64) {
-	itm := items.Get(d.itemID)
-	bo := orders.Get(d.buyOrderID)
-	so := orders.Get(d.sellOrderID)
+func (d Deal) vol(qnt int) float64 {
+	return float64(qnt) * items.Get(d.itemID).Volume
+}
 
-	qnt := d.getQuantity(cargo, isk)
-	bo.Execute(qnt)
-	so.Execute(qnt)
-
-	vol := float64(qnt) * itm.Volume
-	cargo -= vol
-	cost := float64(qnt) * so.Price
-	isk -= cost
-
-	dProfit := d.profitQnt(qnt)
-	return cargo, isk, qnt, dProfit
+func (d Deal) cost(qnt int) float64 {
+	return float64(qnt) * orders.Get(d.sellOrderID).Price
 }
 
 //Execute will execute the deal for as many item as its availabe to trade in this deal, can be stored in the ships cargobay, and have enough isk to purchase
-func (d *Deal) xxExecute(cargo, isk float64) (float64, float64, float64, string) {
-	itm := items.Get(d.itemID)
-	bo := orders.Get(d.buyOrderID)
-	so := orders.Get(d.sellOrderID)
-
-	itmVol := itm.Volume
-	itmName := itm.Name
-
+func (d *Deal) Execute(cargo, isk float64) (float64, float64, int, float64) {
 	qnt := d.getQuantity(cargo, isk)
-	bo.Execute(qnt)
-	so.Execute(qnt)
 
-	vol := float64(qnt) * itmVol
-	cargo -= vol
-	cost := float64(qnt) * so.Price
-	isk -= cost
+	orders.Get(d.buyOrderID).Execute(qnt)
+	orders.Get(d.sellOrderID).Execute(qnt)
 
-	bFor := so.Price
-	sFor := bo.Price
-	profit := d.profitQnt(qnt)
+	cargo -= d.vol(qnt)
+	isk -= d.cost(qnt)
 
-	strg := fmt.Sprintf("\n%d \t%s \tb: %s \ts: %s \tp: %s",
-		qnt,
-		itmName,
-		color.Fg8b(3, utils.KMB(bFor)),
-		color.Fg8b(6, utils.KMB(sFor)),
-		color.Fg8b(2, utils.KMB(profit)))
-
-	return cargo, isk, profit, strg
+	dProfit := d.profitQnt(qnt)
+	return cargo, isk, qnt, dProfit
 }
 
 //Reset will restore the deal to unexecuted state

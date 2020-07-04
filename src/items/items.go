@@ -1,19 +1,13 @@
 package items
 
 import (
+	"../orders"
 	"../utils"
 
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-
-	"../orders"
-
-	//    "os"
-	//    "container/list"
 	"sync"
-	//        "strings"
-	//        "reflect"
 )
 
 //Item mimics the structure of an EVE Online ESI item
@@ -57,7 +51,7 @@ func getItemInfo(id int) *Item {
 	url := fmt.Sprintf(itemURL, id)
 	println(url)
 	var item Item
-	utils.JsonFromUrl(url, &item)
+	utils.JSONFromURL(url, &item)
 	println(item.Name)
 	item.BuyOrders = []int64{}
 	item.SellOrders = []int64{}
@@ -66,6 +60,7 @@ func getItemInfo(id int) *Item {
 	return &item
 }
 
+//Get will return the item specified by the provided itemID
 func Get(itemID int) *Item {
 	mutex.Lock()
 	defer mutex.Unlock()
@@ -84,6 +79,7 @@ func (item *Item) place(o orders.Order) {
 	}
 }
 
+//IsOfficer will check if the item is an office type item
 func (item *Item) IsOfficer() bool {
 	for _, v := range item.DogmaAttributes {
 		if v.AttributeID == 1692 && v.Value == 5.0 {
@@ -93,11 +89,13 @@ func (item *Item) IsOfficer() bool {
 	return false
 }
 
+//PlaceOrder will put the received market order in the item list
 func PlaceOrder(o orders.Order) {
 	item := Get(o.ItemID)
 	item.place(o)
 }
 
+//Cleanup will clear all the items orders
 func Cleanup() {
 	for _, item := range items {
 		item.BuyOrders = []int64{}
@@ -118,6 +116,7 @@ func init() {
 	Cleanup()
 }
 
+//Terminate will save the items files if there are any new items
 func Terminate() {
 	if !saveToFileFlag {
 		return
