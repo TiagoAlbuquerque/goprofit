@@ -12,7 +12,6 @@ import (
 	"../deals"
 	"../locations"
 	"../utils"
-	"../utils/avl"
 	"../utils/color"
 )
 
@@ -26,16 +25,6 @@ type shopList struct {
 	deals      deals.DealsList
 	selected   deals.SelectedDealsList
 	itemProfit map[int]float64
-}
-
-type dealAvlData struct {
-	deal *deals.Deal
-}
-
-func (a dealAvlData) Less(b *avl.Data) bool {
-	c := (*b)
-	d := c.(dealAvlData)
-	return a.deal.Pm3() < d.deal.Pm3()
 }
 
 type shopLists []*shopList
@@ -117,12 +106,9 @@ func (sl shopList) String() string {
 	less := func(i, j int) bool {
 		iItemID := sl.selected[i].Deal.GetItemID()
 		jItemID := sl.selected[j].Deal.GetItemID()
-		if iItemID == jItemID {
-			return i < j
-		}
 		return sl.itemProfit[iItemID] > sl.itemProfit[jItemID]
 	}
-	sort.Slice(sl.selected, less) //*/
+	sort.SliceStable(sl.selected, less)
 	for _, sd := range sl.selected {
 		st += sd.String()
 	}

@@ -29,23 +29,17 @@ type SelectedDealsList []SelectedDeal
 func (dl DealsList) Len() int {
 	return len(dl)
 }
-func (sdl SelectedDealsList) Len() int {
-	return len(sdl)
-}
 func (dl DealsList) Less(i, j int) bool {
 	return dl[i].Pm3() > dl[j].Pm3()
 }
 func (dl DealsList) Swap(i, j int) {
 	dl[i], dl[j] = dl[j], dl[i]
 }
-func (sdl SelectedDealsList) Swap(i, j int) {
-	sdl[i], sdl[j] = sdl[j], sdl[i]
-}
 
 func (sd SelectedDeal) String() string {
 	qnt := sd.Qnt
 	itmName := items.Get(sd.Deal.itemID).Name
-	bFor := orders.Get(sd.Deal.buyOrderID).Price
+	bFor := orders.Get(sd.Deal.sellOrderID).Price
 	sFor := orders.Get(sd.Deal.buyOrderID).Price
 	profit := sd.Profit
 	return fmt.Sprintf("\n%d \t%s \tb: %s \ts: %s \tp: %s",
@@ -152,7 +146,40 @@ func (d *Deal) Execute(cargo, isk float64) (float64, float64, int, float64) {
 	cost := float64(qnt) * so.Price
 	isk -= cost
 
-	return cargo, isk, qnt, d.profitQnt(qnt)
+	dProfit := d.profitQnt(qnt)
+	return cargo, isk, qnt, dProfit
+}
+
+//Execute will execute the deal for as many item as its availabe to trade in this deal, can be stored in the ships cargobay, and have enough isk to purchase
+func (d *Deal) xxExecute(cargo, isk float64) (float64, float64, float64, string) {
+	itm := items.Get(d.itemID)
+	bo := orders.Get(d.buyOrderID)
+	so := orders.Get(d.sellOrderID)
+
+	itmVol := itm.Volume
+	itmName := itm.Name
+
+	qnt := d.getQuantity(cargo, isk)
+	bo.Execute(qnt)
+	so.Execute(qnt)
+
+	vol := float64(qnt) * itmVol
+	cargo -= vol
+	cost := float64(qnt) * so.Price
+	isk -= cost
+
+	bFor := so.Price
+	sFor := bo.Price
+	profit := d.profitQnt(qnt)
+
+	strg := fmt.Sprintf("\n%d \t%s \tb: %s \ts: %s \tp: %s",
+		qnt,
+		itmName,
+		color.Fg8b(3, utils.KMB(bFor)),
+		color.Fg8b(6, utils.KMB(sFor)),
+		color.Fg8b(2, utils.KMB(profit)))
+
+	return cargo, isk, profit, strg
 }
 
 //Reset will restore the deal to unexecuted state
