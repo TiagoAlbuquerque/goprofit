@@ -71,14 +71,10 @@ type sortable interface {
 }
 
 func iSort(list sortable, inicio, fim int) {
-	i := inicio + 1
-	for i <= fim {
-		j := i
-		for j > inicio && !list.Less(j-1, j) {
+	for i := inicio + 1; i <= fim; i++ {
+		for j := i; j > inicio && !list.Less(j-1, j); j-- {
 			list.Swap(j-1, j)
-			j--
 		}
-		i++
 	}
 }
 

@@ -24,6 +24,12 @@ type SelectedDeal struct {
 	Profit float64
 }
 
+//Resources is a structure that comprises of the resources of Cargo space and Isk available
+type Resources struct {
+	Cargo float64
+	Isk   float64
+}
+
 //List is a slice of Deal
 type List []Deal
 
@@ -131,8 +137,8 @@ func (d Deal) profitQnt(qnt int) float64 {
 	return float64(qnt) * d.profitPerUnit()
 }
 
-func (d Deal) getQuantity(cargo, isk float64) int {
-	return min(d.amountAvailable(), d.amountCargo(cargo), d.amountIsk(isk))
+func (d Deal) getQuantity(res Resources) int {
+	return min(d.amountAvailable(), d.amountCargo(res.Cargo), d.amountIsk(res.Isk))
 }
 
 func (d Deal) vol(qnt int) float64 {
@@ -144,21 +150,24 @@ func (d Deal) cost(qnt int) float64 {
 }
 
 //Execute will execute the deal for as many item as its availabe to trade in this deal, can be stored in the ships cargobay, and have enough isk to purchase
-func (d *Deal) Execute(cargo, isk float64) (float64, float64, int, float64) {
-	qnt := d.getQuantity(cargo, isk)
+func (d Deal) Execute(res *Resources) (bool, SelectedDeal) {
+	qnt := d.getQuantity(*res)
+	if qnt == 0 {
+		return false, SelectedDeal{}
+	}
 
 	orders.Get(d.buyOrderID).Execute(qnt)
 	orders.Get(d.sellOrderID).Execute(qnt)
 
-	cargo -= d.vol(qnt)
-	isk -= d.cost(qnt)
+	res.Cargo -= d.vol(qnt)
+	res.Isk -= d.cost(qnt)
 
 	dProfit := d.profitQnt(qnt)
-	return cargo, isk, qnt, dProfit
+	return true, SelectedDeal{Deal: d, Qnt: qnt, Profit: dProfit}
 }
 
 //Reset will restore the deal to unexecuted state
-func (d *Deal) Reset() {
+func (d Deal) Reset() {
 	bo := orders.Get(d.buyOrderID)
 	bo.Reset()
 	//orders.Set(bo)

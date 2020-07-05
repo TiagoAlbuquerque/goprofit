@@ -21,7 +21,6 @@ type shopList struct {
 	profit     float64
 	cargoUsed  float64
 	investment float64
-	st         string
 	deals      deals.List
 	selected   deals.SelectedList
 	itemProfit map[int]float64
@@ -80,21 +79,18 @@ func (sl *shopList) getProfit() float64 {
 	if sl.profit > 0.0 {
 		return sl.profit
 	}
-	cargo := conf.Cargo()
-	isk := conf.MaxInvest()
-	dProfit := 0.0
-	qnt := 0
+	res := deals.Resources{Cargo: conf.Cargo(), Isk: conf.MaxInvest()}
 	sort.Sort(sl.deals)
 	for _, deal := range sl.deals {
-		cargo, isk, qnt, dProfit = deal.Execute(cargo, isk)
-		if dProfit > 0.0 {
-			sl.itemProfit[deal.GetItemID()] += dProfit
-			sl.selected = append(sl.selected, deals.SelectedDeal{Deal: deal, Qnt: qnt, Profit: dProfit})
-			sl.profit += dProfit
+		isSelected, sDeal := deal.Execute(&res)
+		if isSelected {
+			sl.itemProfit[deal.GetItemID()] += sDeal.Profit
+			sl.selected = append(sl.selected, sDeal)
+			sl.profit += sDeal.Profit
 		}
 	}
-	sl.cargoUsed = conf.Cargo() - cargo
-	sl.investment = conf.MaxInvest() - isk
+	sl.cargoUsed = conf.Cargo() - res.Cargo
+	sl.investment = conf.MaxInvest() - res.Isk
 	for _, deal := range sl.deals {
 		deal.Reset()
 	}
@@ -128,7 +124,7 @@ func getShopList(d deals.Deal) *shopList {
 	key := d.Key()
 	sl, ok := listsMap[key]
 	if !ok {
-		sl = &shopList{d.SellLocID(), d.BuyLocID(), 0.0, 0.0, 0.0, "", deals.List{}, deals.SelectedList{}, map[int]float64{}}
+		sl = &shopList{d.SellLocID(), d.BuyLocID(), 0.0, 0.0, 0.0, deals.List{}, deals.SelectedList{}, map[int]float64{}}
 		listsMap[key] = sl
 		lists = append(lists, sl)
 	}
@@ -155,7 +151,7 @@ func PrintTop(n int) {
 	w := new(tabwriter.Writer)
 	w.Init(os.Stdout, 0, 1, 2, ' ', 0)
 
-	for i := n-1; i >= 0 ; i-- {
+	for i := n - 1; i >= 0; i-- {
 		fmt.Fprintln(w, lists[i])
 	}
 	w.Flush()
