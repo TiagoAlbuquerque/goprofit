@@ -165,7 +165,6 @@ func PrintTop(n int) {
 
 	for i := n - 1; i >= 0; i-- {
 		fmt.Fprintln(w, lists[i])
-		x
 	}
 	w.Flush()
 	println()
