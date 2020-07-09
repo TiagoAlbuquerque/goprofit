@@ -173,8 +173,6 @@ func FormatCommas(num float64) string {
 var wac, err = whatsapp.NewConn(72 * time.Hour)
 var sess whatsapp.Session
 
-const number = "558387680888"
-
 func wappInit() {
 	qrChan := make(chan string)
 	obj := qrcodeTerminal.New()
@@ -183,10 +181,13 @@ func wappInit() {
 	}()
 	sess, err = wac.Login(qrChan)
 }
+
 func init() {
 	wappInit()
 }
-func WappMessage(txt string) {
+
+//WappMessage will send an Whatsapp message
+func WappMessage(number, txt string) {
 	//sess, err = wac.RestoreWithSession(sess)
 	text := whatsapp.TextMessage{
 		Info: whatsapp.MessageInfo{

@@ -16,6 +16,7 @@ type gpconf struct {
 	FRegions   string  `json:"f_regions"`
 	MaxInvest  float64 `json:"max_invest"`
 	MThreshold float64 `json:"message_threshold"`
+	MPhoneNum  string  `json:"wapp_phone"`
 	MaxTrades  int     `json:"max_trades"`
 	Minpm3     float64 `json:"min_pm3"`
 	Tax        float64 `json:"tax"`
@@ -30,6 +31,11 @@ var mutex sync.Mutex
 //Cargo availabe in ship
 func Cargo() float64 {
 	return conf.Cargo
+}
+
+//WappPhone will return the Whatsapp phone number to message
+func WappPhone() string {
+	return conf.MPhoneNum
 }
 
 //Tax value charged in stations
@@ -59,9 +65,9 @@ func init() {
 		json.Unmarshal(raw, &conf)
 	} else {
 		fmt.Printf("Failed to open %s\n", fname)
-		conf = gpconf{100.0, "data_items.json", "data_locations.json", "data_regions.json", 100000000.0, 1000000000, 20, 100000, 0.05}
+		conf = gpconf{100.0, "data_items.json", "data_locations.json", "data_regions.json", 100000000.0, 1000000000, "558387680888", 20, 100000, 0.05}
 	}
-	utils.WappMessage(fmt.Sprintf("eve profit threshold:\n%s", utils.FormatCommas(MessageThreshold())))
+	utils.WappMessage(WappPhone(), fmt.Sprintf("eve profit threshold:\n%s", utils.FormatCommas(MessageThreshold())))
 
 }
 

@@ -5,6 +5,7 @@
   "f_regions": "data_regions.json",
   "max_invest": 1500000000.0,
   "message_threshold": 200000000.0,
+  "wapp_phone": "558387680888",
   "max_trades": 20,
   "min_pm3": 100000.0,
   "tax": 0.0225,
