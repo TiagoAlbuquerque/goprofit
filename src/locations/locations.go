@@ -14,7 +14,7 @@ type location struct {
 	Distances map[int64]int `json:"distances"`
 }
 
-const fName = "data_locations.eve"
+const fName = "data_locations.json"
 const locationsURL = "https://esi.evetech.net/latest/universe/stations/%d"
 const structuresURL = "https://esi.evetech.net/latest/universe/systems/%d"
 const systemsURL = "https://esi.evetech.net/latest/universe/systems/%d"

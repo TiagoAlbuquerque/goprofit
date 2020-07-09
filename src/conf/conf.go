@@ -15,12 +15,13 @@ type gpconf struct {
 	FLocations string  `json:"f_locations"`
 	FRegions   string  `json:"f_regions"`
 	MaxInvest  float64 `json:"max_invest"`
+	MThreshold float64 `json:"message_threshold"`
 	MaxTrades  int     `json:"max_trades"`
 	Minpm3     float64 `json:"min_pm3"`
 	Tax        float64 `json:"tax"`
 }
 
-const fname = "data_conf.eve"
+const fname = "data_conf.json"
 
 var conf gpconf
 var saveToFileFlag bool = false
@@ -41,6 +42,11 @@ func MaxInvest() float64 {
 	return conf.MaxInvest
 }
 
+//MessageThreshold is the minimum profit required to send a whatsapp message
+func MessageThreshold() float64 {
+	return conf.MThreshold
+}
+
 //Minpm3 Minimal expected profit amount pem cubic meter of cargo
 func Minpm3() float64 {
 	return conf.Minpm3
@@ -53,7 +59,7 @@ func init() {
 		json.Unmarshal(raw, &conf)
 	} else {
 		fmt.Printf("Failed to open %s\n", fname)
-		conf = gpconf{100.0, "data_items.eve", "data_locations.eve", "data_regions.eve", 100000000.0, 20, 100000, 0.05}
+		conf = gpconf{100.0, "data_items.eve", "data_locations.eve", "data_regions.eve", 100000000.0, 1000000000, 20, 100000, 0.05}
 	}
 }
 

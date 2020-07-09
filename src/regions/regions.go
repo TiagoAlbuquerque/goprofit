@@ -19,7 +19,7 @@ import (
 
 const regionsURL = "https://esi.evetech.net/latest/universe/regions/"
 const marketsURL = "https://esi.evetech.net/latest/markets/%d/orders/?order_type=all&page=%d"
-const fName = "data_regions.eve"
+const fName = "data_regions.json"
 
 type region struct {
 	Constellations []int  `json:"constellations"`

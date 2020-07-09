@@ -94,7 +94,19 @@ func (sl *shopList) getProfit() float64 {
 	for _, deal := range sl.deals {
 		deal.Reset()
 	}
+	if sl.profit > conf.MessageThreshold() {
+		utils.WappMessage(sl.wappMessageString())
+	}
 	return sl.profit
+}
+func (sl shopList) wappMessageString() string {
+	return fmt.Sprintf("\nfrom: %s", locations.GetName(sl.sellID)) +
+		fmt.Sprintf(" to: %s", locations.GetName(sl.buyID)) +
+		fmt.Sprintf(" %d jumps", sl.distance()) +
+		fmt.Sprintf("\ntotal volume: %.2f", sl.cargoUsed) +
+		fmt.Sprintf("\ninvestment: %s", utils.FormatCommas(sl.investment)) +
+		fmt.Sprintf("\ntotal profit: %s", utils.FormatCommas(sl.profit)) +
+		fmt.Sprintf("\nprofit per jump: %s", utils.FormatCommas(sl.profitPerJump()))
 }
 
 func (sl shopList) String() string {
@@ -153,6 +165,7 @@ func PrintTop(n int) {
 
 	for i := n - 1; i >= 0; i-- {
 		fmt.Fprintln(w, lists[i])
+		x
 	}
 	w.Flush()
 	println()

@@ -39,7 +39,7 @@ type Item struct {
 }
 
 const itemURL = "https://esi.evetech.net/latest/universe/types/%d"
-const fileName = "data_items.eve"
+const fileName = "data_items.json"
 
 var items map[int]*Item
 var saveToFileFlag bool = false

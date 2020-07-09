@@ -7,7 +7,10 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
+	qrcodeTerminal "github.com/Baozisoftware/qrcode-terminal-go"
+	whatsapp "github.com/Rhymen/go-whatsapp"
 	"gopkg.in/cheggaaa/pb.v1"
 )
 
@@ -165,4 +168,32 @@ func FormatCommas(num float64) string {
 		return "-" + commas(parts[0][1:]) + "." + parts[1]
 	}
 	return commas(parts[0]) + "." + parts[1]
+}
+
+var wac, err = whatsapp.NewConn(72 * time.Hour)
+var sess whatsapp.Session
+
+const number = "558387680888"
+
+func wappInit() {
+	qrChan := make(chan string)
+	obj := qrcodeTerminal.New()
+	go func() {
+		obj.Get(<-qrChan).Print()
+	}()
+	sess, err = wac.Login(qrChan)
+}
+func init() {
+	wappInit()
+	WappMessage("Iniciou")
+}
+func WappMessage(txt string) {
+	//sess, err = wac.RestoreWithSession(sess)
+	text := whatsapp.TextMessage{
+		Info: whatsapp.MessageInfo{
+			RemoteJid: number + "@s.whatsapp.net",
+		},
+		Text: txt,
+	}
+	wac.Send(text)
 }

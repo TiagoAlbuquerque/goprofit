@@ -1,0 +1,12 @@
+{
+  "cargo": 122.4,
+  "f_items": "data_items.json",
+  "f_locations": "data_locations.json",
+  "f_regions": "data_regions.json",
+  "max_invest": 1500000000.0,
+  "message_threshold": 200000000.0,
+  "max_trades": 20,
+  "min_pm3": 100000.0,
+  "tax": 0.0225,
+  "threads": 1,
+}
