@@ -59,7 +59,7 @@ func init() {
 		json.Unmarshal(raw, &conf)
 	} else {
 		fmt.Printf("Failed to open %s\n", fname)
-		conf = gpconf{100.0, "data_items.eve", "data_locations.eve", "data_regions.eve", 100000000.0, 1000000000, 20, 100000, 0.05}
+		conf = gpconf{100.0, "data_items.json", "data_locations.json", "data_regions.json", 100000000.0, 1000000000, 20, 100000, 0.05}
 	}
 }
 

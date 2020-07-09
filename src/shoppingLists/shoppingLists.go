@@ -94,9 +94,6 @@ func (sl *shopList) getProfit() float64 {
 	for _, deal := range sl.deals {
 		deal.Reset()
 	}
-	if sl.profit > conf.MessageThreshold() {
-		utils.WappMessage(sl.wappMessageString())
-	}
 	return sl.profit
 }
 func (sl shopList) wappMessageString() string {
@@ -159,6 +156,10 @@ func PrintTop(n int) {
 	start := time.Now()
 	utils.Top(lists)
 	utils.StatusLine("sorted in: " + fmt.Sprint(time.Now().Sub(start)))
+
+	if lists[0].profit > conf.MessageThreshold() {
+		utils.WappMessage(sl.wappMessageString())
+	}
 
 	w := new(tabwriter.Writer)
 	w.Init(os.Stdout, 0, 1, 2, ' ', 0)
