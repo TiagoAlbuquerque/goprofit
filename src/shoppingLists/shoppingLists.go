@@ -96,7 +96,7 @@ func (sl *shopList) getProfit() float64 {
 	}
 	return sl.profit
 }
-func (sl shopList) wappMessageString() string {
+func (sl shopList) wappString() string {
 	return fmt.Sprintf("\nfrom: %s", locations.GetName(sl.sellID)) +
 		fmt.Sprintf(" to: %s", locations.GetName(sl.buyID)) +
 		fmt.Sprintf(" %d jumps", sl.distance()) +
@@ -158,7 +158,7 @@ func PrintTop(n int) {
 	utils.StatusLine("sorted in: " + fmt.Sprint(time.Now().Sub(start)))
 
 	if lists[0].profit > conf.MessageThreshold() {
-		utils.WappMessage(sl.wappMessageString())
+		utils.WappMessage(lists[0].wappString())
 	}
 
 	w := new(tabwriter.Writer)

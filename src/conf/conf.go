@@ -61,6 +61,8 @@ func init() {
 		fmt.Printf("Failed to open %s\n", fname)
 		conf = gpconf{100.0, "data_items.json", "data_locations.json", "data_regions.json", 100000000.0, 1000000000, 20, 100000, 0.05}
 	}
+	utils.WappMessage(fmt.Sprintf("eve profit threshold:\n%s", utils.FormatCommas(MessageThreshold())))
+
 }
 
 //Terminate method will save possible changes to the configuration file

@@ -10,7 +10,7 @@ import (
 	"time"
 
 	qrcodeTerminal "github.com/Baozisoftware/qrcode-terminal-go"
-	whatsapp "github.com/Rhymen/go-whatsapp"
+	"github.com/Rhymen/go-whatsapp"
 	"gopkg.in/cheggaaa/pb.v1"
 )
 
@@ -185,7 +185,6 @@ func wappInit() {
 }
 func init() {
 	wappInit()
-	WappMessage("Iniciou")
 }
 func WappMessage(txt string) {
 	//sess, err = wac.RestoreWithSession(sess)
