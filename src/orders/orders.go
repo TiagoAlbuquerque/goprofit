@@ -33,21 +33,18 @@ func (o *Order) OrderRemain() int {
 //Execute will fill up the order on qnt amount
 func (o *Order) Execute(qnt int) {
 	o.Executed += qnt
-	//Set(*o)
 }
 
 //Reset will reset the order to an unexecuted state
 func (o *Order) Reset() {
 	o.Executed = 0
-	//Set(*o)
 }
 
 //Get will return the market order to an specific ID
 func Get(oID int64) *Order {
 	mutex.Lock()
 	defer mutex.Unlock()
-	out := orders[oID]
-	return out
+	return orders[oID]
 }
 
 //Set will store the receiver Order

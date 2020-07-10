@@ -75,6 +75,15 @@ func (sl *shopList) profitPerJump() float64 {
 	return sl.getProfit() / float64(sl.distance())
 }
 
+func (sl *shopList) selectDeal(deal deals.Deal, res *deals.Resources) {
+	isSelected, sDeal := deal.Execute(res)
+	if isSelected {
+		sl.itemProfit[deal.GetItemID()] += sDeal.Profit
+		sl.selected = append(sl.selected, sDeal)
+		sl.profit += sDeal.Profit
+	}
+}
+
 func (sl *shopList) getProfit() float64 {
 	if sl.profit > 0.0 {
 		return sl.profit
@@ -82,12 +91,7 @@ func (sl *shopList) getProfit() float64 {
 	res := deals.Resources{Cargo: conf.Cargo(), Isk: conf.MaxInvest()}
 	sort.Sort(sl.deals)
 	for _, deal := range sl.deals {
-		isSelected, sDeal := deal.Execute(&res)
-		if isSelected {
-			sl.itemProfit[deal.GetItemID()] += sDeal.Profit
-			sl.selected = append(sl.selected, sDeal)
-			sl.profit += sDeal.Profit
-		}
+		sl.selectDeal(deal, &res)
 	}
 	sl.cargoUsed = conf.Cargo() - res.Cargo
 	sl.investment = conf.MaxInvest() - res.Isk

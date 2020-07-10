@@ -108,24 +108,20 @@ func updateMarketsPagesCount() {
 	utils.ProgressBar(total, c)
 }
 
+func backup() bool {
+	fmt.Printf("Failed to open %s\n", fName)
+	regions = make(map[int]region)
+	getRegionsInfo()
+	return true
+}
+
 func init() {
 	raw, err := ioutil.ReadFile(fName)
-	if err == nil {
-		json.Unmarshal(raw, &regions)
-	} else {
-		fmt.Printf("Failed to open %s\n", fName)
-		regions = make(map[int]region)
-		getRegionsInfo()
-	}
-
+	_ = (err == nil && json.Unmarshal(raw, &regions) == nil) || backup()
 	updateMarketsPagesCount()
 }
 
 //Terminate will save modifications to the regions to its configuration file
 func Terminate() {
-	if !saveToFileFlag {
-		return
-	}
-	utils.Save(fName, regions)
-	saveToFileFlag = false
+	saveToFileFlag = saveToFileFlag && utils.Save(fName, regions) && !saveToFileFlag
 }

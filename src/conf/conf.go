@@ -22,7 +22,7 @@ type gpconf struct {
 	Tax        float64 `json:"tax"`
 }
 
-const fname = "data_conf.json"
+const fName = "data_conf.json"
 
 var conf gpconf
 var saveToFileFlag bool = false
@@ -58,25 +58,19 @@ func Minpm3() float64 {
 	return conf.Minpm3
 }
 
+func backup() bool {
+	fmt.Printf("Failed to open %s\n", fName)
+	conf = gpconf{100.0, "data_items.json", "data_locations.json", "data_regions.json", 100000000.0, 1000000000, "558387680888", 20, 100000, 0.05}
+	return true
+}
 func init() {
 	mutex = sync.Mutex{}
-	raw, err := ioutil.ReadFile(fname)
-	if err == nil {
-		json.Unmarshal(raw, &conf)
-	} else {
-		fmt.Printf("Failed to open %s\n", fname)
-		conf = gpconf{100.0, "data_items.json", "data_locations.json", "data_regions.json", 100000000.0, 1000000000, "558387680888", 20, 100000, 0.05}
-	}
-	utils.WappMessage(WappPhone(), fmt.Sprintf("eve profit threshold:\n%s", utils.FormatCommas(MessageThreshold())))
-
+	raw, err := ioutil.ReadFile(fName)
+	defer utils.WappMessage(WappPhone(), fmt.Sprintf("eve profit threshold:\n%s", utils.FormatCommas(MessageThreshold())))
+	_ = (err == nil && json.Unmarshal(raw, &conf) == nil) || backup()
 }
 
 //Terminate method will save possible changes to the configuration file
 func Terminate() {
-	if !saveToFileFlag {
-		return
-	}
-
-	utils.Save(fname, conf)
-	saveToFileFlag = false
+	saveToFileFlag = saveToFileFlag && utils.Save(fName, conf) && !saveToFileFlag
 }

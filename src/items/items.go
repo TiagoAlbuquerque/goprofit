@@ -39,7 +39,7 @@ type Item struct {
 }
 
 const itemURL = "https://esi.evetech.net/latest/universe/types/%d"
-const fileName = "data_items.json"
+const fName = "data_items.json"
 
 var items map[int]*Item
 var saveToFileFlag bool = false
@@ -103,25 +103,20 @@ func Cleanup() {
 	}
 }
 
+func backup() bool {
+	fmt.Printf("Failed to open %s\n", fName)
+	items = make(map[int]*Item)
+	return true
+}
+
 func init() {
 	mutex = sync.Mutex{}
-	raw, err := ioutil.ReadFile(fileName)
-	if err == nil {
-		json.Unmarshal(raw, &items)
-	} else {
-		fmt.Printf("Failed to open %s\n", fileName)
-		items = make(map[int]*Item)
-	}
-
+	raw, err := ioutil.ReadFile(fName)
+	_ = (err == nil && json.Unmarshal(raw, &items) == nil) || backup()
 	Cleanup()
 }
 
 //Terminate will save the items files if there are any new items
 func Terminate() {
-	if !saveToFileFlag {
-		return
-	}
-
-	utils.Save(fileName, items)
-	saveToFileFlag = false
+	saveToFileFlag = saveToFileFlag && utils.Save(fName, items) && !saveToFileFlag
 }

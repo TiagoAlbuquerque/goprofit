@@ -49,16 +49,6 @@ func getLocation(locID int64) *location {
 	return &loc
 }
 
-func init() {
-	raw, err := ioutil.ReadFile(fName)
-	if err == nil {
-		json.Unmarshal(raw, &locations)
-	} else {
-		fmt.Printf("Failed to open %s\n", fName)
-		locations = make(map[int64]location)
-	}
-}
-
 //GetDistance will return the number of jumps on a route from id1 to id2
 func GetDistance(id1, id2 int64) int {
 	a := int64(math.Min(float64(id1), float64(id2)))
@@ -67,6 +57,7 @@ func GetDistance(id1, id2 int64) int {
 	dist, ok := loc.Distances[b]
 	if loc.Distances[b] == 0 {
 		loc.Distances[b] = 1
+		saveToFileFlag = true
 	}
 	if !ok {
 		var route []int
@@ -90,11 +81,18 @@ func GetName(id int64) string {
 	return loc.Name
 }
 
+func backup() bool {
+	fmt.Printf("Failed to open %s\n", fName)
+	locations = make(map[int64]location)
+	return true
+}
+
+func init() {
+	raw, err := ioutil.ReadFile(fName)
+	_ = (err == nil && json.Unmarshal(raw, &locations) == nil) || backup()
+}
+
 // Terminate locations
 func Terminate() {
-	if !saveToFileFlag {
-		return
-	}
-	utils.Save(fName, locations)
-	saveToFileFlag = false
+	saveToFileFlag = saveToFileFlag && utils.Save(fName, locations) && !saveToFileFlag
 }

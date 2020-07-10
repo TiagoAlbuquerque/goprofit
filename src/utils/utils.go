@@ -56,15 +56,13 @@ func Load(fName string) (interface{}, error) {
 }
 
 //Save will marshal to JSON and save the providade data to the specified file
-func Save(fName string, data interface{}) {
+func Save(fName string, data interface{}) bool {
 	out, _ := json.MarshalIndent(data, "", "  ")
-	f, err := os.Create(fName)
-	if err != nil {
-		panic(err)
-	}
+	f, _ := os.Create(fName)
 	defer f.Close()
 	f.Write(out)
 	fmt.Println(fName, " saved")
+	return true
 }
 
 type sortable interface {
@@ -136,13 +134,6 @@ func ProgressBar(total int, c chan bool) {
 	bar.Finish()
 }
 
-func commas(s string) string {
-	if len(s) <= 3 {
-		return s
-	}
-	return commas(s[0:len(s)-3]) + " " + s[len(s)-3:]
-}
-
 //KMB will format will compress long values into K M or B formats
 func KMB(num float64) string {
 	kmb := ""
@@ -161,12 +152,16 @@ func KMB(num float64) string {
 	return fmt.Sprintf("%.3f %s", num, kmb)
 }
 
+func commas(s string) string {
+	if len(s) <= 3 {
+		return s
+	}
+	return commas(s[0:len(s)-3]) + " " + s[len(s)-3:]
+}
+
 //FormatCommas will produce spaces at every power of 1000 as 1 000 000 000
 func FormatCommas(num float64) string {
 	parts := strings.Split(fmt.Sprintf("%.2f", num), ".")
-	if parts[0][0] == '-' {
-		return "-" + commas(parts[0][1:]) + "." + parts[1]
-	}
 	return commas(parts[0]) + "." + parts[1]
 }
 
