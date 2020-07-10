@@ -184,11 +184,10 @@ func init() {
 //WappMessage will send an Whatsapp message
 func WappMessage(number, txt string) {
 	//sess, err = wac.RestoreWithSession(sess)
-	text := whatsapp.TextMessage{
+	wac.Send(whatsapp.TextMessage{
 		Info: whatsapp.MessageInfo{
 			RemoteJid: number + "@s.whatsapp.net",
 		},
 		Text: txt,
-	}
-	wac.Send(text)
+	})
 }

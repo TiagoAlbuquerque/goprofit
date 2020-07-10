@@ -66,8 +66,8 @@ func backup() bool {
 func init() {
 	mutex = sync.Mutex{}
 	raw, err := ioutil.ReadFile(fName)
-	defer utils.WappMessage(WappPhone(), fmt.Sprintf("eve profit threshold:\n%s", utils.FormatCommas(MessageThreshold())))
 	_ = (err == nil && json.Unmarshal(raw, &conf) == nil) || backup()
+	utils.WappMessage(WappPhone(), fmt.Sprintf("eve profit threshold:\n%s", utils.FormatCommas(MessageThreshold())))
 }
 
 //Terminate method will save possible changes to the configuration file
