@@ -41,6 +41,9 @@ func getRegionsList() []int {
 	utils.JSONFromURL(regionsURL, &out)
 	return out
 }
+func GetRegionsList() map[int]region {
+	return regions
+}
 
 func getRegionInfo(id int, c chan bool) {
 	url := fmt.Sprint(regionsURL, id)

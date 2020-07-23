@@ -159,7 +159,7 @@ func PrintTop(n int) {
 
 	start := time.Now()
 	utils.Top(lists)
-	utils.StatusLine("sorted in: " + fmt.Sprint(time.Now().Sub(start)))
+	utils.StatusLine(15, "sorted in: "+fmt.Sprint(time.Now().Sub(start)))
 
 	if lists[0].profit > conf.MessageThreshold() {
 		utils.WappMessage(conf.WappPhone(), lists[0].wappString())

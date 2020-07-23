@@ -32,10 +32,10 @@ func getLocationInfo(id int64) location {
 	} else {
 		url = fmt.Sprintf(locationsURL, id)
 	}
-	utils.StatusLine("new location: " + url)
+	utils.StatusLine(15, "new location: "+url)
 	utils.JSONFromURL(url, &loc)
 	loc.Distances = map[int64]int{}
-	utils.StatusLine(loc.Name)
+	utils.StatusLine(15, loc.Name)
 	locations[id] = loc
 	saveToFileFlag = true
 	return loc
@@ -62,7 +62,7 @@ func GetDistance(id1, id2 int64) int {
 	if !ok {
 		var route []int
 		url := fmt.Sprintf("https://esi.evetech.net/latest/route/%d/%d/", a, b)
-		utils.StatusLine(url)
+		utils.StatusLine(15, url)
 		utils.JSONFromURL(url, &route)
 		loc.Distances[b] = len(route)
 		if loc.Distances[b] == 0 {

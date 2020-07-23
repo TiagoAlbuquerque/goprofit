@@ -9,7 +9,6 @@ import (
 	"../regions"
 	"../shoppinglists"
 	"../utils"
-	"../utils/color"
 
 	//    "../utils/avl"
 
@@ -22,7 +21,7 @@ import (
 
 func placeOrders(ordersL []orders.Order, cOK chan bool) {
 
-	utils.StatusLine(color.Fg8b(3, "Processing market page"))
+	utils.StatusLine(3, "Processing market page")
 
 	cDeals := make(chan deals.Deal)
 	defer close(cDeals)
@@ -38,7 +37,7 @@ func placeOrders(ordersL []orders.Order, cOK chan bool) {
 func consumePages(cPages chan []orders.Order, cOK chan bool) {
 	for page := range cPages {
 		placeOrders(page, cOK)
-		utils.StatusLine(color.Fg8b(1, "Waiting page download"))
+		utils.StatusLine(1, "Waiting page download")
 	}
 }
 

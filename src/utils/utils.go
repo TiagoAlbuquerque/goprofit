@@ -9,6 +9,10 @@ import (
 	"strings"
 	"time"
 
+	"../utils/color"
+
+	"../gui"
+
 	qrcodeTerminal "github.com/Baozisoftware/qrcode-terminal-go"
 	"github.com/Rhymen/go-whatsapp"
 	"gopkg.in/cheggaaa/pb.v1"
@@ -116,19 +120,23 @@ func Top(list sortable) {
 }
 
 //StatusLine will print the providade text in the status indicator line
-func StatusLine(text string) {
+func StatusLine(c int, text string) {
 	up := "\033[A"  //move cursor up one line
 	cr := "\r"      //carriage return [volta para o início]
 	cl := "\033[2K" //clear line
 
-	fmt.Printf(up+cr+cl+"%s\n", text)
+	fmt.Printf(up+cr+cl+"%s\n", color.Fg8b(c, text))
+	gui.StatusLabel(text)
 }
 
 //ProgressBar will start a new progressbar
 func ProgressBar(total int, c chan bool) {
+	cOK := make(chan bool)
+	go gui.ProgressBar(total, cOK)
 	bar := pb.StartNew(total)
+
 	for i := 0; i < total; i++ {
-		_ = <-c
+		cOK <- <-c
 		bar.Increment()
 	}
 	bar.Finish()
@@ -178,16 +186,16 @@ func wappInit() {
 }
 
 func init() {
-	wappInit()
+	//wappInit()
 }
 
 //WappMessage will send an Whatsapp message
 func WappMessage(number, txt string) {
-	//sess, err = wac.RestoreWithSession(sess)
+	/*sess, err = wac.RestoreWithSession(sess)
 	wac.Send(whatsapp.TextMessage{
 		Info: whatsapp.MessageInfo{
 			RemoteJid: number + "@s.whatsapp.net",
 		},
 		Text: txt,
-	})
+	}) //*/
 }
