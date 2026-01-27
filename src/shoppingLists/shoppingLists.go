@@ -8,11 +8,13 @@ import (
 	"text/tabwriter"
 	"time"
 
-	"../conf"
-	"../deals"
-	"../locations"
-	"../utils"
-	"../utils/color"
+	"goprofit/conf"
+	"goprofit/deals"
+	"goprofit/items"
+	"goprofit/locations"
+	"goprofit/orders"
+	"goprofit/utils"
+	"goprofit/utils/color"
 )
 
 type shopList struct {
@@ -24,14 +26,15 @@ type shopList struct {
 	deals      deals.List
 	selected   deals.SelectedList
 	itemProfit map[int]float64
+	dealKeys   map[string]int // Map of "buyOrderID-sellOrderID" -> index in deals slice for O(1) deduplication
 }
 
 type shopLists []*shopList
 
 func (sl *shopList) Less(sl2 *shopList) bool {
-	if sl.getProfit() == sl2.getProfit() {
-		return sl.distance() < sl2.distance()
-	}
+	//if sl.getProfit() == sl2.getProfit() {
+	//	return sl.distance() < sl2.distance()
+	//}
 	return sl.getProfit() > sl2.getProfit()
 }
 
@@ -52,6 +55,15 @@ var mutex sync.Mutex
 var cSorting chan bool
 
 func (sl *shopList) add(d deals.Deal) {
+	// O(1) deduplication using map
+	key := fmt.Sprintf("%d-%d", d.GetBuyOrderID(), d.GetSellOrderID())
+	if idx, exists := sl.dealKeys[key]; exists {
+		// Update existing deal round
+		sl.deals[idx].Round = currentRound
+		return
+	}
+	d.Round = currentRound
+	sl.dealKeys[key] = len(sl.deals)
 	sl.deals = append(sl.deals, d)
 }
 
@@ -132,38 +144,44 @@ func (sl shopList) String() string {
 }
 
 func getShopList(d deals.Deal) *shopList {
-	mutex.Lock()
-	defer mutex.Unlock()
 	key := d.Key()
 	sl, ok := listsMap[key]
 	if !ok {
-		sl = &shopList{d.SellLocID(), d.BuyLocID(), 0.0, 0.0, 0.0, deals.List{}, deals.SelectedList{}, map[int]float64{}}
+		sl = &shopList{
+			sellID:     d.SellLocID(),
+			buyID:      d.BuyLocID(),
+			profit:     0.0,
+			cargoUsed:  0.0,
+			investment: 0.0,
+			deals:      deals.List{},
+			selected:   deals.SelectedList{},
+			itemProfit: map[int]float64{},
+			dealKeys:   map[string]int{},
+		}
 		listsMap[key] = sl
 		lists = append(lists, sl)
 	}
 	return sl
 }
 
-//ConsumeDeals will receive and process trade deals
-func ConsumeDeals(cDeals chan deals.Deal, cOK chan bool) {
+// ConsumeDeals will receive and process trade deals
+func ConsumeDeals(cDeals chan deals.Deal, cOK chan interface{}) {
 	for d := range cDeals {
+		mutex.Lock()
 		sl := getShopList(d)
 		sl.add(d)
+		mutex.Unlock()
 	}
 	cOK <- true
 }
 
-//PrintTop will print the top n most profitable shopping lists
+// PrintTop will print the top n most profitable shopping lists
 func PrintTop(n int) {
 	fmt.Println("LISTAS")
 
 	start := time.Now()
 	utils.Top(lists)
 	utils.StatusLine(15, "sorted in: "+fmt.Sprint(time.Now().Sub(start)))
-
-	if lists[0].profit > conf.MessageThreshold() {
-		utils.WappMessage(conf.WappPhone(), lists[0].wappString())
-	}
 
 	w := new(tabwriter.Writer)
 	w.Init(os.Stdout, 0, 1, 2, ' ', 0)
@@ -175,12 +193,124 @@ func PrintTop(n int) {
 	println()
 }
 
-//Cleanup will reset the shopping lists computed on the last round
+var lastRoundDTOs []ShoppingListDTO
+
+// Cleanup will reset the shopping lists computed on the last round
+// For continuous updates, we might NOT want to clear lists, but maybe reset some state?
+// The plan says "Cleanup() to be empty or removed".
 func Cleanup() {
+	// No-op for continuous persistence
+}
+
+var currentRound int = 0
+
+func NextRound() {
+	mutex.Lock()
+	defer mutex.Unlock()
+	currentRound++
+}
+
+func Prune() {
+	mutex.Lock()
+	defer mutex.Unlock()
+
+	// Remove deals older than 1 round (currentRound - deal.Round > 1)
 	for _, sl := range lists {
-		sl.reset()
+		var activeDeals deals.List
+		newDealKeys := make(map[string]int)
+		for _, d := range sl.deals {
+			if currentRound-d.Round <= 1 {
+				key := fmt.Sprintf("%d-%d", d.GetBuyOrderID(), d.GetSellOrderID())
+				newDealKeys[key] = len(activeDeals)
+				activeDeals = append(activeDeals, d)
+			}
+		}
+		sl.deals = activeDeals
+		sl.dealKeys = newDealKeys
+
+		// Reset stats since deals changed
+		sl.profit = 0
+		sl.cargoUsed = 0
+		sl.itemProfit = map[int]float64{}
+		sl.selected = deals.SelectedList{}
 	}
 }
+
+type ShoppingListDTO struct {
+	From       string        `json:"From"`
+	To         string        `json:"To"`
+	Jumps      int           `json:"Jumps"`
+	Profit     string        `json:"Profit"`
+	Investment string        `json:"Investment"`
+	Volume     string        `json:"Volume"`
+	ROI        string        `json:"ROI"`
+	Items      []ListItemDTO `json:"Items"`
+}
+
+type ListItemDTO struct {
+	Name      string `json:"Name"`
+	Quantity  int    `json:"Quantity"`
+	BuyPrice  string `json:"BuyPrice"`
+	SellPrice string `json:"SellPrice"`
+	Profit    string `json:"Profit"`
+}
+
+func getTopDTOInternal(n int) []ShoppingListDTO {
+	utils.Top(lists)
+
+	count := n
+	if count > len(lists) {
+		count = len(lists)
+	}
+
+	var result []ShoppingListDTO
+	for i := 0; i < count; i++ {
+		sl := lists[i]
+		profit := sl.getProfit()
+		investment := sl.investment
+		if investment == 0 {
+			investment = 1
+		}
+
+		var listItems []ListItemDTO
+		for _, sd := range sl.selected {
+			itmID := sd.Deal.GetItemID()
+			itmName := items.Get(itmID).Name
+
+			bFor := orders.Get(sd.Deal.GetSellOrderID()).Price
+			sFor := orders.Get(sd.Deal.GetBuyOrderID()).Price
+
+			itemDTO := ListItemDTO{
+				Name:      itmName,
+				Quantity:  sd.Qnt,
+				BuyPrice:  utils.KMB(bFor),
+				SellPrice: utils.KMB(sFor),
+				Profit:    utils.KMB(sd.Profit),
+			}
+			listItems = append(listItems, itemDTO)
+		}
+
+		dto := ShoppingListDTO{
+			From:       locations.GetName(sl.sellID),
+			To:         locations.GetName(sl.buyID),
+			Jumps:      sl.distance(),
+			Profit:     utils.FormatCommas(profit),
+			Investment: utils.FormatCommas(sl.investment),
+			Volume:     fmt.Sprintf("%.2f", sl.cargoUsed),
+			ROI:        fmt.Sprintf("%.0f", (profit/investment)*100),
+			Items:      listItems,
+		}
+		result = append(result, dto)
+	}
+	return result
+}
+
+func GetTopDTO(n int) []ShoppingListDTO {
+	mutex.Lock()
+	defer mutex.Unlock()
+	return getTopDTOInternal(n)
+}
+
 func init() {
 	//cSorting = make(chan bool)
 	mutex = sync.Mutex{}

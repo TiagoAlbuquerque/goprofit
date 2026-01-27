@@ -1,39 +1,40 @@
 package deals
 
 import (
-	"../conf"
-	"../items"
-	"../orders"
-	"../utils"
-	"../utils/color"
+	"goprofit/conf"
+	"goprofit/items"
+	"goprofit/orders"
+	"goprofit/utils"
+	"goprofit/utils/color"
 
 	"fmt"
 	"math"
 )
 
-//Deal is astructure to couple a sell and a buy order of a specific item
+// Deal is astructure to couple a sell and a buy order of a specific item
 type Deal struct {
 	itemID                  int
 	buyOrderID, sellOrderID int64
+	Round                   int
 }
 
-//SelectedDeal is a structure that will store a deal, the amount executed in such deal and the profit obtained
+// SelectedDeal is a structure that will store a deal, the amount executed in such deal and the profit obtained
 type SelectedDeal struct {
 	Deal   Deal
 	Qnt    int
 	Profit float64
 }
 
-//Resources is a structure that comprises of the resources of Cargo space and Isk available
+// Resources is a structure that comprises of the resources of Cargo space and Isk available
 type Resources struct {
 	Cargo float64
 	Isk   float64
 }
 
-//List is a slice of Deal
+// List is a slice of Deal
 type List []Deal
 
-//SelectedList is a slice of SelectedDeal
+// SelectedList is a slice of SelectedDeal
 type SelectedList []SelectedDeal
 
 func (dl List) Len() int {
@@ -60,29 +61,37 @@ func (sd SelectedDeal) String() string {
 		color.Fg8b(2, utils.KMB(profit)))
 }
 
-var deals List
-
-//GetItemID will return the item ID of this deal
+// GetItemID will return the item ID of this deal
 func (d Deal) GetItemID() int {
 	return d.itemID
 }
 
-//Key will produce key for the marketlist at witch this deal is to be inserted
+// Key will produce key for the marketlist at witch this deal is to be inserted
 func (d Deal) Key() int64 {
 	return (orders.Get(d.sellOrderID).SystemID * 10000000000) + orders.Get(d.buyOrderID).SystemID
 }
 
-//SellLocID will return the sell location ID for the current deal
+// SellLocID will return the sell location ID for the current deal
 func (d Deal) SellLocID() int64 {
 	return int64(orders.Get(d.sellOrderID).SystemID)
 }
 
-//BuyLocID will return the buy location ID for the current deal
+// BuyLocID will return the buy location ID for the current deal
 func (d Deal) BuyLocID() int64 {
 	return int64(orders.Get(d.buyOrderID).SystemID)
 }
 
-//Pm3 will return the profit amount normalized by cubic meter ocupied by the item
+// GetSellOrderID returns the sell order ID
+func (d Deal) GetSellOrderID() int64 {
+	return d.sellOrderID
+}
+
+// GetBuyOrderID returns the buy order ID
+func (d Deal) GetBuyOrderID() int64 {
+	return d.buyOrderID
+}
+
+// Pm3 will return the profit amount normalized by cubic meter ocupied by the item
 func (d Deal) Pm3() float64 {
 	itm := items.Get(d.itemID)
 	prf := d.profitPerUnit()
@@ -100,7 +109,7 @@ func min(nums ...int) int {
 	return int(out)
 }
 
-//amount that is available compose in buy/sell order
+// amount that is available compose in buy/sell order
 func (d Deal) amountAvailable() int {
 	bo := orders.Get(d.buyOrderID)
 	so := orders.Get(d.sellOrderID)
@@ -110,13 +119,13 @@ func (d Deal) amountAvailable() int {
 	return out
 }
 
-//amount that can be bought
+// amount that can be bought
 func (d Deal) amountIsk(iskAvail float64) int {
 	sop := orders.Get(d.sellOrderID).Price // sell order price
 	return int(math.Floor(iskAvail / sop))
 }
 
-//amount that can fit in cargo
+// amount that can fit in cargo
 func (d Deal) amountCargo(cargo float64) int {
 	itmVol := items.Get(d.itemID).Volume
 	return int(math.Floor(cargo / itmVol))
@@ -149,7 +158,7 @@ func (d Deal) cost(qnt int) float64 {
 	return float64(qnt) * orders.Get(d.sellOrderID).Price
 }
 
-//Execute will execute the deal for as many item as its availabe to trade in this deal, can be stored in the ships cargobay, and have enough isk to purchase
+// Execute will execute the deal for as many item as its availabe to trade in this deal, can be stored in the ships cargobay, and have enough isk to purchase
 func (d Deal) Execute(res *Resources) (bool, SelectedDeal) {
 	qnt := d.getQuantity(*res)
 	if qnt == 0 {
@@ -166,7 +175,7 @@ func (d Deal) Execute(res *Resources) (bool, SelectedDeal) {
 	return true, SelectedDeal{Deal: d, Qnt: qnt, Profit: dProfit}
 }
 
-//Reset will restore the deal to unexecuted state
+// Reset will restore the deal to unexecuted state
 func (d Deal) Reset() {
 	bo := orders.Get(d.buyOrderID)
 	bo.Reset()
@@ -190,35 +199,36 @@ func (d Deal) valid() bool {
 }
 
 func makeDeal(itmID int, boID int64, soID int64, cDeals chan Deal) {
-	d := Deal{itmID, boID, soID}
+	d := Deal{itmID, boID, soID, 0}
 	if d.valid() {
-		deals = append(deals, d)
 		cDeals <- d
 	}
 }
 
 func computeBuyOrder(bOrder orders.Order, cDeals chan Deal) {
-	itm := items.Get(bOrder.ItemID)
-
-	for _, sOrderID := range itm.SellOrders {
-		makeDeal(itm.ItemID, bOrder.OrderID, sOrderID, cDeals)
+	itmID := bOrder.ItemID
+	orders := items.Get(itmID).SellOrders
+	bOrderID := bOrder.OrderID
+	for _, sOrderID := range orders {
+		makeDeal(itmID, bOrderID, sOrderID, cDeals)
 	}
 }
 
 func computeSellOrder(sOrder orders.Order, cDeals chan Deal) {
-	itm := items.Get(sOrder.ItemID)
-
-	for _, bOrderID := range itm.BuyOrders {
-		makeDeal(itm.ItemID, bOrderID, sOrder.OrderID, cDeals)
+	itmID := sOrder.ItemID
+	orders := items.Get(itmID).BuyOrders
+	sOrderID := sOrder.OrderID
+	for _, bOrderID := range orders {
+		makeDeal(itmID, bOrderID, sOrderID, cDeals)
 	}
 }
 
-//Cleanup will discard all deals stored
+// Cleanup is a no-op as deals are now processed entirely through channels
 func Cleanup() {
-	deals = []Deal{}
+	// No-op: deals are sent directly to shopping lists via channel
 }
 
-//ComputeDeals will produce Deals based on received orders
+// ComputeDeals will produce Deals based on received orders
 func ComputeDeals(o orders.Order, cDeals chan Deal) {
 	if o.IsBuyOrder {
 		computeBuyOrder(o, cDeals)

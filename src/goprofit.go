@@ -5,17 +5,23 @@ import (
 	"os"
 	"os/signal"
 
-	"./controller"
+	"goprofit/controller"
+	"goprofit/server"
+	shoppinglists "goprofit/shoppingLists"
 )
 
 func main() {
+	go server.Start()
+
 	for {
 		cicle()
 	}
 }
 
 func cicle() {
+	shoppinglists.NextRound()
 	controller.FetchMarket()
+	shoppinglists.Prune()
 	controller.PrintShoppingLists(3)
 
 	controller.Terminate()
@@ -29,7 +35,7 @@ func interruptionHandler(c chan os.Signal) {
 	}
 }
 func init() {
-	c := make(chan os.Signal)
+	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
 	go interruptionHandler(c)
 }
