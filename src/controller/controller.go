@@ -9,19 +9,21 @@ import (
 	"goprofit/regions"
 	shoppinglists "goprofit/shoppingLists"
 	"goprofit/utils"
+	"sync"
 
-	"encoding/json"
+	"github.com/goccy/go-json"
+
 	"fmt"
 	"io"
 )
 
 func placeOrders(ordersL []orders.Order, cOK chan interface{}) {
-
+	defer utils.StartTimer("Controller_PlaceOrders_Acum")()
 	utils.StatusLine(3, "Processing market page")
 
-	cDeals := make(chan deals.Deal)
+	cDeals := make(chan deals.Deal, 100) // Buffered channel
 	defer close(cDeals)
-	go shoppinglists.ConsumeDeals(cDeals, cOK)
+	go shoppinglists.ConsumeDealsBatch(cDeals, cOK)
 
 	for _, o := range ordersL {
 		orders.Set(o)
@@ -31,13 +33,24 @@ func placeOrders(ordersL []orders.Order, cOK chan interface{}) {
 }
 
 func consumePages(cPages chan []orders.Order, cOK chan interface{}) {
-	for page := range cPages {
-		go placeOrders(page, cOK)
-		//utils.StatusLine(1, "Waiting page download")
+	// Limit concurrency to avoid CPU thrashing based on configuration
+	concurrency := conf.Threads()
+	var wg sync.WaitGroup
+
+	for i := 0; i < concurrency; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for page := range cPages {
+				placeOrders(page, cOK)
+			}
+		}()
 	}
+	wg.Wait()
 }
 
 func getMarketPage(url string, cPages chan []orders.Order) {
+	defer utils.StartTimer("Controller_GetMarketPage_Acum")()
 	var mPage []orders.Order
 	// Try until successful or hard failure handled
 	for {
@@ -80,6 +93,7 @@ func producePages(lURL []string, cPages chan []orders.Order) {
 
 // FetchMarket will fetch the market pages from ESI
 func FetchMarket() {
+	defer utils.StartTimer("Controller_FetchMarket_Total")()
 	items.Cleanup()
 	fmt.Println("Fetching markets pages")
 	cOK := make(chan interface{})
@@ -102,6 +116,7 @@ func PrintShoppingLists(n int) {
 
 // Terminate will clean the data structures and possibly save modifications ocurred to relevant files
 func Terminate() {
+	defer utils.StartTimer("Terminate")()
 	items.Cleanup()
 	// shoppinglists.Cleanup() -- REMOVED for continuous updates
 	// orders.Cleanup() -- REMOVED for continuous updates

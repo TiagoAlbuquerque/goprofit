@@ -7,6 +7,7 @@ require github.com/cheggaaa/pb/v3 v3.1.7
 require (
 	github.com/VividCortex/ewma v1.2.0 // indirect
 	github.com/fatih/color v1.18.0 // indirect
+	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect

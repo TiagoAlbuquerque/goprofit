@@ -1,12 +1,13 @@
 package utils
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"strings"
+
+	"github.com/goccy/go-json"
 
 	"time"
 
@@ -25,9 +26,11 @@ var httpClient *http.Client
 
 func init() {
 	transport := &http.Transport{
-		MaxIdleConns:        100,
-		MaxIdleConnsPerHost: 100,
+		MaxIdleConns:        200,
+		MaxIdleConnsPerHost: 200,
 		IdleConnTimeout:     90 * time.Second,
+		ForceAttemptHTTP2:   true,
+		DisableCompression:  false, // Explicitly false
 	}
 	httpClient = &http.Client{
 		Transport: transport,

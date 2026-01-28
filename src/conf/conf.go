@@ -16,6 +16,7 @@ type gpconf struct {
 	MPhoneNum  string  `json:"wapp_phone"`
 	Minpm3     float64 `json:"min_pm3"`
 	Tax        float64 `json:"tax"`
+	Threads    int     `json:"threads"` // New field
 }
 
 const fName = "data_conf.json"
@@ -23,6 +24,14 @@ const fName = "data_conf.json"
 var conf gpconf
 var saveToFileFlag bool = false
 var mutex sync.Mutex
+
+// Threads returns the configured number of threads/workers
+func Threads() int {
+	if conf.Threads <= 0 {
+		return 16 // Default safe fallback
+	}
+	return conf.Threads
+}
 
 // Cargo availabe in ship
 func Cargo() float64 {
@@ -56,7 +65,7 @@ func Minpm3() float64 {
 
 func backup() bool {
 	fmt.Printf("Failed to open %s\n", fName)
-	conf = gpconf{100.0, 100000000.0, 1000000000, "558387680888", 100000, 0.05}
+	conf = gpconf{100.0, 100000000.0, 1000000000, "558387680888", 100000, 0.05, 16}
 	return true
 }
 func init() {

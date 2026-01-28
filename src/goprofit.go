@@ -8,6 +8,7 @@ import (
 	"goprofit/controller"
 	"goprofit/server"
 	shoppinglists "goprofit/shoppingLists"
+	"goprofit/utils"
 )
 
 func main() {
@@ -19,6 +20,7 @@ func main() {
 }
 
 func cicle() {
+	defer utils.StartTimer("Total Cycle")()
 	shoppinglists.NextRound()
 	controller.FetchMarket()
 	shoppinglists.Prune()

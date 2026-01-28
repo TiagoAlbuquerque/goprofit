@@ -55,6 +55,7 @@ var mutex sync.Mutex
 var cSorting chan bool
 
 func (sl *shopList) add(d deals.Deal) {
+	defer utils.StartTimer("ShoppingList_Add_Acum")()
 	// O(1) deduplication using map
 	key := fmt.Sprintf("%d-%d", d.GetBuyOrderID(), d.GetSellOrderID())
 	if idx, exists := sl.dealKeys[key]; exists {
@@ -97,6 +98,7 @@ func (sl *shopList) selectDeal(deal deals.Deal, res *deals.Resources) {
 }
 
 func (sl *shopList) getProfit() float64 {
+	defer utils.StartTimer("ShoppingList_GetProfit_Acum")()
 	if sl.profit > 0.0 {
 		return sl.profit
 	}
@@ -143,13 +145,12 @@ func (sl shopList) String() string {
 		fmt.Sprintf("\nprofit per jump: %s", color.Fg8b(5, utils.FormatCommas(sl.profitPerJump())))
 }
 
-func getShopList(d deals.Deal) *shopList {
-	key := d.Key()
+func getShopList(key int64, sellLoc int64, buyLoc int64) *shopList {
 	sl, ok := listsMap[key]
 	if !ok {
 		sl = &shopList{
-			sellID:     d.SellLocID(),
-			buyID:      d.BuyLocID(),
+			sellID:     sellLoc,
+			buyID:      buyLoc,
 			profit:     0.0,
 			cargoUsed:  0.0,
 			investment: 0.0,
@@ -166,13 +167,67 @@ func getShopList(d deals.Deal) *shopList {
 
 // ConsumeDeals will receive and process trade deals
 func ConsumeDeals(cDeals chan deals.Deal, cOK chan interface{}) {
+	defer utils.StartTimer("ShoppingList_ConsumeDeals_Total")()
 	for d := range cDeals {
 		mutex.Lock()
-		sl := getShopList(d)
+		sl := getShopList(d.Key(), d.SellLocID(), d.BuyLocID())
 		sl.add(d)
 		mutex.Unlock()
 	}
 	cOK <- true
+}
+
+type dealCtx struct {
+	d       deals.Deal
+	key     int64
+	sellLoc int64
+	buyLoc  int64
+}
+
+type ingestRequest struct {
+	batch []dealCtx
+	cOK   chan interface{}
+}
+
+// Buffer upped to avoid any backpressure from fetchers
+var ingestChan = make(chan ingestRequest, 5000)
+
+func aggregator() {
+	for req := range ingestChan {
+		mutex.Lock()
+		for _, ctx := range req.batch {
+			sl := getShopList(ctx.key, ctx.sellLoc, ctx.buyLoc)
+			sl.add(ctx.d)
+		}
+		mutex.Unlock()
+
+		// Signal completion to the worker
+		req.cOK <- true
+	}
+}
+
+// ConsumeDealsBatch will collect all deals from the channel and send to aggregator
+func ConsumeDealsBatch(cDeals chan deals.Deal, cOK chan interface{}) {
+	defer utils.StartTimer("ShoppingList_ConsumeDealsBatch_Total")()
+
+	var batch []dealCtx
+
+	// 1. Collect all deals and PRE-CALCULATE keys/locs
+	for d := range cDeals {
+		batch = append(batch, dealCtx{
+			d:       d,
+			key:     d.Key(),
+			sellLoc: d.SellLocID(),
+			buyLoc:  d.BuyLocID(),
+		})
+	}
+
+	// 2. Send to Aggregator
+	if len(batch) > 0 {
+		ingestChan <- ingestRequest{batch: batch, cOK: cOK}
+	} else {
+		cOK <- true
+	}
 }
 
 // PrintTop will print the top n most profitable shopping lists
@@ -186,7 +241,12 @@ func PrintTop(n int) {
 	w := new(tabwriter.Writer)
 	w.Init(os.Stdout, 0, 1, 2, ' ', 0)
 
-	for i := n - 1; i >= 0; i-- {
+	count := n
+	if count > len(lists) {
+		count = len(lists)
+	}
+
+	for i := count - 1; i >= 0; i-- {
 		fmt.Fprintln(w, lists[i])
 	}
 	w.Flush()
@@ -211,6 +271,7 @@ func NextRound() {
 }
 
 func Prune() {
+	defer utils.StartTimer("ShoppingList_Prune")()
 	mutex.Lock()
 	defer mutex.Unlock()
 
@@ -256,6 +317,7 @@ type ListItemDTO struct {
 }
 
 func getTopDTOInternal(n int) []ShoppingListDTO {
+	defer utils.StartTimer("ShoppingList_GetTopDTO")()
 	utils.Top(lists)
 
 	count := n
@@ -316,4 +378,6 @@ func init() {
 	mutex = sync.Mutex{}
 	listsMap = map[int64]*shopList{}
 	lists = shopLists{}
+
+	go aggregator()
 }
