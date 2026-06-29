@@ -9,5 +9,5 @@
   "max_trades": 20,
   "min_pm3": 100000.0,
   "tax": 0.036,
-  "threads": 1
+  "threads": 32
 }

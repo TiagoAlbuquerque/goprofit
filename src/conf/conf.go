@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"runtime"
 	"sync"
 
 	"goprofit/utils"
@@ -28,7 +29,8 @@ var mutex sync.Mutex
 // Threads returns the configured number of threads/workers
 func Threads() int {
 	if conf.Threads <= 0 {
-		return 16 // Default safe fallback
+		// Auto-detect: 2x Logical Cores is a good starting point for mixed IO/CPU workloads
+		return runtime.NumCPU() * 2
 	}
 	return conf.Threads
 }
